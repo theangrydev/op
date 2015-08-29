@@ -45,9 +45,7 @@ public class ParserTest implements WithAssertions, WithTestState {
 	public void shouldParseAStatementWithIntegerConstantAddition() throws Exception {
 		givenAParserWithInput("Count=1+2;");
 		whenTheInputIsParsed();
-		thenTheProgramContainsASingleStatement();
-		andTheStatementIsAnExistingTypeAssignment();
-		andTheAssignmentHasTargetType("Count");
+		thenTheProgramContainsASingleAssignment();
 		andTheAssignedValueIsAnIntegerConstant();
 		andTheIntegerConstantHasValue(3);
 	}
@@ -56,9 +54,7 @@ public class ParserTest implements WithAssertions, WithTestState {
 	public void shouldParseAStatementWithRealConstantAddition() throws Exception {
 		givenAParserWithInput("Count=1.5+2.5;");
 		whenTheInputIsParsed();
-		thenTheProgramContainsASingleStatement();
-		andTheStatementIsAnExistingTypeAssignment();
-		andTheAssignmentHasTargetType("Count");
+		thenTheProgramContainsASingleAssignment();
 		andTheAssignedValueIsARealConstant();
 		andTheRealConstantHasValue(4.0);
 	}
@@ -67,19 +63,17 @@ public class ParserTest implements WithAssertions, WithTestState {
 	public void shouldParseAStatementWithStringConstantAddition() throws Exception {
 		givenAParserWithInput("Count=\"1.5\"+\"2.5\";");
 		whenTheInputIsParsed();
-		thenTheProgramContainsASingleStatement();
-		andTheStatementIsAnExistingTypeAssignment();
-		andTheAssignmentHasTargetType("Count");
+		thenTheProgramContainsASingleAssignment();
 		andTheAssignedValueIsAStringConstant();
 		andTheStringConstantHasValue("1.52.5");
 	}
 
 	private static final String THE_STATEMENT = "statement";
+
 	private static final String ASSIGNED_VALUE = "assigned value";
 	private static final String THE_ROOT_SYMBOL = "root symbol";
 	private static final String THE_PROGRAM = "program";
 	private final TestState state = new TestState();
-
 	private Parser parser;
 
 	private void andTheIntegerConstantHasValue(int expected) {
@@ -123,6 +117,12 @@ public class ParserTest implements WithAssertions, WithTestState {
 		thenTheRootSymbolShouldBeAProgram();
 		assertThat(theProgram().statements()).hasSize(1);
 		state.store(THE_STATEMENT, statement(0));
+	}
+
+	private void thenTheProgramContainsASingleAssignment() {
+		thenTheProgramContainsASingleStatement();
+		andTheStatementIsAnExistingTypeAssignment();
+		andTheAssignmentHasTargetType("Count");
 	}
 
 	private void andTheStatementIsAnExistingTypeAssignment() {
