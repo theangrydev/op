@@ -60,6 +60,24 @@ public class ParserTest implements WithAssertions, WithTestState {
 	}
 
 	@Test
+	public void shouldParseAStatementWithIntegerConstantSubtraction() throws Exception {
+		givenAParserWithInput("Count=1-2;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleAssignment();
+		andTheAssignedValueIsAnIntegerConstant();
+		andTheIntegerConstantHasValue(-1);
+	}
+
+	@Test
+	public void shouldParseAStatementWithRealConstantSubtraction() throws Exception {
+		givenAParserWithInput("Count=1.5-2.5;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleAssignment();
+		andTheAssignedValueIsARealConstant();
+		andTheRealConstantHasValue(-1.0);
+	}
+
+	@Test
 	public void shouldParseAStatementWithStringConstantAddition() throws Exception {
 		givenAParserWithInput("Count=\"1.5\"+\"2.5\";");
 		whenTheInputIsParsed();

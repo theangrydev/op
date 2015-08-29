@@ -18,6 +18,14 @@ public class IntegerConstantTest implements WithAssertions {
 	}
 
 	@Test
+	public void shouldSubtractAnotherConstant() throws Exception {
+		IntegerConstant value1 = IntegerConstant.of(1);
+		IntegerConstant value2 = IntegerConstant.of(2);
+		assertThat(value1.minus(value2)).hasValue(-1);
+		assertThat(value2.minus(value1)).hasValue(1);
+	}
+
+	@Test
 	public void shouldToStringTheValue() throws Exception {
 		assertThat(IntegerConstant.of(100)).hasToString("100");
 	}

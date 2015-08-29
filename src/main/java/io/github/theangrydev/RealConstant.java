@@ -1,6 +1,6 @@
 package io.github.theangrydev;
 
-public class RealConstant implements Constant<Double> {
+public class RealConstant implements NumericConstant<Double> {
 	private final Double value;
 
 	private RealConstant(Double value) {
@@ -18,6 +18,11 @@ public class RealConstant implements Constant<Double> {
 	@Override
 	public Constant<Double> add(Constant<Double> other) {
 		return of(value + other.getValue());
+	}
+
+	@Override
+	public NumericConstant<Double> minus(NumericConstant<Double> other) {
+		return of(value - other.getValue());
 	}
 
 	@Override

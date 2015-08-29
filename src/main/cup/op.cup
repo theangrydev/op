@@ -24,9 +24,9 @@ non terminal List<Statement> StatementList;
 non terminal Expression Expression;
 non terminal Program Program;
 non terminal TypeDeclaration TypeDeclaration;
-non terminal Constant<Integer> IntegerConstant;
+non terminal NumericConstant<Integer> IntegerConstant;
+non terminal NumericConstant<Double> RealConstant;
 non terminal Constant<String> StringConstant;
-non terminal Constant<Double> RealConstant;
 non terminal Constant<?> Constant;
 
 /* Precedences */
@@ -57,4 +57,6 @@ Expression ::= Constant:value                                                   
     | IntegerConstant:value1 PLUS IntegerConstant:value2                        {: RESULT=value1.add(value2); :}
     | RealConstant:value1 PLUS RealConstant:value2                              {: RESULT=value1.add(value2); :}
     | StringConstant:value1 PLUS StringConstant:value2                          {: RESULT=value1.add(value2); :}
+    | IntegerConstant:value1 MINUS IntegerConstant:value2                       {: RESULT=value1.minus(value2); :}
+    | RealConstant:value1 MINUS RealConstant:value2                             {: RESULT=value1.minus(value2); :}
     ;
