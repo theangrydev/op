@@ -11,6 +11,7 @@ public class StringConstant implements Constant<String> {
 		return new StringConstant(value);
 	}
 
+	@Override
 	public String getValue() {
 		return value;
 	}

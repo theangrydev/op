@@ -11,6 +11,7 @@ public class RealConstant implements NumericConstant<Double> {
 		return new RealConstant(value);
 	}
 
+	@Override
 	public Double getValue() {
 		return value;
 	}
