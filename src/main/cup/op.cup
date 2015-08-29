@@ -34,27 +34,27 @@ start with Program;
 
 /* The grammar rules */
 Program ::= StatementList:statementList                                         {: RESULT=Program.of(statementList); :}
-	;
+    ;
 StatementList ::= Statement:statement SEMICOLON StatementList:statementList     {: statementList.add(statement); RESULT=statementList; :}
     | /* Empty StatementList */                                                 {: RESULT=new LinkedList<Statement>(); :}
-	;
+    ;
 Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=TypeDeclarationAssignment.of(typeDeclaration, expression); :}
     | IDENTIFIER:type ASSIGNMENT Expression:expression                          {: RESULT=ExistingTypeAssignment.of(type, expression); :}
-	;
+    ;
 IntegerConstant ::= INTEGER:value                                               {: RESULT=IntegerConstant.of(value); :}
-	;
+    ;
 StringConstant ::= STRING:value                                                 {: RESULT=StringConstant.of(value); :}
-	;
+    ;
 RealConstant ::= REAL:value                                                     {: RESULT=RealConstant.of(value); :}
-	;
+    ;
 Constant ::= IntegerConstant:value                                              {: RESULT=value; :}
     | RealConstant:value                                                        {: RESULT=value; :}
     | StringConstant:value                                                      {: RESULT=value; :}
-	;
+    ;
 TypeDeclaration ::= IDENTIFIER:targetType COLON IDENTIFIER:existingType         {: RESULT=TypeDeclaration.of(targetType, existingType); :}
-	;
+    ;
 Expression ::= Constant:value                                                   {: RESULT=value; :}
-	| IntegerConstant:value1 PLUS IntegerConstant:value2                        {: RESULT=value1.add(value2); :}
-	| RealConstant:value1 PLUS RealConstant:value2                              {: RESULT=value1.add(value2); :}
-	| StringConstant:value1 PLUS StringConstant:value2                          {: RESULT=value1.add(value2); :}
-	;
+    | IntegerConstant:value1 PLUS IntegerConstant:value2                        {: RESULT=value1.add(value2); :}
+    | RealConstant:value1 PLUS RealConstant:value2                              {: RESULT=value1.add(value2); :}
+    | StringConstant:value1 PLUS StringConstant:value2                          {: RESULT=value1.add(value2); :}
+    ;
