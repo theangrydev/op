@@ -144,7 +144,7 @@ public class ScannerTest implements WithTestState, WithAssertions {
 
 	private void thenTheSymbolCodeIs(String symbolName) {
 		Integer code = code(symbolName);
-		state.addToGivens(symbolName, code);
+		state.store(symbolName, code);
 		assertThat(symbol).hasSym(code);
 	}
 
