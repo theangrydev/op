@@ -104,7 +104,9 @@ public class ScannerTest implements WithTestState, WithAssertions {
 		@Row({"\"\"", ""}),
 		@Row({"\"1.34\"", "1.34"}),
 		@Row({"\"if\"", "if"}),
-		@Row({"\"hello\"", "hello"})
+		@Row({"\"hello\"", "hello"}),
+		@Row({"\"\\\"\"", "\\\""}),
+		@Row({"\"'\n\r\t'\"'", "'\n\r\t'"})
 	})
 	@Test
 	public void shouldScanStrings(String input, String value) throws Exception {
@@ -112,14 +114,6 @@ public class ScannerTest implements WithTestState, WithAssertions {
 		whenTheNextTokenIsFetched();
 		thenTheSymbolCodeIs("STRING");
 		andTheValueIsTheString(value);
-	}
-
-	@Test
-	public void shouldScanStringsWithEscapedQuotes() throws Exception {
-		givenAScannerWithInput("\"\\\"\"");
-		whenTheNextTokenIsFetched();
-		thenTheSymbolCodeIs("STRING");
-		andTheValueIsTheString("\\\"");
 	}
 
 	@Test
