@@ -15,6 +15,14 @@ public class Assignment implements Statement {
 		return new Assignment(targetType, expression);
 	}
 
+	public String getTargetType() {
+		return targetType;
+	}
+
+	public Expression getExpression() {
+		return expression;
+	}
+
 	@Override
 	public String toString() {
 		return targetType + "=" + expression;

@@ -181,6 +181,9 @@
 					<artifactId>assertj-assertions-generator-maven-plugin</artifactId>
 					<version>${assertj.assertions.generator.plugin.version}</version>
 					<configuration>
+						<packages>
+							<package>io.github.theangrydev</package>
+						</packages>
 						<classes>
 							<class>java_cup.runtime.Symbol</class>
 						</classes>

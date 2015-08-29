@@ -36,16 +36,16 @@ start with Program;
 Program ::= StatementList:statementList                                         {: RESULT=Program.of(statementList); :}
 	;
 StatementList ::= Statement:statement SEMICOLON StatementList:statementList     {: statementList.add((Statement) statement); RESULT=statementList; :}
-    | SEMICOLON                                                                 {: RESULT=new LinkedList<Statement>(); :}
+    | /* Empty StatementList */                                                 {: RESULT=new LinkedList<Statement>(); :}
 	;
 Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=Assignment.of(typeDeclaration.targetType(), expression); :}
     | IDENTIFIER:type ASSIGNMENT Expression:expression                          {: RESULT=Assignment.of(type, expression); :}
 	;
-IntegerConstant ::= INTEGER:value                                               {: RESULT=Constant.integer(value); :}
+IntegerConstant ::= INTEGER:value                                               {: RESULT=IntegerConstant.of(value); :}
 	;
-StringConstant ::= STRING:value                                                 {: RESULT=Constant.string(value); :}
+StringConstant ::= STRING:value                                                 {: RESULT=StringConstant.of(value); :}
 	;
-RealConstant ::= REAL:value                                                     {: RESULT=Constant.real(value); :}
+RealConstant ::= REAL:value                                                     {: RESULT=RealConstant.of(value); :}
 	;
 Constant ::= IntegerConstant:value                                              {: RESULT=value; :}
     | RealConstant:value                                                        {: RESULT=value; :}
@@ -53,5 +53,5 @@ Constant ::= IntegerConstant:value                                              
 	;
 TypeDeclaration ::= IDENTIFIER:targetType COLON IDENTIFIER:existingType         {: RESULT=TypeDeclaration.of(targetType, existingType); :}
 	;
-Expression ::= Constant:value                                             {: RESULT=value; :}
+Expression ::= Constant:value                                                   {: RESULT=value; :}
 	;
