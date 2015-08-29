@@ -8,7 +8,6 @@ public class TypeDeclaration {
 	private TypeDeclaration(String targetType, String existingType) {
 		this.targetType = targetType;
 		this.existingType = existingType;
-		System.out.println(this);
 	}
 
 	public static TypeDeclaration of(String targetType, String existingType) {

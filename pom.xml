@@ -69,6 +69,7 @@
 		<ant.version>1.9.6</ant.version>
 		<yatspec.version>1.9</yatspec.version>
 		<apache.commons.lang.version>3.4</apache.commons.lang.version>
+		<reflections.version>0.9.10</reflections.version>
 	</properties>
 
 	<build>
@@ -419,6 +420,14 @@
 			<groupId>com.googlecode.yatspec</groupId>
 			<artifactId>yatspec</artifactId>
 			<version>${yatspec.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Reflections -->
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>${reflections.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

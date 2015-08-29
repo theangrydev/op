@@ -5,7 +5,6 @@ public class IntegerConstant implements Constant<Integer> {
 
 	private IntegerConstant(Integer value) {
 		this.value = value;
-		System.out.println(this);
 	}
 
 	public static IntegerConstant of(Integer value) {
@@ -15,6 +14,11 @@ public class IntegerConstant implements Constant<Integer> {
 	@Override
 	public Integer getValue() {
 		return value;
+	}
+
+	@Override
+	public Constant<Integer> add(Constant<Integer> other) {
+		return of(value + other.getValue());
 	}
 
 	@Override

@@ -14,35 +14,67 @@ public class ParserTest implements WithAssertions, WithTestState {
 	@Test
 	public void shouldParseAnEmptyStatement() throws Exception {
 		givenAParserWithInput("");
-		whenParsed();
+		whenTheInputIsParsed();
 		thenThereShouldBeAProgramWithNoStatements();
 	}
 
 	@Test
 	public void shouldParseATypeDeclarationAssignmentStatement() throws Exception {
 		givenAParserWithInput("Count:Integer=6;");
-		whenParsed();
-		thenTheProgramShouldContainASingleStatement();
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
 		andTheStatementIsATypeDeclarationAssignment();
 		andTheAssignmentHasExistingType("Integer");
 		andTheAssignmentHasTargetType("Count");
-		andTheAssignedValueIsAConstant();
-		andTheConstantHasValue(6);
+		andTheAssignedValueIsAnIntegerConstant();
+		andTheIntegerConstantHasValue(6);
 	}
 
 	@Test
 	public void shouldParseAnExistingTypeAssignmentStatement() throws Exception {
 		givenAParserWithInput("Count=777;");
-		whenParsed();
-		thenTheProgramShouldContainASingleStatement();
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
 		andTheStatementIsAnExistingTypeAssignment();
 		andTheAssignmentHasTargetType("Count");
-		andTheAssignedValueIsAConstant();
-		andTheConstantHasValue(777);
+		andTheAssignedValueIsAnIntegerConstant();
+		andTheIntegerConstantHasValue(777);
+	}
+
+	@Test
+	public void shouldParseAStatementWithIntegerConstantAddition() throws Exception {
+		givenAParserWithInput("Count=1+2;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
+		andTheStatementIsAnExistingTypeAssignment();
+		andTheAssignmentHasTargetType("Count");
+		andTheAssignedValueIsAnIntegerConstant();
+		andTheIntegerConstantHasValue(3);
+	}
+
+	@Test
+	public void shouldParseAStatementWithRealConstantAddition() throws Exception {
+		givenAParserWithInput("Count=1.5+2.5;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
+		andTheStatementIsAnExistingTypeAssignment();
+		andTheAssignmentHasTargetType("Count");
+		andTheAssignedValueIsARealConstant();
+		andTheRealConstantHasValue(4.0);
+	}
+
+	@Test
+	public void shouldParseAStatementWithStringConstantAddition() throws Exception {
+		givenAParserWithInput("Count=\"1.5\"+\"2.5\";");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
+		andTheStatementIsAnExistingTypeAssignment();
+		andTheAssignmentHasTargetType("Count");
+		andTheAssignedValueIsAStringConstant();
+		andTheStringConstantHasValue("1.52.5");
 	}
 
 	private static final String THE_STATEMENT = "statement";
-
 	private static final String ASSIGNED_VALUE = "assigned value";
 	private static final String THE_ROOT_SYMBOL = "root symbol";
 	private static final String THE_PROGRAM = "program";
@@ -50,13 +82,33 @@ public class ParserTest implements WithAssertions, WithTestState {
 
 	private Parser parser;
 
-	private void andTheConstantHasValue(int expected) {
+	private void andTheIntegerConstantHasValue(int expected) {
 		assertThat(theAssignedIntegerConstant()).hasValue(expected);
 	}
 
-	private void andTheAssignedValueIsAConstant() {
+	private void andTheRealConstantHasValue(double expected) {
+		assertThat(theAssignedRealConstant()).hasValue(expected);
+	}
+
+	private void andTheStringConstantHasValue(String expected) {
+		assertThat(theAssignedStringConstant()).hasValue(expected);
+	}
+
+	private void andTheAssignedValueIsAnIntegerConstant() {
+		andTheAssignedValueIsAConstant(IntegerConstant.class);
+	}
+
+	private void andTheAssignedValueIsARealConstant() {
+		andTheAssignedValueIsAConstant(RealConstant.class);
+	}
+
+	private void andTheAssignedValueIsAStringConstant() {
+		andTheAssignedValueIsAConstant(StringConstant.class);
+	}
+
+	private void andTheAssignedValueIsAConstant(Class<? extends Constant<?>> constantType) {
 		state.store(ASSIGNED_VALUE, theAssignmentStatement().getExpression());
-		assertThat(theAssignedValue()).isInstanceOf(IntegerConstant.class);
+		assertThat(theAssignedValue()).isInstanceOf(constantType);
 	}
 
 	private void andTheAssignmentHasTargetType(String targetType) {
@@ -67,7 +119,7 @@ public class ParserTest implements WithAssertions, WithTestState {
 		assertThat(theTypeDeclarationAssignmentStatement()).hasExistingType(existingType);
 	}
 
-	private void thenTheProgramShouldContainASingleStatement() {
+	private void thenTheProgramContainsASingleStatement() {
 		thenTheRootSymbolShouldBeAProgram();
 		assertThat(theProgram().statements()).hasSize(1);
 		state.store(THE_STATEMENT, statement(0));
@@ -87,6 +139,14 @@ public class ParserTest implements WithAssertions, WithTestState {
 
 	private IntegerConstant theAssignedIntegerConstant() {
 		return state.retrieve(ASSIGNED_VALUE, IntegerConstant.class);
+	}
+
+	private RealConstant theAssignedRealConstant() {
+		return state.retrieve(ASSIGNED_VALUE, RealConstant.class);
+	}
+
+	private StringConstant theAssignedStringConstant() {
+		return state.retrieve(ASSIGNED_VALUE, StringConstant.class);
 	}
 
 	private TypeDeclarationAssignment theTypeDeclarationAssignmentStatement() {
@@ -124,7 +184,7 @@ public class ParserTest implements WithAssertions, WithTestState {
 		state.store(THE_PROGRAM, theRootSymbolValue);
 	}
 
-	private void whenParsed() throws Exception {
+	private void whenTheInputIsParsed() throws Exception {
 		state.store(THE_ROOT_SYMBOL,  parser.parse());
 	}
 

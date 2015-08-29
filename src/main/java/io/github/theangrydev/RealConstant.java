@@ -5,7 +5,6 @@ public class RealConstant implements Constant<Double> {
 
 	private RealConstant(Double value) {
 		this.value = value;
-		System.out.println(this);
 	}
 
 	public static RealConstant of(Double value) {
@@ -14,6 +13,11 @@ public class RealConstant implements Constant<Double> {
 
 	public Double getValue() {
 		return value;
+	}
+
+	@Override
+	public Constant<Double> add(Constant<Double> other) {
+		return of(value + other.getValue());
 	}
 
 	@Override

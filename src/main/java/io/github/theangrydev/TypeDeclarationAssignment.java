@@ -10,7 +10,6 @@ public class TypeDeclarationAssignment implements Assignment {
 		this.existingType = existingType;
 		this.targetType = targetType;
 		this.expression = expression;
-		System.out.println(this);
 	}
 
 	public static TypeDeclarationAssignment of(TypeDeclaration typeDeclaration, Expression expression) {

@@ -54,4 +54,7 @@ Constant ::= IntegerConstant:value                                              
 TypeDeclaration ::= IDENTIFIER:targetType COLON IDENTIFIER:existingType         {: RESULT=TypeDeclaration.of(targetType, existingType); :}
 	;
 Expression ::= Constant:value                                                   {: RESULT=value; :}
+	| IntegerConstant:value1 PLUS IntegerConstant:value2                        {: RESULT=value1.add(value2); :}
+	| RealConstant:value1 PLUS RealConstant:value2                              {: RESULT=value1.add(value2); :}
+	| StringConstant:value1 PLUS StringConstant:value2                          {: RESULT=value1.add(value2); :}
 	;

@@ -5,7 +5,6 @@ public class StringConstant implements Constant<String> {
 
 	private StringConstant(String value) {
 		this.value = value;
-		System.out.println(this);
 	}
 
 	public static StringConstant of(String value) {
@@ -14,6 +13,11 @@ public class StringConstant implements Constant<String> {
 
 	public String getValue() {
 		return value;
+	}
+
+	@Override
+	public Constant<String> add(Constant<String> other) {
+		return of(value + other.getValue());
 	}
 
 	@Override

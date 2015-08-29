@@ -8,7 +8,6 @@ public class Program {
 
 	private Program(List<Statement> statements) {
 		this.statements = statements;
-		System.out.println(this);
 	}
 
 	public static Program of(List<Statement> statements) {
