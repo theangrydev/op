@@ -35,7 +35,7 @@ start with Program;
 /* The grammar rules */
 Program ::= StatementList:statementList                                         {: RESULT=Program.of(statementList); :}
 	;
-StatementList ::= Statement:statement SEMICOLON StatementList:statementList     {: statementList.add((Statement) statement); RESULT=statementList; :}
+StatementList ::= Statement:statement SEMICOLON StatementList:statementList     {: statementList.add(statement); RESULT=statementList; :}
     | /* Empty StatementList */                                                 {: RESULT=new LinkedList<Statement>(); :}
 	;
 Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=TypeDeclarationAssignment.of(typeDeclaration, expression); :}
