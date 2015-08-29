@@ -19,11 +19,11 @@ public class ParserTest implements WithAssertions {
 	}
 
 	@Test
-	public void shouldParseAnAssignmentStatement() throws Exception {
+	public void shouldParseATypeDeclarationAssignmentStatement() throws Exception {
 		givenAParserWithInput("Count:Integer=6;");
 		whenParsed();
 		thenThereShouldBeASingleStatement();
-		andTheStatementIsAnAssignment();
+		andTheStatementIsATypeDeclarationAssignment();
 		andTheAssignmentHasTargetType("Count");
 		andTheAssignedValueIsAConstant();
 		andTheConstantHasValue(6);
@@ -33,19 +33,19 @@ public class ParserTest implements WithAssertions {
 	private Parser parser;
 	private Symbol symbol;
 	private Statement statement;
-	private Assignment assignment;
+	private TypeDeclarationAssignment typeDeclarationAssignment;
 
 	private void andTheConstantHasValue(int expected) {
 		assertThat(integerConstant).hasValue(expected);
 	}
 
 	private void andTheAssignedValueIsAConstant() {
-		assertThat(assignment.getExpression()).isInstanceOf(IntegerConstant.class);
-		integerConstant = (IntegerConstant) assignment.getExpression();
+		assertThat(typeDeclarationAssignment.getExpression()).isInstanceOf(IntegerConstant.class);
+		integerConstant = (IntegerConstant) typeDeclarationAssignment.getExpression();
 	}
 
 	private void andTheAssignmentHasTargetType(String targetType) {
-		assertThat(assignment).hasTargetType(targetType);
+		assertThat(typeDeclarationAssignment).hasTargetType(targetType);
 	}
 
 	private void thenThereShouldBeASingleStatement() {
@@ -53,9 +53,9 @@ public class ParserTest implements WithAssertions {
 		statement = statement(0);
 	}
 
-	private void andTheStatementIsAnAssignment() {
-		assertThat(statement).isInstanceOf(Assignment.class);
-		assignment = (Assignment) statement;
+	private void andTheStatementIsATypeDeclarationAssignment() {
+		assertThat(statement).isInstanceOf(TypeDeclarationAssignment.class);
+		typeDeclarationAssignment = (TypeDeclarationAssignment) statement;
 	}
 
 	private Statement statement(int index) {

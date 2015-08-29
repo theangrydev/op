@@ -9,7 +9,7 @@ public interface WithAssertions extends org.assertj.core.api.WithAssertions {
 		return new SymbolAssert(actual);
 	}
 
-	default AssignmentAssert assertThat(Assignment actual) {
+	default AssignmentAssert assertThat(TypeDeclarationAssignment actual) {
 		return new AssignmentAssert(actual);
 	}
 

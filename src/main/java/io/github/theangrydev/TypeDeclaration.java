@@ -15,8 +15,12 @@ public class TypeDeclaration {
 		return new TypeDeclaration(targetType, existingType);
 	}
 
-	public String targetType() {
+	public String getTargetType() {
 		return targetType;
+	}
+
+	public String getExistingType() {
+		return existingType;
 	}
 
 	@Override

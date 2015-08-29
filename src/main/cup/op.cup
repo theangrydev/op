@@ -38,8 +38,8 @@ Program ::= StatementList:statementList                                         
 StatementList ::= Statement:statement SEMICOLON StatementList:statementList     {: statementList.add((Statement) statement); RESULT=statementList; :}
     | /* Empty StatementList */                                                 {: RESULT=new LinkedList<Statement>(); :}
 	;
-Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=Assignment.of(typeDeclaration.targetType(), expression); :}
-    | IDENTIFIER:type ASSIGNMENT Expression:expression                          {: RESULT=Assignment.of(type, expression); :}
+Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=TypeDeclarationAssignment.of(typeDeclaration, expression); :}
+    | IDENTIFIER:type ASSIGNMENT Expression:expression                          {: RESULT=ExistingTypeAssignment.of(type, expression); :}
 	;
 IntegerConstant ::= INTEGER:value                                               {: RESULT=IntegerConstant.of(value); :}
 	;
