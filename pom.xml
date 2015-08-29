@@ -56,8 +56,9 @@
 		<maven.jar.plugin.version>2.5</maven.jar.plugin.version>
 		<maven.resources.plugin.version>2.7</maven.resources.plugin.version>
 		<maven.install.plugin.version>2.5.2</maven.install.plugin.version>
-		<maven.site.plugin.version>3.4</maven.site.plugin.version>
+		<maven.site.plugin.version>${apache.commons.lang.version}</maven.site.plugin.version>
 		<maven.antrun.plugin.version>1.8</maven.antrun.plugin.version>
+		<maven.build.helper.plugin.version>1.9.1</maven.build.helper.plugin.version>
 		<jflex.maven.plugin.version>1.6.1</jflex.maven.plugin.version>
 		<assertj.assertions.generator.plugin.version>2.0.1-SNAPSHOT</assertj.assertions.generator.plugin.version>
 
@@ -67,7 +68,7 @@
 		<mockito.version>1.10.19</mockito.version>
 		<ant.version>1.9.6</ant.version>
 		<yatspec.version>1.9</yatspec.version>
-		<maven.build.helper.plugin.version>1.9.1</maven.build.helper.plugin.version>
+		<apache.commons.lang.version>3.4</apache.commons.lang.version>
 	</properties>
 
 	<build>
@@ -183,8 +184,8 @@
 						<classes>
 							<class>java_cup.runtime.Symbol</class>
 						</classes>
-						<generateAssertions>false</generateAssertions>
-						<generateBddAssertions>true</generateBddAssertions>
+						<generateAssertions>true</generateAssertions>
+						<generateBddAssertions>false</generateBddAssertions>
 						<generateSoftAssertions>false</generateSoftAssertions>
 						<generateJUnitSoftAssertions>false</generateJUnitSoftAssertions>
 					</configuration>
@@ -378,15 +379,14 @@
 			<version>${java.cup.version}</version>
 		</dependency>
 
-		<!-- Test dependencies -->
-		<!-- JUnit -->
+		<!-- Apache commons lang-->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-			<scope>test</scope>
+			<version>${apache.commons.lang.version}</version>
 		</dependency>
 
+		<!-- Test dependencies -->
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>

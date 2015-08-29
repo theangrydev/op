@@ -1,23 +1,57 @@
 package io.github.theangrydev;
 
-import java_cup.runtime.*;
+import java_cup.runtime.ComplexSymbolFactory.Location;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /* Terminals (tokens returned by the scanner). */
-terminal AND, OR, ELSE, IF, THEN, CODE, API, TIMES, PLUS, MINUS, DIVIDE, SEMICOLON, COMMA, LEFT_PARENTHESIS, RIGHT_PARENTHESIS, EQUAL_TO, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, NOT_EQUAL_TO, COLON, ASSIGNMENT, DOT, IDENTIFIER, INTEGER, REAL, STRING;
+terminal AND, OR;
+terminal EQUAL_TO, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, NOT_EQUAL_TO;
+terminal TIMES, PLUS, MINUS, DIVIDE;
+terminal IF, ELSE;
+terminal ASSIGNMENT;
+terminal String IDENTIFIER;
+terminal CODE, API;
+terminal SEMICOLON, COMMA, LEFT_PARENTHESIS, RIGHT_PARENTHESIS, COLON, DOT;
+terminal Integer INTEGER;
+terminal Double REAL;
+terminal String STRING;
 
 /* Non terminals */
-non terminal Statement;
-non terminal Expression;
-non terminal Program;
+non terminal Statement Statement;
+non terminal List<Statement> StatementList;
+non terminal Expression Expression;
+non terminal Program Program;
+non terminal TypeDeclaration TypeDeclaration;
+non terminal Constant<Integer> IntegerConstant;
+non terminal Constant<String> StringConstant;
+non terminal Constant<Double> RealConstant;
+non terminal Constant<?> Constant;
 
 /* Precedences */
 start with Program;
 
 /* The grammar rules */
-Program ::= Statement
-;
-Statement ::= Statement Expression:expression SEMICOLON {: RESULT=expression; :}
-            | Expression:expression SEMICOLON           {: RESULT=expression; :}
-;
-Expression ::= INTEGER:value       {: RESULT=value; :}
-;
+Program ::= StatementList:statementList                                         {: RESULT=Program.of(statementList); :}
+	;
+StatementList ::= Statement:statement SEMICOLON StatementList:statementList     {: statementList.add((Statement) statement); RESULT=statementList; :}
+    | SEMICOLON                                                                 {: RESULT=new LinkedList<Statement>(); :}
+	;
+Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=Assignment.of(typeDeclaration.targetType(), expression); :}
+    | IDENTIFIER:type ASSIGNMENT Expression:expression                          {: RESULT=Assignment.of(type, expression); :}
+	;
+IntegerConstant ::= INTEGER:value                                               {: RESULT=Constant.integer(value); :}
+	;
+StringConstant ::= STRING:value                                                 {: RESULT=Constant.string(value); :}
+	;
+RealConstant ::= REAL:value                                                     {: RESULT=Constant.real(value); :}
+	;
+Constant ::= IntegerConstant:value                                              {: RESULT=value; :}
+    | RealConstant:value                                                        {: RESULT=value; :}
+    | StringConstant:value                                                      {: RESULT=value; :}
+	;
+TypeDeclaration ::= IDENTIFIER:targetType COLON IDENTIFIER:existingType         {: RESULT=TypeDeclaration.of(targetType, existingType); :}
+	;
+Expression ::= Constant:value                                             {: RESULT=value; :}
+	;
