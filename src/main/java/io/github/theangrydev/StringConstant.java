@@ -20,4 +20,9 @@ public class StringConstant implements Constant<String> {
 	public String toString() {
 		return value;
 	}
+
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
 }

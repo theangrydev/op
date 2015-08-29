@@ -20,4 +20,9 @@ public class RealConstant implements Constant<Double> {
 	public String toString() {
 		return value.toString();
 	}
+
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
 }

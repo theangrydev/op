@@ -21,4 +21,9 @@ public class IntegerConstant implements Constant<Integer> {
 	public String toString() {
 		return value.toString();
 	}
+
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
 }
