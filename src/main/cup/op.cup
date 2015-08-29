@@ -1,0 +1,23 @@
+package io.github.theangrydev;
+
+import java_cup.runtime.*;
+
+/* Terminals (tokens returned by the scanner). */
+terminal AND, OR, ELSE, IF, THEN, CODE, API, TIMES, PLUS, MINUS, DIVIDE, SEMICOLON, COMMA, LEFT_PARENTHESIS, RIGHT_PARENTHESIS, EQUAL_TO, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, NOT_EQUAL_TO, COLON, ASSIGNMENT, DOT, IDENTIFIER, INTEGER, REAL, STRING;
+
+/* Non terminals */
+non terminal Statement;
+non terminal Expression;
+non terminal Program;
+
+/* Precedences */
+start with Program;
+
+/* The grammar rules */
+Program ::= Statement
+;
+Statement ::= Statement Expression:expression SEMICOLON {: RESULT=expression; :}
+            | Expression:expression SEMICOLON           {: RESULT=expression; :}
+;
+Expression ::= INTEGER:value       {: RESULT=value; :}
+;

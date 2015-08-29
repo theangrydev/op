@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+		xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>io.github.theangrydev</groupId>
+	<artifactId>op</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<prerequisites>
+		<maven>3.0.2</maven>
+	</prerequisites>
+
+	<repositories>
+		<repository>
+			<id>project</id>
+			<url>file://${project.basedir}/repo</url>
+		</repository>
+		<repository>
+			<id>repo.bodar.com</id>
+			<url>http://repo.bodar.com</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>project</id>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>ignore</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>file://${project.basedir}/repo</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<!-- Project -->
+		<java.language.level>1.8</java.language.level>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<java.cup.download.directory>${project.build.directory}/java-cup-bin-${java.cup.version}</java.cup.download.directory>
+
+		<!-- Plugins -->
+		<maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
+		<maven.clean.plugin.version>2.6.1</maven.clean.plugin.version>
+		<maven.dependency.plugin.version>2.9</maven.dependency.plugin.version>
+		<maven.jar.plugin.version>2.7</maven.jar.plugin.version>
+		<maven.surefire.plugin.version>2.18</maven.surefire.plugin.version>
+		<maven.jar.plugin.version>2.5</maven.jar.plugin.version>
+		<maven.resources.plugin.version>2.7</maven.resources.plugin.version>
+		<maven.install.plugin.version>2.5.2</maven.install.plugin.version>
+		<maven.site.plugin.version>3.4</maven.site.plugin.version>
+		<maven.antrun.plugin.version>1.8</maven.antrun.plugin.version>
+		<jflex.maven.plugin.version>1.6.1</jflex.maven.plugin.version>
+		<assertj.assertions.generator.plugin.version>2.0.1-SNAPSHOT</assertj.assertions.generator.plugin.version>
+
+		<!-- Dependencies -->
+		<java.cup.version>11b-20150326</java.cup.version>
+		<assertj.core.version>3.1.0</assertj.core.version>
+		<mockito.version>1.10.19</mockito.version>
+		<ant.version>1.9.6</ant.version>
+		<yatspec.version>1.9</yatspec.version>
+		<maven.build.helper.plugin.version>1.9.1</maven.build.helper.plugin.version>
+	</properties>
+
+	<build>
+		<!-- Plugin configuration -->
+		<pluginManagement>
+			<plugins>
+				<!-- Compiler -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${java.language.level}</source>
+						<target>${java.language.level}</target>
+					</configuration>
+				</plugin>
+
+				<!-- Ant -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${maven.antrun.plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.ant</groupId>
+							<artifactId>ant</artifactId>
+							<version>${ant.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.ant</groupId>
+							<artifactId>ant-launcher</artifactId>
+							<version>${ant.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<!-- Clean -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${maven.clean.plugin.version}</version>
+				</plugin>
+
+				<!-- Dependency -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven.dependency.plugin.version}</version>
+				</plugin>
+
+				<!-- Resources  -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven.resources.plugin.version}</version>
+				</plugin>
+
+				<!-- Build helper -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${maven.build.helper.plugin.version}</version>
+				</plugin>
+
+				<!-- Surefire -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven.surefire.plugin.version}</version>
+				</plugin>
+
+				<!-- JAR -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven.jar.plugin.version}</version>
+				</plugin>
+
+				<!-- Install -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${maven.install.plugin.version}</version>
+				</plugin>
+
+				<!-- Versions Maven -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>${versions.plugin.version}</version>
+				</plugin>
+
+				<!-- JFlex -->
+				<plugin>
+					<groupId>de.jflex</groupId>
+					<artifactId>jflex-maven-plugin</artifactId>
+					<version>${jflex.maven.plugin.version}</version>
+				</plugin>
+
+				<!-- Download -->
+				<plugin>
+					<groupId>com.googlecode.maven-download-plugin</groupId>
+					<artifactId>download-maven-plugin</artifactId>
+					<version>1.2.1</version>
+				</plugin>
+
+				<!-- AssertJ -->
+				<plugin>
+					<groupId>org.assertj</groupId>
+					<artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+					<version>${assertj.assertions.generator.plugin.version}</version>
+					<configuration>
+						<classes>
+							<class>java_cup.runtime.Symbol</class>
+						</classes>
+						<generateAssertions>false</generateAssertions>
+						<generateBddAssertions>true</generateBddAssertions>
+						<generateSoftAssertions>false</generateSoftAssertions>
+						<generateJUnitSoftAssertions>false</generateJUnitSoftAssertions>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<!-- Plugin executions -->
+		<plugins>
+			<!-- Generate AssertJ assertions -->
+			<plugin>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-assertion-helpers</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>generate-assertions</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Run JFlex -->
+			<plugin>
+				<groupId>de.jflex</groupId>
+				<artifactId>jflex-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-jflex</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Run CUP -->
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>download-cup</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>http://www2.cs.tum.edu/projects/cup/releases/java-cup-bin-${java.cup.version}.tar.gz</url>
+							<unpack>true</unpack>
+							<outputDirectory>${java.cup.download.directory}</outputDirectory>
+							<md5>f6da842ad39f53c9c2fd1fea5b249172</md5>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>install-cup</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<file>${java.cup.download.directory}/java-cup-11b.jar</file>
+							<groupId>edu.tum.cs</groupId>
+							<artifactId>java-cup</artifactId>
+							<version>${java.cup.version}</version>
+							<packaging>jar</packaging>
+							<localRepositoryPath>${project.basedir}/repo</localRepositoryPath>
+						</configuration>
+					</execution>
+					<execution>
+						<id>install-cup-runtime</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<file>${java.cup.download.directory}/java-cup-11b-runtime.jar</file>
+							<groupId>edu.tum.cs</groupId>
+							<artifactId>java-cup-runtime</artifactId>
+							<version>${java.cup.version}</version>
+							<packaging>jar</packaging>
+							<localRepositoryPath>${project.basedir}/repo</localRepositoryPath>
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-install</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-cup</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<taskdef name="cup" classname="java_cup.anttask.CUPTask" classpathref="maven.compile.classpath"/>
+								<cup srcfile="${project.basedir}/src/main/cup/op.cup"
+									 destdir="${project.build.directory}/generated-sources/cup"
+									 parser="Parser"
+									 symbols="Symbols"
+									 interface="true"
+									 nosummary="true"/>
+							</target>
+							<sourceRoot>${project.build.directory}/generated-sources/cup</sourceRoot>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+					<groupId>edu.tum.cs</groupId>
+					<artifactId>java-cup</artifactId>
+					<version>${java.cup.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- Disable default lifecycle -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<phase>none</phase>
+					</execution>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-resources</id>
+						<phase>none</phase>
+					</execution>
+					<execution>
+						<id>default-testResources</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-test</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- Compile dependencies -->
+		<!-- CUP -->
+		<dependency>
+			<groupId>edu.tum.cs</groupId>
+			<artifactId>java-cup-runtime</artifactId>
+			<version>${java.cup.version}</version>
+		</dependency>
+
+		<!-- Test dependencies -->
+		<!-- JUnit -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- JUnit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- AssertJ -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj.core.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Mockito -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+		</dependency>
+
+		<!-- yatspec -->
+		<dependency>
+			<groupId>com.googlecode.yatspec</groupId>
+			<artifactId>yatspec</artifactId>
+			<version>${yatspec.version}</version>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<!-- Enable default lifecycle -->
+		<profile>
+			<id>default-build</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default-compile</id>
+								<phase>compile</phase>
+							</execution>
+							<execution>
+								<id>default-testCompile</id>
+								<phase>test-compile</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default-resources</id>
+								<phase>process-resources</phase>
+							</execution>
+							<execution>
+								<id>default-testResources</id>
+								<phase>process-test-resources</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default-test</id>
+								<phase>test</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jar-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default-jar</id>
+								<phase>package</phase>
+							</execution>
+							<execution>
+								<id>test-jar</id>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-install-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default-install</id>
+								<phase>install</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Check for updates -->
+		<profile>
+			<id>check-for-updates</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>versions-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>check-for-dependency-updates</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>display-dependency-updates</goal>
+									<goal>display-plugin-updates</goal>
+									<goal>display-property-updates</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
