@@ -168,7 +168,7 @@ public class ScannerTest implements WithTestState, WithAssertions {
 		try {
 			return field.getInt(null);
 		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Could not get static int for field=" + field, e);
 		}
 	}
 
