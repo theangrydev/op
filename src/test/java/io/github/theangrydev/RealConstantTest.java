@@ -26,6 +26,14 @@ public class RealConstantTest implements WithAssertions {
 	}
 
 	@Test
+	public void shouldMultiplyByAnotherConstant() throws Exception {
+		RealConstant value1 = RealConstant.of(-3.5);
+		RealConstant value2 = RealConstant.of(2.0);
+		assertThat(value1.times(value2)).hasValue(-7.0);
+		assertThat(value2.times(value1)).hasValue(-7.0);
+	}
+
+	@Test
 	public void shouldToStringTheValue() throws Exception {
 		assertThat(RealConstant.of(100.105)).hasToString("100.105");
 	}

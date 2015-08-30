@@ -27,6 +27,11 @@ public class RealConstant implements NumericConstant<Double> {
 	}
 
 	@Override
+	public NumericConstant<Double> times(NumericConstant<Double> other) {
+		return of(value * other.getValue());
+	}
+
+	@Override
 	public String toString() {
 		return value.toString();
 	}

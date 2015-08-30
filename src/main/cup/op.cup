@@ -59,4 +59,6 @@ Expression ::= Constant:value                                                   
     | StringConstant:value1 PLUS StringConstant:value2                          {: RESULT=value1.add(value2); :}
     | IntegerConstant:value1 MINUS IntegerConstant:value2                       {: RESULT=value1.minus(value2); :}
     | RealConstant:value1 MINUS RealConstant:value2                             {: RESULT=value1.minus(value2); :}
+    | IntegerConstant:value1 TIMES IntegerConstant:value2                       {: RESULT=value1.times(value2); :}
+    | RealConstant:value1 TIMES RealConstant:value2                             {: RESULT=value1.times(value2); :}
     ;

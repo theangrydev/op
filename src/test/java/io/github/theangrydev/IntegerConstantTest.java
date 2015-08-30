@@ -26,6 +26,14 @@ public class IntegerConstantTest implements WithAssertions {
 	}
 
 	@Test
+	public void shouldMultiplyByAnotherConstant() throws Exception {
+		IntegerConstant value1 = IntegerConstant.of(-3);
+		IntegerConstant value2 = IntegerConstant.of(2);
+		assertThat(value1.times(value2)).hasValue(-6);
+		assertThat(value2.times(value1)).hasValue(-6);
+	}
+
+	@Test
 	public void shouldToStringTheValue() throws Exception {
 		assertThat(IntegerConstant.of(100)).hasToString("100");
 	}
