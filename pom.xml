@@ -306,7 +306,7 @@
 						<configuration>
 							<target>
 								<taskdef name="cup" classname="java_cup.anttask.CUPTask" classpathref="maven.compile.classpath"/>
-								<cup srcfile="${project.basedir}/src/main/cup/op.cup"
+								<cup srcfile="${project.basedir}/src/main/cup/io/github/theangrydev/op/parser/CUPParser.cup"
 									 destdir="${project.build.directory}/generated-sources/cup"
 									 parser="CUPParser"
 									 symbols="CUPSymbols"
