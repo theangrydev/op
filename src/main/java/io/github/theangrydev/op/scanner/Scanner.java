@@ -6,7 +6,7 @@ import java.io.Reader;
 
 public class Scanner extends JFlexScanner {
 
-	public Scanner(Reader in, ComplexSymbolFactory symbolFactory) {
-		super(in, symbolFactory);
+	public Scanner(String unit, Reader input, ComplexSymbolFactory symbolFactory) {
+		super(input, unit, symbolFactory);
 	}
 }

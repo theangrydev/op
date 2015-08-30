@@ -209,7 +209,7 @@ public class ParserTest implements WithAssertions, WithTestState {
 	}
 
 	private void givenAParserWithInput(String input) {
-		parser = new Parser(input);
+		parser = new Parser("inline", input);
 	}
 
 	@Override

@@ -9,8 +9,8 @@ import java.io.StringReader;
 public class Parser {
 	private final CUPParser parser;
 
-	public Parser(String input) {
-		parser = parser(input);
+	public Parser(String unit, String input) {
+		this.parser = parser(unit, input);
 	}
 
 	public Program parse() {
@@ -21,12 +21,12 @@ public class Parser {
 		}
 	}
 
-	private static CUPParser parser(String input) {
-		return parser(new StringReader(input));
+	private static CUPParser parser(String unit, String input) {
+		return parser(unit, new StringReader(input));
 	}
 
-	private static CUPParser parser(Reader input) {
+	private static CUPParser parser(String unit, Reader input) {
 		ComplexSymbolFactory symbolFactory = new ComplexSymbolFactory();
-		return new CUPParser(new Scanner(input, symbolFactory), symbolFactory);
+		return new CUPParser(new Scanner(unit, input, symbolFactory), symbolFactory);
 	}
 }

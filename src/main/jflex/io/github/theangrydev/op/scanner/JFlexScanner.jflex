@@ -27,9 +27,11 @@ import java_cup.runtime.Symbol;
 /**
  * Constructor code:
  */
+%ctorarg String unit
 %ctorarg ComplexSymbolFactory symbolFactory
 %init{
 	this.symbolFactory = symbolFactory;
+	this.unit = unit;
 %init}
 
 /**
@@ -37,13 +39,14 @@ import java_cup.runtime.Symbol;
  */
 %{
 private ComplexSymbolFactory symbolFactory;
+private String unit;
 
 private Symbol symbol(String name, int tokenId) {
-	return symbolFactory.newSymbol(name, tokenId, new Location(yyline+1, yycolumn +1), new Location(yyline+1,yycolumn+yylength()));
+	return symbolFactory.newSymbol(name, tokenId, new Location(unit, yyline+1, yycolumn +1), new Location(unit, yyline+1,yycolumn+yylength()));
 }
 
 private Symbol symbol(String name, int tokenId, Object value) {
-	return symbolFactory.newSymbol(name, tokenId, new Location(yyline+1, yycolumn +1), new Location(yyline+1,yycolumn+yylength()), value);
+	return symbolFactory.newSymbol(name, tokenId, new Location(unit, yyline+1, yycolumn +1), new Location(unit, yyline+1,yycolumn+yylength()), value);
 }
 
 private String innerText() {

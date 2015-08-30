@@ -178,7 +178,7 @@ public class ScannerTest implements WithTestState, WithAssertions {
 	}
 
 	private void givenAScannerWithInput(String input) {
-		scanner = new Scanner(new StringReader(input), new ComplexSymbolFactory());
+		scanner = new Scanner("inline", new StringReader(input), new ComplexSymbolFactory());
 	}
 
 	private void whenTheNextTokenIsFetched() throws IOException {
