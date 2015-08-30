@@ -1,4 +1,4 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.parser;
 
 public interface BinaryOperator extends Expression {
 	Expression getLeft();

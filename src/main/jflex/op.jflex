@@ -1,9 +1,9 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.scanner;
 
+import io.github.theangrydev.op.parser.CUPSymbols;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 import java_cup.runtime.Symbol;
-import java_cup.runtime.SymbolFactory;
 
 %%
 
@@ -22,7 +22,7 @@ import java_cup.runtime.SymbolFactory;
 /**
  * Class name
  */
-%class Scanner
+%class JFlexScanner
 
 /**
  * Constructor code:
@@ -55,7 +55,7 @@ private String innerText() {
  * The value used for EOF:
  */
 %eofval{
-	return symbol("EOF", Symbols.EOF);
+	return symbol("EOF", CUPSymbols.EOF);
 %eofval}
 
 /**
@@ -78,32 +78,32 @@ Whitespace      = [ \n\t]
 /**
  * Lexical rules:
  */
-"&&"            { return symbol("&&", Symbols.AND); }
-"||"            { return symbol("||", Symbols.OR); }
-"if"            { return symbol("if", Symbols.IF); }
-"else"          { return symbol("else", Symbols.ELSE); }
-"code"          { return symbol("code", Symbols.CODE); }
-"api"           { return symbol("api", Symbols.API); }
-"*"             { return symbol("*", Symbols.TIMES); }
-"+"             { return symbol("+", Symbols.PLUS); }
-"-"             { return symbol("-", Symbols.MINUS); }
-"/"             { return symbol("/", Symbols.DIVIDE); }
-";"             { return symbol(";", Symbols.SEMICOLON); }
-","             { return symbol(",", Symbols.COMMA); }
-"("             { return symbol("(", Symbols.LEFT_PARENTHESIS); }
-")"             { return symbol(")", Symbols.RIGHT_PARENTHESIS); }
-"=="            { return symbol("==", Symbols.EQUAL_TO); }
-"<"             { return symbol("<", Symbols.LESS_THAN); }
-">"             { return symbol(">", Symbols.GREATER_THAN); }
-"<="            { return symbol("<=", Symbols.LESS_THAN_OR_EQUAL_TO); }
-">="            { return symbol(">=", Symbols.GREATER_THAN_OR_EQUAL_TO); }
-"!="            { return symbol("!=", Symbols.NOT_EQUAL_TO); }
-":"             { return symbol(":", Symbols.COLON); }
-"="             { return symbol("=", Symbols.ASSIGNMENT); }
-"."             { return symbol(".", Symbols.DOT); }
-{Identifier}    { return symbol("identifier", Symbols.IDENTIFIER, yytext()); }
-{Integer}       { return symbol("integer", Symbols.INTEGER, new Integer(yytext())); }
-{Real}          { return symbol("real", Symbols.REAL, new Double(yytext())); }
-{String}        { return symbol("string", Symbols.STRING, innerText()); }
+"&&"            { return symbol("&&", CUPSymbols.AND); }
+"||"            { return symbol("||", CUPSymbols.OR); }
+"if"            { return symbol("if", CUPSymbols.IF); }
+"else"          { return symbol("else", CUPSymbols.ELSE); }
+"code"          { return symbol("code", CUPSymbols.CODE); }
+"api"           { return symbol("api", CUPSymbols.API); }
+"*"             { return symbol("*", CUPSymbols.TIMES); }
+"+"             { return symbol("+", CUPSymbols.PLUS); }
+"-"             { return symbol("-", CUPSymbols.MINUS); }
+"/"             { return symbol("/", CUPSymbols.DIVIDE); }
+";"             { return symbol(";", CUPSymbols.SEMICOLON); }
+","             { return symbol(",", CUPSymbols.COMMA); }
+"("             { return symbol("(", CUPSymbols.LEFT_PARENTHESIS); }
+")"             { return symbol(")", CUPSymbols.RIGHT_PARENTHESIS); }
+"=="            { return symbol("==", CUPSymbols.EQUAL_TO); }
+"<"             { return symbol("<", CUPSymbols.LESS_THAN); }
+">"             { return symbol(">", CUPSymbols.GREATER_THAN); }
+"<="            { return symbol("<=", CUPSymbols.LESS_THAN_OR_EQUAL_TO); }
+">="            { return symbol(">=", CUPSymbols.GREATER_THAN_OR_EQUAL_TO); }
+"!="            { return symbol("!=", CUPSymbols.NOT_EQUAL_TO); }
+":"             { return symbol(":", CUPSymbols.COLON); }
+"="             { return symbol("=", CUPSymbols.ASSIGNMENT); }
+"."             { return symbol(".", CUPSymbols.DOT); }
+{Identifier}    { return symbol("identifier", CUPSymbols.IDENTIFIER, yytext()); }
+{Integer}       { return symbol("integer", CUPSymbols.INTEGER, new Integer(yytext())); }
+{Real}          { return symbol("real", CUPSymbols.REAL, new Double(yytext())); }
+{String}        { return symbol("string", CUPSymbols.STRING, innerText()); }
 {Whitespace}    { /* Ignore whitespace. */ }
 .               { System.out.println("Illegal char, '" + yytext() + "' line: " + yyline + ", column: " + yychar); }

@@ -1,4 +1,4 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.parser;
 
 import java_cup.runtime.ComplexSymbolFactory.Location;
 

@@ -1,12 +1,11 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.parser;
 
 import com.googlecode.yatspec.junit.SpecRunner;
-import java_cup.runtime.ComplexSymbolFactory;
-import java_cup.runtime.Symbol;
+import io.github.theangrydev.TestState;
+import io.github.theangrydev.WithAssertions;
+import io.github.theangrydev.WithTestState;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.io.StringReader;
 
 @RunWith(SpecRunner.class)
 public class ParserTest implements WithAssertions, WithTestState {
@@ -88,7 +87,6 @@ public class ParserTest implements WithAssertions, WithTestState {
 
 	private static final String THE_STATEMENT = "statement";
 	private static final String ASSIGNED_VALUE = "assigned value";
-	private static final String THE_ROOT_SYMBOL = "root symbol";
 	private static final String THE_PROGRAM = "program";
 	private final TestState state = new TestState();
 	private Parser parser;
@@ -140,7 +138,6 @@ public class ParserTest implements WithAssertions, WithTestState {
 	}
 
 	private void thenTheProgramContainsASingleStatement() {
-		thenTheRootSymbolShouldBeAProgram();
 		assertThat(theProgram().statements()).hasSize(1);
 		state.store(THE_STATEMENT, statement(0));
 	}
@@ -195,16 +192,11 @@ public class ParserTest implements WithAssertions, WithTestState {
 		return state.retrieve(THE_STATEMENT, Statement.class);
 	}
 
-	private Symbol theRootSymbol() {
-		return state.retrieve(THE_ROOT_SYMBOL, Symbol.class);
-	}
-
 	private Statement statement(int index) {
 		return theProgram().statements().get(index);
 	}
 
 	private void thenThereShouldBeAProgramWithNoStatements() {
-		thenTheRootSymbolShouldBeAProgram();
 		assertThat(theProgram().statements()).isEmpty();
 	}
 
@@ -212,20 +204,12 @@ public class ParserTest implements WithAssertions, WithTestState {
 		return state.retrieve(THE_PROGRAM, Program.class);
 	}
 
-	private void thenTheRootSymbolShouldBeAProgram() {
-		Object theRootSymbolValue = theRootSymbol().value;
-		assertThat(theRootSymbolValue).isExactlyInstanceOf(Program.class);
-		state.store(THE_PROGRAM, theRootSymbolValue);
-	}
-
 	private void whenTheInputIsParsed() throws Exception {
-		state.store(THE_ROOT_SYMBOL,  parser.parse());
+		state.store(THE_PROGRAM,  parser.parse());
 	}
 
 	private void givenAParserWithInput(String input) {
-		ComplexSymbolFactory symbolFactory = new ComplexSymbolFactory();
-		Scanner scanner = new Scanner(new StringReader(input), symbolFactory);
-		parser = new Parser(scanner, symbolFactory);
+		parser = new Parser(input);
 	}
 
 	@Override

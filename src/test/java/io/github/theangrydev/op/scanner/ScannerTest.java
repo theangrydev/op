@@ -1,10 +1,13 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.scanner;
 
 import com.googlecode.yatspec.junit.Notes;
 import com.googlecode.yatspec.junit.Row;
 import com.googlecode.yatspec.junit.SpecRunner;
 import com.googlecode.yatspec.junit.Table;
 import com.googlecode.yatspec.state.givenwhenthen.WithTestState;
+import io.github.theangrydev.TestState;
+import io.github.theangrydev.WithAssertions;
+import io.github.theangrydev.op.parser.CUPSymbols;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
 import java_cup.runtime.SymbolAssert;
@@ -125,7 +128,7 @@ public class ScannerTest implements WithTestState, WithAssertions {
 
 	private static final Map<String, Integer> symbolsValuesByName;
 	static {
-		symbolsValuesByName = stream(Symbols.class.getDeclaredFields())
+		symbolsValuesByName = stream(CUPSymbols.class.getDeclaredFields())
 			.filter(field -> isStatic(field.getModifiers()))
 			.filter(field -> field.getType() == int.class)
 			.collect(toMap(Field::getName, ScannerTest::getStaticInt));
@@ -171,19 +174,15 @@ public class ScannerTest implements WithTestState, WithAssertions {
 	}
 
 	private IllegalStateException symbolNotFoundException(String symbolName) {
-		return new IllegalStateException(format("There is no symbol named '%s' in %s", symbolName, Symbols.class.getSimpleName()));
+		return new IllegalStateException(format("There is no symbol named '%s' in %s", symbolName, CUPSymbols.class.getSimpleName()));
 	}
 
 	private void givenAScannerWithInput(String input) {
-		scanner = new Scanner(input(input), new ComplexSymbolFactory());
+		scanner = new Scanner(new StringReader(input), new ComplexSymbolFactory());
 	}
 
 	private void whenTheNextTokenIsFetched() throws IOException {
 		symbol = scanner.next_token();
-	}
-
-	private StringReader input(String input) {
-		return new StringReader(input);
 	}
 
 	@Override

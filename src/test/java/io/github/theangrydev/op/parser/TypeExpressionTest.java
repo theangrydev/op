@@ -1,5 +1,6 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.parser;
 
+import io.github.theangrydev.WithAssertions;
 import org.junit.Test;
 
 public class TypeExpressionTest implements WithAssertions {

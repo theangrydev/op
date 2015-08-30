@@ -1,4 +1,4 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.parser;
 
 public class ExistingTypeAssignment implements Assignment {
 	private final String targetType;

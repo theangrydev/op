@@ -1,4 +1,4 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.parser;
 
 public class StringConstant implements Constant<String> {
 	private final String value;

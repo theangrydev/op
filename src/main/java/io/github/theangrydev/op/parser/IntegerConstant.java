@@ -1,4 +1,4 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.parser;
 
 public class IntegerConstant implements NumericConstant<Integer> {
 	private final Integer value;

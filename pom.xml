@@ -308,8 +308,8 @@
 								<taskdef name="cup" classname="java_cup.anttask.CUPTask" classpathref="maven.compile.classpath"/>
 								<cup srcfile="${project.basedir}/src/main/cup/op.cup"
 									 destdir="${project.build.directory}/generated-sources/cup"
-									 parser="Parser"
-									 symbols="Symbols"
+									 parser="CUPParser"
+									 symbols="CUPSymbols"
 									 interface="true"
 									 nosummary="true"/>
 							</target>
