@@ -25,14 +25,14 @@ public class StringConstantTest implements WithAssertions {
 	@Test
 	public void acceptShouldVisitTheStringConstant() throws Exception {
 		StringConstant value = StringConstant.of("100");
-		value.accept(new Expression.Visitor<String>() {
+		value.accept(new Expression.Visitor() {
 			@Override
 			public void visit(StringConstant stringConstant) {
 				assertThat(value).isSameAs(stringConstant);
 			}
 
 			@Override
-			public void visit(TypeExpression<String> typeExpression) {
+			public void visit(TypeExpression typeExpression) {
 				fail("Should visit the StringConstant");
 			}
 

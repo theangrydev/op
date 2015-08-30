@@ -42,7 +42,7 @@ public class RealConstant implements NumericConstant<Double> {
 	}
 
 	@Override
-	public void accept(Visitor<Double> visitor) {
+	public void accept(Visitor visitor) {
 		visitor.visit(this);
 	}
 }

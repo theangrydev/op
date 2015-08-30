@@ -27,7 +27,7 @@ public class StringConstant implements Constant<String> {
 	}
 
 	@Override
-	public void accept(Visitor<String> visitor) {
+	public void accept(Visitor visitor) {
 		visitor.visit(this);
 	}
 }

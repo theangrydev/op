@@ -49,7 +49,7 @@ public class RealConstantTest implements WithAssertions {
 	@Test
 	public void acceptShouldVisitTheRealConstant() throws Exception {
 		RealConstant value = RealConstant.of(10.5);
-		value.accept(new Expression.Visitor<Double>() {
+		value.accept(new Expression.Visitor() {
 			@Override
 			public void visit(RealConstant realConstant) {
 				assertThat(value).isSameAs(realConstant);
@@ -66,7 +66,7 @@ public class RealConstantTest implements WithAssertions {
 			}
 
 			@Override
-			public void visit(TypeExpression<Double> typeExpression) {
+			public void visit(TypeExpression typeExpression) {
 				fail("Should visit the RealConstant");
 			}
 

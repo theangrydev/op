@@ -1,6 +1,6 @@
 package io.github.theangrydev;
 
-public class TypeExpression<T> implements Expression<T> {
+public class TypeExpression implements Expression {
 
 	private final String type;
 
@@ -8,8 +8,8 @@ public class TypeExpression<T> implements Expression<T> {
 		this.type = type;
 	}
 
-	public static <T> TypeExpression<T> of(String type) {
-		return new TypeExpression<>(type);
+	public static TypeExpression of(String type) {
+		return new TypeExpression(type);
 	}
 
 	public String getType() {
@@ -17,7 +17,7 @@ public class TypeExpression<T> implements Expression<T> {
 	}
 
 	@Override
-	public void accept(Visitor<T> visitor) {
+	public void accept(Visitor visitor) {
 		visitor.visit(this);
 	}
 

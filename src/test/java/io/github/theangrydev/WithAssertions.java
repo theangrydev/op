@@ -36,4 +36,12 @@ public interface WithAssertions extends org.assertj.core.api.WithAssertions {
 	default TypeExpressionAssert assertThat(TypeExpression actual) {
 		return new TypeExpressionAssert(actual);
 	}
+
+	default TypeAdditionAssert assertThat(TypeAddition actual) {
+		return new TypeAdditionAssert(actual);
+	}
+
+	default TypeDeclarationAssert assertThat(TypeDeclaration actual) {
+		return new TypeDeclarationAssert(actual);
+	}
 }

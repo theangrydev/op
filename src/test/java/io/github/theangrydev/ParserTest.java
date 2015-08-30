@@ -186,15 +186,15 @@ public class ParserTest implements WithAssertions, WithTestState {
 	}
 
 	private void andTheTypeAdditionHasATypeOnTheLeft(String type) {
-		assertThat((TypeExpression<Object>) theAssignedTypeAddition().getLeft()).hasType(type);
+		assertThat(theAssignedTypeAddition().getLeft()).hasType(type);
 	}
 
 	private void andTheTypeAdditionHasATypeOnTheRight(String type) {
-		assertThat((TypeExpression<Object>) theAssignedTypeAddition().getRight()).hasType(type);
+		assertThat(theAssignedTypeAddition().getRight()).hasType(type);
 	}
 
 	private void andTheIntegerAdditionHasATypeOnTheLeft(String type) {
-		assertThat((TypeExpression<Integer>) theAssignedIntegerAddition().getLeft()).hasType(type);
+		assertThat((TypeExpression) theAssignedIntegerAddition().getLeft()).hasType(type);
 	}
 
 	private void andTheAssignedValueIsAnIntegerConstant() {

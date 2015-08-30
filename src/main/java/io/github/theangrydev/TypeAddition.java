@@ -2,30 +2,30 @@ package io.github.theangrydev;
 
 public class TypeAddition implements Addition<Object> {
 
-	private final Expression<Object> left;
-	private final Expression<Object> right;
+	private final TypeExpression left;
+	private final TypeExpression right;
 
-	public TypeAddition(Expression<Object> left, Expression<Object> right) {
+	public TypeAddition(TypeExpression left, TypeExpression right) {
 		this.left = left;
 		this.right = right;
 	}
 
-	public static TypeAddition add(Expression<Object> left, Expression<Object> right) {
+	public static TypeAddition add(TypeExpression left, TypeExpression right) {
 		return new TypeAddition(left, right);
 	}
 
 	@Override
-	public Expression<Object> getLeft() {
+	public TypeExpression getLeft() {
 		return left;
 	}
 
 	@Override
-	public Expression<Object> getRight() {
+	public TypeExpression getRight() {
 		return right;
 	}
 
 	@Override
-	public void accept(Visitor<Object> visitor) {
+	public void accept(Visitor visitor) {
 		visitor.visit(this);
 	}
 
