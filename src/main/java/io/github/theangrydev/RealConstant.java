@@ -17,7 +17,7 @@ public class RealConstant implements NumericConstant<Double> {
 	}
 
 	@Override
-	public Constant<Double> add(Constant<Double> other) {
+	public NumericConstant<Double> add(NumericConstant<Double> other) {
 		return of(value + other.getValue());
 	}
 

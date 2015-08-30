@@ -11,14 +11,13 @@ public class StringConstant implements Constant<String> {
 		return new StringConstant(value);
 	}
 
-	@Override
-	public String getValue() {
-		return value;
+	public StringConstant concat(StringConstant other) {
+		return of(value + other.getValue());
 	}
 
 	@Override
-	public Constant<String> add(Constant<String> other) {
-		return of(value + other.getValue());
+	public String getValue() {
+		return value;
 	}
 
 	@Override

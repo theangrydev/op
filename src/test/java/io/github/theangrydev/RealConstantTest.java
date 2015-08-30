@@ -71,12 +71,7 @@ public class RealConstantTest implements WithAssertions {
 			}
 
 			@Override
-			public void visit(IntegerAddition integerAddition) {
-				fail("Should visit the RealConstant");
-			}
-
-			@Override
-			public void visit(TypeAddition typeAddition) {
+			public void visit(Addition addition) {
 				fail("Should visit the RealConstant");
 			}
 		});

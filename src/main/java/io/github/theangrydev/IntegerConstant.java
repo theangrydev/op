@@ -17,7 +17,7 @@ public class IntegerConstant implements NumericConstant<Integer> {
 	}
 
 	@Override
-	public Constant<Integer> add(Constant<Integer> other) {
+	public NumericConstant<Integer> add(NumericConstant<Integer> other) {
 		return of(value + other.getValue());
 	}
 

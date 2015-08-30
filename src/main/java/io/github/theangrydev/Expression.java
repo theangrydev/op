@@ -7,7 +7,6 @@ public interface Expression {
 		void visit(RealConstant realConstant);
 		void visit(StringConstant stringConstant);
 		void visit(TypeExpression typeExpression);
-		void visit(IntegerAddition integerAddition);
-		void visit(TypeAddition typeAddition);
+		void visit(Addition addition);
 	}
 }

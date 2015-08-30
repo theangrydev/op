@@ -39,12 +39,7 @@ public class TypeExpressionTest implements WithAssertions {
 			}
 
 			@Override
-			public void visit(IntegerAddition integerAddition) {
-				fail("Should visit the TypeExpression");
-			}
-
-			@Override
-			public void visit(TypeAddition typeAddition) {
+			public void visit(Addition addition) {
 				fail("Should visit the TypeExpression");
 			}
 		});

@@ -10,11 +10,11 @@ public class StringConstantTest implements WithAssertions {
 	}
 
 	@Test
-	public void shouldAddAnotherConstant() throws Exception {
+	public void shouldConcatAnotherConstant() throws Exception {
 		StringConstant value1 = StringConstant.of("1");
 		StringConstant value2 = StringConstant.of("2");
-		assertThat(value1.add(value2)).hasValue("12");
-		assertThat(value2.add(value1)).hasValue("21");
+		assertThat(value1.concat(value2)).hasValue("12");
+		assertThat(value2.concat(value1)).hasValue("21");
 	}
 
 	@Test
@@ -37,12 +37,7 @@ public class StringConstantTest implements WithAssertions {
 			}
 
 			@Override
-			public void visit(IntegerAddition integerAddition) {
-				fail("Should visit the StringConstant");
-			}
-
-			@Override
-			public void visit(TypeAddition typeAddition) {
+			public void visit(Addition addition) {
 				fail("Should visit the StringConstant");
 			}
 

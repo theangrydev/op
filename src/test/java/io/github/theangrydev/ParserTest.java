@@ -12,7 +12,7 @@ import java.io.StringReader;
 public class ParserTest implements WithAssertions, WithTestState {
 
 	@Test
-	public void shouldParseAnEmptyStatement() throws Exception {
+	public void shouldParseAnEmptyProgram() throws Exception {
 		givenAParserWithInput("");
 		whenTheInputIsParsed();
 		thenThereShouldBeAProgramWithNoStatements();
@@ -42,113 +42,81 @@ public class ParserTest implements WithAssertions, WithTestState {
 	}
 
 	@Test
-	public void shouldParseAStatementWithTypeAndIntegerConstantAddition() throws Exception {
-		givenAParserWithInput("Count=A+7;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsAnIntegerAddition();
-		andTheIntegerAdditionHasATypeOnTheLeft("A");
-		andTheIntegerAdditionHasAnIntegerConstantOnTheRight(7);
-	}
-
-	@Test
-	public void shouldParseAStatementWithTypeAndTypeAddition() throws Exception {
-		givenAParserWithInput("Count=A+B;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsATypeAddition();
-		andTheTypeAdditionHasATypeOnTheLeft("A");
-		andTheTypeAdditionHasATypeOnTheRight("B");
-	}
-
-	@Test
-	public void shouldParseAStatementWithIntegerConstantAddition() throws Exception {
-		givenAParserWithInput("Count=1+2;");
+	public void shouldParseAStatementWithAnInteger() throws Exception {
+		givenAParserWithInput("Count=123;");
 		whenTheInputIsParsed();
 		thenTheProgramContainsASingleAssignmentFor("Count");
 		andTheAssignedValueIsAnIntegerConstant();
-		andTheIntegerConstantHasValue(3);
+		andTheIntegerConstantHasValue(123);
 	}
 
 	@Test
-	public void shouldParseAStatementWithItegerConstantAddition() throws Exception {
-		givenAParserWithInput("Count=1+2;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsAnIntegerConstant();
-		andTheIntegerConstantHasValue(3);
-	}
-
-	@Test
-	public void shouldParseAStatementWithRealConstantAddition() throws Exception {
-		givenAParserWithInput("Count=1.5+2.5;");
+	public void shouldParseAStatementWithAReal() throws Exception {
+		givenAParserWithInput("Count=7.5;");
 		whenTheInputIsParsed();
 		thenTheProgramContainsASingleAssignmentFor("Count");
 		andTheAssignedValueIsARealConstant();
-		andTheRealConstantHasValue(4.0);
+		andTheRealConstantHasValue(7.5);
 	}
 
 	@Test
-	public void shouldParseAStatementWithIntegerConstantSubtraction() throws Exception {
-		givenAParserWithInput("Count=1-2;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsAnIntegerConstant();
-		andTheIntegerConstantHasValue(-1);
-	}
-
-	@Test
-	public void shouldParseAStatementWithRealConstantSubtraction() throws Exception {
-		givenAParserWithInput("Count=1.5-2.5;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsARealConstant();
-		andTheRealConstantHasValue(-1.0);
-	}
-
-	@Test
-	public void shouldParseAStatementWithIntegerConstantMultiplication() throws Exception {
-		givenAParserWithInput("Count=3*2;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsAnIntegerConstant();
-		andTheIntegerConstantHasValue(6);
-	}
-
-	@Test
-	public void shouldParseAStatementWithRealConstantMultiplication() throws Exception {
-		givenAParserWithInput("Count=1.5*2.0;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsARealConstant();
-		andTheRealConstantHasValue(3);
-	}
-
-	@Test
-	public void shouldParseAStatementWithIntegerConstantDivision() throws Exception {
-		givenAParserWithInput("Count=10/2;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsAnIntegerConstant();
-		andTheIntegerConstantHasValue(5);
-	}
-
-	@Test
-	public void shouldParseAStatementWithRealConstantDivision() throws Exception {
-		givenAParserWithInput("Count=1.0/2.0;");
-		whenTheInputIsParsed();
-		thenTheProgramContainsASingleAssignmentFor("Count");
-		andTheAssignedValueIsARealConstant();
-		andTheRealConstantHasValue(0.5);
-	}
-
-	@Test
-	public void shouldParseAStatementWithStringConstantAddition() throws Exception {
-		givenAParserWithInput("Count=\"1.5\"+\"2.5\";");
+	public void shouldParseAStatementWithAString() throws Exception {
+		givenAParserWithInput("Count=\"Hello World!\";");
 		whenTheInputIsParsed();
 		thenTheProgramContainsASingleAssignmentFor("Count");
 		andTheAssignedValueIsAStringConstant();
-		andTheStringConstantHasValue("1.52.5");
+		andTheStringConstantHasValue("Hello World!");
+	}
+
+	@Test
+	public void shouldParseAStatementWithAddition() throws Exception {
+		givenAParserWithInput("Count=A+7;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleAssignmentFor("Count");
+		andTheAssignedValueIsAnAddition();
+		andTheAdditionHasLeftOperand("A");
+		andTheAdditionHasRightOperand(7);
+	}
+
+//	@Test
+//	public void shouldParseAStatementWithMultiplication() throws Exception {
+//		givenAParserWithInput("Count=1.5*2.5;");
+//		whenTheInputIsParsed();
+//		thenTheProgramContainsASingleAssignmentFor("Count");
+//		andTheAssignedValueIsAMultiplication();
+//		andTheAssignedValueIsARealConstant();
+//		andTheRealConstantHasValue(4.0);
+//	}
+//
+//	private void andTheAssignedValueIsAMultiplication() {
+//		storeTheAssignedValue();
+//		assertThat(theAssignedValue()).isExactlyInstanceOf(Addition.class);
+//	}
+
+//	@Test
+//	public void shouldParseAStatementWithSubtraction() throws Exception {
+//		givenAParserWithInput("Count=1-2;");
+//		whenTheInputIsParsed();
+//		thenTheProgramContainsASingleAssignmentFor("Count");
+//		andTheAssignedValueIsAnIntegerConstant();
+//		andTheIntegerConstantHasValue(-1);
+//	}
+//
+//	@Test
+//	public void shouldParseAStatementWithDivision() throws Exception {
+//		givenAParserWithInput("Count=1-2;");
+//		whenTheInputIsParsed();
+//		thenTheProgramContainsASingleAssignmentFor("Count");
+//		andTheAssignedValueIsAnIntegerConstant();
+//		andTheIntegerConstantHasValue(-1);
+//	}
+
+	private void andTheAdditionHasLeftOperand(String type) {
+		assertThat((TypeExpression) theAssignedTypeAddition().getLeft()).hasType(type);
+	}
+
+	private void andTheAdditionHasRightOperand(int integer) {
+		assertThat((IntegerConstant) theAssignedTypeAddition().getRight()).hasValue(integer);
 	}
 
 	private static final String THE_STATEMENT = "statement";
@@ -171,30 +139,9 @@ public class ParserTest implements WithAssertions, WithTestState {
 		assertThat(theAssignedStringConstant()).hasValue(expected);
 	}
 
-	private void andTheAssignedValueIsAnIntegerAddition() {
+	private void andTheAssignedValueIsAnAddition() {
 		storeTheAssignedValue();
-		assertThat(theAssignedValue()).isExactlyInstanceOf(IntegerAddition.class);
-	}
-
-	private void andTheAssignedValueIsATypeAddition() {
-		storeTheAssignedValue();
-		assertThat(theAssignedValue()).isExactlyInstanceOf(TypeAddition.class);
-	}
-
-	private void andTheIntegerAdditionHasAnIntegerConstantOnTheRight(int constant) {
-		assertThat((IntegerConstant) theAssignedIntegerAddition().getRight()).hasValue(constant);
-	}
-
-	private void andTheTypeAdditionHasATypeOnTheLeft(String type) {
-		assertThat(theAssignedTypeAddition().getLeft()).hasType(type);
-	}
-
-	private void andTheTypeAdditionHasATypeOnTheRight(String type) {
-		assertThat(theAssignedTypeAddition().getRight()).hasType(type);
-	}
-
-	private void andTheIntegerAdditionHasATypeOnTheLeft(String type) {
-		assertThat((TypeExpression) theAssignedIntegerAddition().getLeft()).hasType(type);
+		assertThat(theAssignedValue()).isExactlyInstanceOf(Addition.class);
 	}
 
 	private void andTheAssignedValueIsAnIntegerConstant() {
@@ -250,12 +197,8 @@ public class ParserTest implements WithAssertions, WithTestState {
 		return theAssignedValue(Expression.class);
 	}
 
-	private TypeAddition theAssignedTypeAddition() {
-		return theAssignedValue(TypeAddition.class);
-	}
-
-	private IntegerAddition theAssignedIntegerAddition() {
-		return theAssignedValue(IntegerAddition.class);
+	private Addition theAssignedTypeAddition() {
+		return theAssignedValue(Addition.class);
 	}
 
 	private IntegerConstant theAssignedIntegerConstant() {
