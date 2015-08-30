@@ -25,10 +25,9 @@ non terminal Expression Expression;
 non terminal Program Program;
 non terminal TypeDeclaration TypeDeclaration;
 non terminal TypeExpression TypeExpression;
-non terminal NumericConstant<Integer> IntegerConstant;
-non terminal NumericConstant<Double> RealConstant;
+non terminal IntegerConstant IntegerConstant;
+non terminal RealConstant RealConstant;
 non terminal StringConstant StringConstant;
-non terminal Constant<?> Constant;
 
 /* Precedences */
 precedence left PLUS, MINUS, TIMES, DIVIDE;
@@ -44,10 +43,6 @@ StatementList ::= Statement:statement SEMICOLON StatementList:statementList     
     ;
 Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=TypeDeclarationAssignment.of(typeDeclaration, expression); :}
     | IDENTIFIER:type ASSIGNMENT Expression:expression                          {: RESULT=ExistingTypeAssignment.of(type, expression); :}
-    ;
-Constant ::= IntegerConstant:value                                              {: RESULT=value; :}
-    | RealConstant:value                                                        {: RESULT=value; :}
-    | StringConstant:value                                                      {: RESULT=value; :}
     ;
 TypeDeclaration ::= IDENTIFIER:targetType COLON IDENTIFIER:existingType         {: RESULT=TypeDeclaration.of(targetType, existingType); :}
     ;
