@@ -1,6 +1,6 @@
 package io.github.theangrydev;
 
-public class Addition implements Expression {
+public class Addition implements BinaryOperator {
 
 	private final Expression left;
 	private final Expression right;
@@ -14,10 +14,12 @@ public class Addition implements Expression {
 		return new Addition(left, right);
 	}
 
+	@Override
 	public Expression getLeft() {
 		return left;
 	}
 
+	@Override
 	public Expression getRight() {
 		return right;
 	}
