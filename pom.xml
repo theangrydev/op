@@ -61,6 +61,7 @@
 		<maven.build.helper.plugin.version>1.9.1</maven.build.helper.plugin.version>
 		<jflex.maven.plugin.version>1.6.1</jflex.maven.plugin.version>
 		<assertj.assertions.generator.plugin.version>2.0.1-SNAPSHOT</assertj.assertions.generator.plugin.version>
+		<download.maven.plugin.version>1.2.1</download.maven.plugin.version>
 
 		<!-- Dependencies -->
 		<java.cup.version>11b-20150326</java.cup.version>
@@ -175,7 +176,7 @@
 				<plugin>
 					<groupId>com.googlecode.maven-download-plugin</groupId>
 					<artifactId>download-maven-plugin</artifactId>
-					<version>1.2.1</version>
+					<version>${download.maven.plugin.version}</version>
 				</plugin>
 
 				<!-- AssertJ -->
