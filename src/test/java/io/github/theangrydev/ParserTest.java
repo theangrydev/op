@@ -78,39 +78,6 @@ public class ParserTest implements WithAssertions, WithTestState {
 		andTheAdditionHasRightOperand(7);
 	}
 
-//	@Test
-//	public void shouldParseAStatementWithMultiplication() throws Exception {
-//		givenAParserWithInput("Count=1.5*2.5;");
-//		whenTheInputIsParsed();
-//		thenTheProgramContainsASingleAssignmentFor("Count");
-//		andTheAssignedValueIsAMultiplication();
-//		andTheAssignedValueIsARealConstant();
-//		andTheRealConstantHasValue(4.0);
-//	}
-//
-//	private void andTheAssignedValueIsAMultiplication() {
-//		storeTheAssignedValue();
-//		assertThat(theAssignedValue()).isExactlyInstanceOf(Addition.class);
-//	}
-
-//	@Test
-//	public void shouldParseAStatementWithSubtraction() throws Exception {
-//		givenAParserWithInput("Count=1-2;");
-//		whenTheInputIsParsed();
-//		thenTheProgramContainsASingleAssignmentFor("Count");
-//		andTheAssignedValueIsAnIntegerConstant();
-//		andTheIntegerConstantHasValue(-1);
-//	}
-//
-//	@Test
-//	public void shouldParseAStatementWithDivision() throws Exception {
-//		givenAParserWithInput("Count=1-2;");
-//		whenTheInputIsParsed();
-//		thenTheProgramContainsASingleAssignmentFor("Count");
-//		andTheAssignedValueIsAnIntegerConstant();
-//		andTheIntegerConstantHasValue(-1);
-//	}
-
 	private void andTheAdditionHasLeftOperand(String type) {
 		assertThat((TypeExpression) theAssignedTypeAddition().getLeft()).hasType(type);
 	}
