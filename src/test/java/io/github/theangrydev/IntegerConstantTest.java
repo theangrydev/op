@@ -34,6 +34,14 @@ public class IntegerConstantTest implements WithAssertions {
 	}
 
 	@Test
+	public void shouldDivideByAnotherConstant() throws Exception {
+		IntegerConstant value1 = IntegerConstant.of(10);
+		IntegerConstant value2 = IntegerConstant.of(2);
+		assertThat(value1.divide(value2)).hasValue(5);
+		assertThat(value2.divide(value1)).hasValue(0);
+	}
+
+	@Test
 	public void shouldToStringTheValue() throws Exception {
 		assertThat(IntegerConstant.of(100)).hasToString("100");
 	}

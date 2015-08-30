@@ -96,6 +96,24 @@ public class ParserTest implements WithAssertions, WithTestState {
 	}
 
 	@Test
+	public void shouldParseAStatementWithIntegerConstantDivision() throws Exception {
+		givenAParserWithInput("Count=10/2;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleAssignment();
+		andTheAssignedValueIsAnIntegerConstant();
+		andTheIntegerConstantHasValue(5);
+	}
+
+	@Test
+	public void shouldParseAStatementWithRealConstantDivision() throws Exception {
+		givenAParserWithInput("Count=1.0/2.0;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleAssignment();
+		andTheAssignedValueIsARealConstant();
+		andTheRealConstantHasValue(0.5);
+	}
+
+	@Test
 	public void shouldParseAStatementWithStringConstantAddition() throws Exception {
 		givenAParserWithInput("Count=\"1.5\"+\"2.5\";");
 		whenTheInputIsParsed();

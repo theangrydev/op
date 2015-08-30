@@ -34,6 +34,14 @@ public class RealConstantTest implements WithAssertions {
 	}
 
 	@Test
+	public void shouldDivideByAnotherConstant() throws Exception {
+		RealConstant value1 = RealConstant.of(10.0);
+		RealConstant value2 = RealConstant.of(2.0);
+		assertThat(value1.divide(value2)).hasValue(5.0);
+		assertThat(value2.divide(value1)).hasValue(0.2);
+	}
+
+	@Test
 	public void shouldToStringTheValue() throws Exception {
 		assertThat(RealConstant.of(100.105)).hasToString("100.105");
 	}

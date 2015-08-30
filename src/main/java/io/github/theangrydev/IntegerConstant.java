@@ -32,6 +32,11 @@ public class IntegerConstant implements NumericConstant<Integer> {
 	}
 
 	@Override
+	public NumericConstant<Integer> divide(NumericConstant<Integer> other) {
+		return of(value / other.getValue());
+	}
+
+	@Override
 	public String toString() {
 		return value.toString();
 	}
