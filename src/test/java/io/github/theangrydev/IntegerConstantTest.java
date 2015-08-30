@@ -49,7 +49,7 @@ public class IntegerConstantTest implements WithAssertions {
 	@Test
 	public void acceptShouldVisitTheIntegerConstant() throws Exception {
 		IntegerConstant value = IntegerConstant.of(100);
-		value.accept(new Expression.Visitor() {
+		value.accept(new Expression.Visitor<Integer>() {
 			@Override
 			public void visit(IntegerConstant integerConstant) {
 				assertThat(value).isSameAs(integerConstant);
@@ -62,6 +62,21 @@ public class IntegerConstantTest implements WithAssertions {
 
 			@Override
 			public void visit(StringConstant stringConstant) {
+				fail("Should visit the IntegerConstant");
+			}
+
+			@Override
+			public void visit(TypeExpression<Integer> typeExpression) {
+				fail("Should visit the IntegerConstant");
+			}
+
+			@Override
+			public void visit(IntegerAddition integerAddition) {
+				fail("Should visit the IntegerConstant");
+			}
+
+			@Override
+			public void visit(TypeAddition typeAddition) {
 				fail("Should visit the IntegerConstant");
 			}
 		});

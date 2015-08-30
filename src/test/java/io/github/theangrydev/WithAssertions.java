@@ -28,4 +28,12 @@ public interface WithAssertions extends org.assertj.core.api.WithAssertions {
 	default AssignmentAssert assertThat(Assignment actual) {
 		return new AssignmentAssert(actual);
 	}
+
+	default IntegerAdditionAssert assertThat(IntegerAddition actual) {
+		return new IntegerAdditionAssert(actual);
+	}
+
+	default TypeExpressionAssert assertThat(TypeExpression actual) {
+		return new TypeExpressionAssert(actual);
+	}
 }

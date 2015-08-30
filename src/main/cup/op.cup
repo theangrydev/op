@@ -63,4 +63,6 @@ Expression ::= Constant:value                                                   
     | RealConstant:value1 TIMES RealConstant:value2                             {: RESULT=value1.times(value2); :}
     | IntegerConstant:value1 DIVIDE IntegerConstant:value2                      {: RESULT=value1.divide(value2); :}
     | RealConstant:value1 DIVIDE RealConstant:value2                            {: RESULT=value1.divide(value2); :}
+    | IDENTIFIER:type PLUS IntegerConstant:constant                             {: RESULT=IntegerAddition.add(TypeExpression.of(type), constant); :}
+    | IDENTIFIER:type1 PLUS IDENTIFIER:type2                                    {: RESULT=TypeAddition.add(TypeExpression.of(type1), TypeExpression.of(type2)); :}
     ;

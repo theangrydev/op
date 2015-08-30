@@ -42,7 +42,7 @@ public class IntegerConstant implements NumericConstant<Integer> {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
+	public void accept(Visitor<Integer> visitor) {
 		visitor.visit(this);
 	}
 }
