@@ -87,7 +87,6 @@ public class ParserTest implements WithAssertions, WithTestState {
 	}
 
 	private static final String THE_STATEMENT = "statement";
-
 	private static final String ASSIGNED_VALUE = "assigned value";
 	private static final String THE_ROOT_SYMBOL = "root symbol";
 	private static final String THE_PROGRAM = "program";
