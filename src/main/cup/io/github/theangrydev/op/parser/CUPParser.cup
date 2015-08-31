@@ -1,14 +1,31 @@
 package io.github.theangrydev.op.parser;
 
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import java_cup.runtime.ComplexSymbolFactory.Location;
+import java_cup.runtime.Symbol;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /* Parser code */
 parser code {:
+    private UnexpectedToken unexpectedToken;
+
     private io.github.theangrydev.op.parser.Location location(Location left, Location right) {
         return io.github.theangrydev.op.parser.Location.between(left, right);
+    }
+
+    @Override
+    public void syntax_error(Symbol currentToken) {
+        unexpectedToken = UnexpectedToken.of((ComplexSymbol) currentToken);
+    }
+
+    @Override
+    public List<Integer> expected_token_ids() {
+        int lookahead_pos = this.lookahead_pos;
+        List<Integer> expectedTokenIds = super.expected_token_ids();
+        this.lookahead_pos = lookahead_pos;
+        return expectedTokenIds;
     }
 :};
 
@@ -27,6 +44,7 @@ terminal String STRING;
 
 /* Non terminals */
 non terminal Statement Statement;
+non terminal Statement StatementWithSemicolon;
 non terminal List<Statement> StatementList;
 non terminal Expression Expression;
 non terminal Program Program;
@@ -45,8 +63,11 @@ start with Program;
 /* The grammar rules */
 Program ::= StatementList:statementList                                         {: RESULT=Program.of(statementList); :}
     ;
-StatementList ::= Statement:statement SEMICOLON StatementList:statementList     {: statementList.add(statement); RESULT=statementList; :}
+StatementList ::= StatementWithSemicolon:statement StatementList:statementList  {: statementList.add(statement); RESULT=statementList; :}
     | /* Empty StatementList */                                                 {: RESULT=new LinkedList<Statement>(); :}
+    ;
+StatementWithSemicolon ::= Statement:statement SEMICOLON                        {: RESULT=statement; :}
+    | error:error SEMICOLON                                                     {: RESULT=StatementSyntaxError.of(SyntaxError.of(unexpectedToken, location(errorxleft, errorxright), expected_token_ids())); :}
     ;
 Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=TypeDeclarationAssignment.of(typeDeclaration, expression); :}
     | TypeExpression:type ASSIGNMENT Expression:expression                      {: RESULT=ExistingTypeAssignment.of(type, expression); :}

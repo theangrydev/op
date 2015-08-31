@@ -1,8 +1,7 @@
 package io.github.theangrydev.op.parser;
 
 import java_cup.runtime.ComplexSymbolFactory;
-
-import java.util.Objects;
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 
 public class Location {
 
@@ -14,42 +13,39 @@ public class Location {
 		this.right = right;
 	}
 
+	public static Location of(ComplexSymbol complexSymbol) {
+		return between(complexSymbol.getLeft(), complexSymbol.getRight());
+	}
+
 	public static Location between(ComplexSymbolFactory.Location left, ComplexSymbolFactory.Location right) {
 		return new Location(left, right);
 	}
 
 	public static Location between(ProgramElement left, ProgramElement right) {
-		return new Location(left.getLocation().left, right.getLocation().right);
+		return between(left.getLocation(), right.getLocation());
 	}
 
-	private boolean containedInTheSameUnit() {
-		return Objects.equals(left.getUnit(), right.getUnit());
-	}
-
-	private boolean containedInTheSameLine() {
-		return left.getLine() == right.getLine();
+	public static Location between(Location left, Location right) {
+		return new Location(left.left, right.right);
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append('[');
-		stringBuilder.append(left.getUnit());
-		stringBuilder.append(' ');
-		stringBuilder.append(left.getLine());
-		stringBuilder.append(':');
-		stringBuilder.append(left.getColumn());
-		stringBuilder.append('-');
-		if (!containedInTheSameUnit()) {
-			stringBuilder.append(right.getUnit());
-			stringBuilder.append(' ');
+		return render(left) + '-' + render(right);
+	}
+
+	private String render(ComplexSymbolFactory.Location location) {
+		if (location == null) {
+			return "null";
 		}
-		if (!containedInTheSameLine()) {
-			stringBuilder.append(right.getLine());
-			stringBuilder.append(':');
-		}
-		stringBuilder.append(right.getColumn());
-		stringBuilder.append(']');
-		return stringBuilder.toString();
+		return location.getUnit() + '[' + location.getLine() + ':' + location.getColumn() + ']';
+	}
+
+	public String getRight() {
+		return render(right);
+	}
+
+	public String getLeft() {
+		return render(left);
 	}
 }
