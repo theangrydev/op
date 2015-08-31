@@ -9,8 +9,8 @@ public class TypeExpression implements Expression {
 		this.type = type;
 	}
 
-	public static TypeExpression of(Location leftLocation, String type) {
-		return new TypeExpression(leftLocation, type);
+	public static TypeExpression of(Location location, String type) {
+		return new TypeExpression(location, type);
 	}
 
 	public String getType() {

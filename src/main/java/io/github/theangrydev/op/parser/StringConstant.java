@@ -1,16 +1,16 @@
 package io.github.theangrydev.op.parser;
 
 public class StringConstant implements Constant<String> {
-	private final Location leftLocation;
+	private final Location location;
 	private final String value;
 
-	private StringConstant(Location leftLocation, String value) {
-		this.leftLocation = leftLocation;
+	private StringConstant(Location location, String value) {
+		this.location = location;
 		this.value = value;
 	}
 
-	public static StringConstant of(Location leftLocation, String value) {
-		return new StringConstant(leftLocation, value);
+	public static StringConstant of(Location location, String value) {
+		return new StringConstant(location, value);
 	}
 
 	@Override
@@ -30,6 +30,6 @@ public class StringConstant implements Constant<String> {
 
 	@Override
 	public Location getLocation() {
-		return leftLocation;
+		return location;
 	}
 }

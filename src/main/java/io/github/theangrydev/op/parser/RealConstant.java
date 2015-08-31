@@ -9,8 +9,8 @@ public class RealConstant implements NumericConstant<Double> {
 		this.value = value;
 	}
 
-	public static RealConstant of(Location leftLocation, Double value) {
-		return new RealConstant(leftLocation, value);
+	public static RealConstant of(Location location, Double value) {
+		return new RealConstant(location, value);
 	}
 
 	@Override
