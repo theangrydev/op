@@ -1,6 +1,6 @@
 package io.github.theangrydev.op.parser;
 
-public interface Expression {
+public interface Expression extends ProgramElement {
 	void accept(Visitor visitor);
 	interface Visitor {
 		void visit(IntegerConstant integerConstant);

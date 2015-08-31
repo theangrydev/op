@@ -1,12 +1,11 @@
 package io.github.theangrydev.op.parser;
 
 public class TypeDeclarationAssignment implements Assignment {
-
-	private final String existingType;
-	private final String targetType;
+	private final TypeExpression existingType;
+	private final TypeExpression targetType;
 	private final Expression expression;
 
-	private TypeDeclarationAssignment(String existingType, String targetType, Expression expression) {
+	private TypeDeclarationAssignment(TypeExpression existingType, TypeExpression targetType, Expression expression) {
 		this.existingType = existingType;
 		this.targetType = targetType;
 		this.expression = expression;
@@ -16,12 +15,12 @@ public class TypeDeclarationAssignment implements Assignment {
 		return new TypeDeclarationAssignment(typeDeclaration.getExistingType(), typeDeclaration.getTargetType(), expression);
 	}
 
-	public String getExistingType() {
+	public TypeExpression getExistingType() {
 		return existingType;
 	}
 
 	@Override
-	public String getTargetType() {
+	public TypeExpression getTargetType() {
 		return targetType;
 	}
 
@@ -33,5 +32,10 @@ public class TypeDeclarationAssignment implements Assignment {
 	@Override
 	public String toString() {
 		return targetType + ":" + existingType + "=" + expression;
+	}
+
+	@Override
+	public Location getLocation() {
+		return Location.between(targetType, expression);
 	}
 }

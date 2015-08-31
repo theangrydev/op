@@ -1,39 +1,22 @@
 package io.github.theangrydev.op.parser;
 
+
 public class IntegerConstant implements NumericConstant<Integer> {
+	private final Location location;
 	private final Integer value;
 
-	private IntegerConstant(Integer value) {
+	private IntegerConstant(Location location, Integer value) {
+		this.location = location;
 		this.value = value;
 	}
 
-	public static IntegerConstant of(Integer value) {
-		return new IntegerConstant(value);
+	public static IntegerConstant of(Location location, Integer value) {
+		return new IntegerConstant(location, value);
 	}
 
 	@Override
 	public Integer getValue() {
 		return value;
-	}
-
-	@Override
-	public NumericConstant<Integer> add(NumericConstant<Integer> other) {
-		return of(value + other.getValue());
-	}
-
-	@Override
-	public NumericConstant<Integer> minus(NumericConstant<Integer> other) {
-		return of(value - other.getValue());
-	}
-
-	@Override
-	public NumericConstant<Integer> times(NumericConstant<Integer> other) {
-		return of(value * other.getValue());
-	}
-
-	@Override
-	public NumericConstant<Integer> divide(NumericConstant<Integer> other) {
-		return of(value / other.getValue());
 	}
 
 	@Override
@@ -44,5 +27,10 @@ public class IntegerConstant implements NumericConstant<Integer> {
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
+	}
+
+	@Override
+	public Location getLocation() {
+		return location;
 	}
 }

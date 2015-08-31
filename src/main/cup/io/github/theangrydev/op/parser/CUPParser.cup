@@ -5,7 +5,14 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
 import java.util.LinkedList;
 import java.util.List;
 
-/* Terminals (tokens returned by the scanner). */
+/* Parser code */
+parser code {:
+    private io.github.theangrydev.op.parser.Location location(Location left, Location right) {
+        return io.github.theangrydev.op.parser.Location.between(left, right);
+    }
+:};
+
+/* Terminals (tokens returned by the scanner) */
 terminal AND, OR;
 terminal EQUAL_TO, LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, NOT_EQUAL_TO;
 terminal TIMES, PLUS, MINUS, DIVIDE;
@@ -42,15 +49,15 @@ StatementList ::= Statement:statement SEMICOLON StatementList:statementList     
     | /* Empty StatementList */                                                 {: RESULT=new LinkedList<Statement>(); :}
     ;
 Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=TypeDeclarationAssignment.of(typeDeclaration, expression); :}
-    | IDENTIFIER:type ASSIGNMENT Expression:expression                          {: RESULT=ExistingTypeAssignment.of(type, expression); :}
+    | TypeExpression:type ASSIGNMENT Expression:expression                      {: RESULT=ExistingTypeAssignment.of(type, expression); :}
     ;
-TypeDeclaration ::= IDENTIFIER:targetType COLON IDENTIFIER:existingType         {: RESULT=TypeDeclaration.of(targetType, existingType); :}
+TypeDeclaration ::= TypeExpression:targetType COLON TypeExpression:existingType {: RESULT=TypeDeclaration.of(targetType, existingType); :}
     ;
-TypeExpression ::= IDENTIFIER:type                                              {: RESULT=TypeExpression.of(type); :}
+TypeExpression ::= IDENTIFIER:type                                              {: RESULT=TypeExpression.of(location(typexleft, typexright), type); :}
     ;
-Expression ::= INTEGER:value                                                    {: RESULT=IntegerConstant.of(value); :}
-    | REAL:value                                                                {: RESULT=RealConstant.of(value); :}
-    | STRING:value                                                              {: RESULT=StringConstant.of(value); :}
-    | IDENTIFIER:type                                                           {: RESULT=TypeExpression.of(type); :}
+Expression ::= INTEGER:value                                                    {: RESULT=IntegerConstant.of(location(valuexleft, valuexright), value); :}
+    | REAL:value                                                                {: RESULT=RealConstant.of(location(valuexleft, valuexright), value); :}
+    | STRING:value                                                              {: RESULT=StringConstant.of(location(valuexleft, valuexright), value); :}
+    | TypeExpression:type                                                       {: RESULT=type; :}
     | Expression:left PLUS Expression:right                                     {: RESULT=Addition.add(left, right); :}
     ;

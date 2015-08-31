@@ -33,4 +33,9 @@ public class Addition implements BinaryOperator {
 	public String toString() {
 		return left + "+" + right;
 	}
+
+	@Override
+	public Location getLocation() {
+		return left.getLocation();
+	}
 }

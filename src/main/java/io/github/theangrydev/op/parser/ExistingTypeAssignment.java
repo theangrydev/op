@@ -1,20 +1,21 @@
 package io.github.theangrydev.op.parser;
 
+
 public class ExistingTypeAssignment implements Assignment {
-	private final String targetType;
+	private final TypeExpression targetType;
 	private final Expression expression;
 
-	private ExistingTypeAssignment(String targetType, Expression expression) {
+	private ExistingTypeAssignment(TypeExpression targetType, Expression expression) {
 		this.targetType = targetType;
 		this.expression = expression;
 	}
 
-	public static ExistingTypeAssignment of(String targetType, Expression expression) {
+	public static ExistingTypeAssignment of(TypeExpression targetType, Expression expression) {
 		return new ExistingTypeAssignment(targetType, expression);
 	}
 
 	@Override
-	public String getTargetType() {
+	public TypeExpression getTargetType() {
 		return targetType;
 	}
 
@@ -26,5 +27,10 @@ public class ExistingTypeAssignment implements Assignment {
 	@Override
 	public String toString() {
 		return targetType + "=" + expression;
+	}
+
+	@Override
+	public Location getLocation() {
+		return Location.between(targetType, expression);
 	}
 }

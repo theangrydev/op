@@ -3,53 +3,24 @@ package io.github.theangrydev.op.parser;
 import io.github.theangrydev.WithAssertions;
 import org.junit.Test;
 
+import static org.mockito.Mockito.mock;
+
 public class IntegerConstantTest implements WithAssertions {
+	private final Location location = mock(Location.class);
 
 	@Test
 	public void shouldStoreAValue() throws Exception {
-		assertThat(IntegerConstant.of(100)).hasValue(100);
-	}
-
-	@Test
-	public void shouldAddAnotherConstant() throws Exception {
-		IntegerConstant value1 = IntegerConstant.of(1);
-		IntegerConstant value2 = IntegerConstant.of(2);
-		assertThat(value1.add(value2)).hasValue(3);
-		assertThat(value2.add(value1)).hasValue(3);
-	}
-
-	@Test
-	public void shouldSubtractAnotherConstant() throws Exception {
-		IntegerConstant value1 = IntegerConstant.of(1);
-		IntegerConstant value2 = IntegerConstant.of(2);
-		assertThat(value1.minus(value2)).hasValue(-1);
-		assertThat(value2.minus(value1)).hasValue(1);
-	}
-
-	@Test
-	public void shouldMultiplyByAnotherConstant() throws Exception {
-		IntegerConstant value1 = IntegerConstant.of(-3);
-		IntegerConstant value2 = IntegerConstant.of(2);
-		assertThat(value1.times(value2)).hasValue(-6);
-		assertThat(value2.times(value1)).hasValue(-6);
-	}
-
-	@Test
-	public void shouldDivideByAnotherConstant() throws Exception {
-		IntegerConstant value1 = IntegerConstant.of(10);
-		IntegerConstant value2 = IntegerConstant.of(2);
-		assertThat(value1.divide(value2)).hasValue(5);
-		assertThat(value2.divide(value1)).hasValue(0);
+		assertThat(IntegerConstant.of(location, 100)).hasValue(100);
 	}
 
 	@Test
 	public void shouldToStringTheValue() throws Exception {
-		assertThat(IntegerConstant.of(100)).hasToString("100");
+		assertThat(IntegerConstant.of(location, 100)).hasToString("100");
 	}
 
 	@Test
 	public void acceptShouldVisitTheIntegerConstant() throws Exception {
-		IntegerConstant value = IntegerConstant.of(100);
+		IntegerConstant value = IntegerConstant.of(location, 100);
 		value.accept(new Expression.Visitor() {
 			@Override
 			public void visit(IntegerConstant integerConstant) {

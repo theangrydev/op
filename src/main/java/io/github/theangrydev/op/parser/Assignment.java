@@ -1,6 +1,6 @@
 package io.github.theangrydev.op.parser;
 
 public interface Assignment extends Statement {
-	String getTargetType();
+	TypeExpression getTargetType();
 	Expression getExpression();
 }

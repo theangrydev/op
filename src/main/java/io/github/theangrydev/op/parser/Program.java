@@ -2,7 +2,7 @@ package io.github.theangrydev.op.parser;
 
 import java.util.List;
 
-public class Program {
+public class Program implements ProgramElement {
 
 	private final List<Statement> statements;
 
@@ -21,5 +21,18 @@ public class Program {
 	@Override
 	public String toString() {
 		return "{" + statements.toString() + "}";
+	}
+
+	@Override
+	public Location getLocation() {
+		return Location.between(getFirstStatement(), getLastStatement());
+	}
+
+	public Statement getLastStatement() {
+		return statements.get(statements.size() - 1);
+	}
+
+	public Statement getFirstStatement() {
+		return statements.get(0);
 	}
 }

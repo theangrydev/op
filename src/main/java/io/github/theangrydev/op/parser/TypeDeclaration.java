@@ -2,23 +2,23 @@ package io.github.theangrydev.op.parser;
 
 public class TypeDeclaration {
 
-	private final String targetType;
-	private final String existingType;
+	private final TypeExpression targetType;
+	private final TypeExpression existingType;
 
-	private TypeDeclaration(String targetType, String existingType) {
+	private TypeDeclaration(TypeExpression targetType, TypeExpression existingType) {
 		this.targetType = targetType;
 		this.existingType = existingType;
 	}
 
-	public static TypeDeclaration of(String targetType, String existingType) {
+	public static TypeDeclaration of(TypeExpression targetType, TypeExpression existingType) {
 		return new TypeDeclaration(targetType, existingType);
 	}
 
-	public String getTargetType() {
+	public TypeExpression getTargetType() {
 		return targetType;
 	}
 
-	public String getExistingType() {
+	public TypeExpression getExistingType() {
 		return existingType;
 	}
 

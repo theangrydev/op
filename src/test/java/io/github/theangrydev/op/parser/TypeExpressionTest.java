@@ -3,21 +3,24 @@ package io.github.theangrydev.op.parser;
 import io.github.theangrydev.WithAssertions;
 import org.junit.Test;
 
+import static org.mockito.Mockito.mock;
+
 public class TypeExpressionTest implements WithAssertions {
+	private final Location location = mock(Location.class);
 
 	@Test
 	public void shouldStoreTheValue() throws Exception {
-		assertThat(TypeExpression.of("ABC")).hasType("ABC");
+		assertThat(TypeExpression.of(location, "ABC")).hasType("ABC");
 	}
 
 	@Test
 	public void shouldToStringTheValue() throws Exception {
-		assertThat(TypeExpression.of("ABC")).hasToString("ABC");
+		assertThat(TypeExpression.of(location, "ABC")).hasToString("ABC");
 	}
 
 	@Test
 	public void acceptShouldVisitTheTypeDeclaration() throws Exception {
-		TypeExpression value = TypeExpression.of("target");
+		TypeExpression value = TypeExpression.of(location, "target");
 		value.accept(new Expression.Visitor() {
 			@Override
 			public void visit(TypeExpression typeExpression) {

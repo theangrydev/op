@@ -130,11 +130,11 @@ public class ParserTest implements WithAssertions, WithTestState {
 	}
 
 	private void andTheAssignmentHasTargetType(String targetType) {
-		assertThat(theAssignmentStatement()).hasTargetType(targetType);
+		assertThat(theAssignmentStatement().getTargetType()).hasType(targetType);
 	}
 
 	private void andTheAssignmentHasExistingType(String existingType) {
-		assertThat(theTypeDeclarationAssignmentStatement()).hasExistingType(existingType);
+		assertThat(theTypeDeclarationAssignmentStatement().getExistingType()).hasType(existingType);
 	}
 
 	private void thenTheProgramContainsASingleStatement() {

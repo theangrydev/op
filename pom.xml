@@ -42,8 +42,12 @@
 	<properties>
 		<!-- Project -->
 		<java.language.level>1.8</java.language.level>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.file.encoding>UTF-8</project.file.encoding>
+		<project.build.sourceEncoding>${project.file.encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.file.encoding}</project.reporting.outputEncoding>
+
+		<cup.debug.mode>true</cup.debug.mode>
+		<cup.suppress.summary>true</cup.suppress.summary>
 
 		<java.cup.download.directory>${project.build.directory}/java-cup-bin-${java.cup.version}</java.cup.download.directory>
 
@@ -311,7 +315,9 @@
 									 parser="CUPParser"
 									 symbols="CUPSymbols"
 									 interface="true"
-									 nosummary="true"/>
+									 nonterms="${cup.debug.mode}"
+									 dump="${cup.debug.mode}"
+									 nosummary="${cup.suppress.summary}"/>
 							</target>
 							<sourceRoot>${project.build.directory}/generated-sources/cup</sourceRoot>
 						</configuration>
