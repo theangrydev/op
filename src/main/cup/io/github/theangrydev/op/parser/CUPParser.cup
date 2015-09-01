@@ -9,7 +9,9 @@ import java.util.List;
 
 /* Parser code */
 parser code {:
-    private UnexpectedToken unexpectedToken;
+    private static final int RECOVERY_ERROR_LOOKAHEAD_SIZE = 3;
+    private int errorLookAheadSize = RECOVERY_ERROR_LOOKAHEAD_SIZE;
+    private SyntaxError syntaxError;
 
     private io.github.theangrydev.op.parser.Location location(Location left, Location right) {
         return io.github.theangrydev.op.parser.Location.between(left, right);
@@ -17,15 +19,20 @@ parser code {:
 
     @Override
     public void syntax_error(Symbol currentToken) {
-        unexpectedToken = UnexpectedToken.of((ComplexSymbol) currentToken);
+        syntaxError = SyntaxError.of((ComplexSymbol) this.stack.peek(), (ComplexSymbol) currentToken, expected_token_ids());
     }
 
     @Override
     public List<Integer> expected_token_ids() {
-        int lookahead_pos = this.lookahead_pos;
+        errorLookAheadSize = 1;
         List<Integer> expectedTokenIds = super.expected_token_ids();
-        this.lookahead_pos = lookahead_pos;
+        errorLookAheadSize = RECOVERY_ERROR_LOOKAHEAD_SIZE;
         return expectedTokenIds;
+    }
+
+    @Override
+    protected int error_sync_size() {
+        return errorLookAheadSize;
     }
 :};
 
@@ -67,7 +74,7 @@ StatementList ::= StatementWithSemicolon:statement StatementList:statementList  
     | /* Empty StatementList */                                                 {: RESULT=new LinkedList<Statement>(); :}
     ;
 StatementWithSemicolon ::= Statement:statement SEMICOLON                        {: RESULT=statement; :}
-    | error:error SEMICOLON                                                     {: RESULT=StatementSyntaxError.of(SyntaxError.of(unexpectedToken, location(errorxleft, errorxright), expected_token_ids())); :}
+    | error SEMICOLON                                                           {: RESULT=StatementSyntaxError.of(syntaxError); :}
     ;
 Statement ::= TypeDeclaration:typeDeclaration ASSIGNMENT Expression:expression  {: RESULT=TypeDeclarationAssignment.of(typeDeclaration, expression); :}
     | TypeExpression:type ASSIGNMENT Expression:expression                      {: RESULT=ExistingTypeAssignment.of(type, expression); :}
