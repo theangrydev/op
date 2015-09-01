@@ -70,7 +70,7 @@ start with Program;
 /* The grammar rules */
 Program ::= StatementList:statementList                                         {: RESULT=Program.of(statementList); :}
     ;
-StatementList ::= StatementWithSemicolon:statement StatementList:statementList  {: statementList.add(statement); RESULT=statementList; :}
+StatementList ::= StatementList:statementList StatementWithSemicolon:statement  {: statementList.add(statement); RESULT=statementList; :}
     | /* Empty StatementList */                                                 {: RESULT=new LinkedList<Statement>(); :}
     ;
 StatementWithSemicolon ::= Statement:statement SEMICOLON                        {: RESULT=statement; :}
