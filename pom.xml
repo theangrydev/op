@@ -73,7 +73,7 @@
 		<assertj.core.version>3.1.0</assertj.core.version>
 		<mockito.version>1.10.19</mockito.version>
 		<ant.version>1.9.6</ant.version>
-		<yatspec.version>dev</yatspec.version>
+		<yatspec.version>1.11</yatspec.version>
 		<apache.commons.lang.version>3.4</apache.commons.lang.version>
 		<reflections.version>0.9.10</reflections.version>
 		<junit.version>4.11</junit.version>
