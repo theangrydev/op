@@ -1,7 +1,7 @@
 package io.github.theangrydev.op.scanner;
 
 import io.github.theangrydev.opper.grammar.GrammarBuilder;
-import io.github.theangrydev.opper.scanner.BFAScanner;
+import io.github.theangrydev.opper.scanner.BFAScannerFactory;
 import io.github.theangrydev.opper.scanner.Scanner;
 import io.github.theangrydev.opper.scanner.definition.Expression;
 import io.github.theangrydev.opper.scanner.definition.SymbolDefinition;
@@ -58,7 +58,7 @@ public class ScannerFactory {
 		symbolDefinitions.add(definition(grammarBuilder.symbolByName("Real"), concatenate(concatenate(integer(), character('.')), integer())));
 		symbolDefinitions.add(definition(grammarBuilder.symbolByName("String"), concatenate(quote(), concatenate(repeat(either(concatenate(escape(), quote()), notQuote())), quote()))));
 		symbolDefinitions.add(definition(grammarBuilder.symbolByName("Whitespace"), either(character(' '), character('\n'), character('\t'))));
-		return new BFAScanner(symbolDefinitions, charactersToParse);
+		return new BFAScannerFactory(symbolDefinitions).scanner(charactersToParse);
 	}
 
 	private Expression notQuote() {

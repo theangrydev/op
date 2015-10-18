@@ -8,6 +8,7 @@ import io.github.theangrydev.op.semantics.SemanticAnalyser;
 import io.github.theangrydev.opper.common.DoNothingLogger;
 import io.github.theangrydev.opper.grammar.GrammarBuilder;
 import io.github.theangrydev.opper.parser.EarlyParser;
+import io.github.theangrydev.opper.parser.EarlyParserFactory;
 import io.github.theangrydev.opper.scanner.Scanner;
 
 import java.io.Reader;
@@ -74,7 +75,7 @@ public class ProgramParser {
 		statementListAnalysers.add(grammar.ruleByDefinition("StatementList", "StatementList", "StatementWithSemicolon"), analyser(binaryExpression(ProgramParser::addStatement, 0, statementListAnalysers, 1, statementWithSemicolon)));
 
 		Scanner scanner = new ScannerFactory(grammar).scanner(input);
-		EarlyParser earlyParser = new EarlyParser(new DoNothingLogger(), grammar.build(), scanner);
+		EarlyParser earlyParser = new EarlyParserFactory(new DoNothingLogger(), grammar.build()).parser(scanner);
 
 		ParseTreeAnalyser<Program> programAnalyser = analyser(consumeExpression(statementListAnalysers, Program::of));
 		return new SemanticAnalyser<>(earlyParser, programAnalyser);
