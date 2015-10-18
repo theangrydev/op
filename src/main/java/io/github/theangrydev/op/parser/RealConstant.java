@@ -13,8 +13,8 @@ public class RealConstant implements NumericConstant<Double> {
 		this.value = value;
 	}
 
-	public static RealConstant of(String value) {
-		return new RealConstant(null, parseDouble(value));
+	public static RealConstant of(Location location, String value) {
+		return new RealConstant(location, parseDouble(value));
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class RealConstant implements NumericConstant<Double> {
 	}
 
 	@Override
-	public Location location() {
+	public Location getLocation() {
 		return location;
 	}
 }

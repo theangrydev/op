@@ -6,6 +6,7 @@ import io.github.theangrydev.opper.grammar.Rule;
 import io.github.theangrydev.opper.parser.Parser;
 import io.github.theangrydev.opper.parser.tree.ParseTree;
 import io.github.theangrydev.opper.parser.tree.ParseTreeNode;
+import io.github.theangrydev.opper.scanner.Location;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -57,11 +58,11 @@ public class SemanticAnalyserTest {
 	}
 
 	private ParseTree parseTree(String content) {
-		return leaf(null, content);
+		return leaf(null, content, null);
 	}
 
 	private ParseTree parseTree(Rule rule, String content) {
-		return leaf(rule, content);
+		return leaf(rule, content, null);
 	}
 
 	private ParseTree parseTree(Rule rule, ParseTree... children) {
@@ -79,7 +80,7 @@ public class SemanticAnalyserTest {
 			this.value = value;
 		}
 
-		public static Number number(String content) {
+		public static Number number(Location location, String content) {
 			return new Number(Integer.parseInt(content));
 		}
 

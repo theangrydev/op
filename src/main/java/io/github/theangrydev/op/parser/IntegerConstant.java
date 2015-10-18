@@ -14,8 +14,8 @@ public class IntegerConstant implements NumericConstant<Integer> {
 		this.value = value;
 	}
 
-	public static IntegerConstant of(String value) {
-		return new IntegerConstant(null, parseInt(value));
+	public static IntegerConstant of(Location location, String value) {
+		return new IntegerConstant(location, parseInt(value));
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class IntegerConstant implements NumericConstant<Integer> {
 	}
 
 	@Override
-	public Location location() {
+	public Location getLocation() {
 		return location;
 	}
 }

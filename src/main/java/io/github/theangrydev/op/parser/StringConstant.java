@@ -11,8 +11,8 @@ public class StringConstant implements Constant<String> {
 		this.value = value;
 	}
 
-	public static StringConstant of(String value) {
-		return new StringConstant(null, value.substring(1, value.length() - 1));
+	public static StringConstant of(Location location, String value) {
+		return new StringConstant(location, value.substring(1, value.length() - 1));
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class StringConstant implements Constant<String> {
 	}
 
 	@Override
-	public Location location() {
+	public Location getLocation() {
 		return location;
 	}
 }

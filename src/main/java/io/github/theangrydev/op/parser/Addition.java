@@ -4,16 +4,18 @@ import io.github.theangrydev.opper.scanner.Location;
 
 public class Addition implements BinaryOperator {
 
+	private final Location location;
 	private final Expression left;
 	private final Expression right;
 
-	private Addition(Expression left, Expression right) {
+	private Addition(Location location, Expression left, Expression right) {
+		this.location = location;
 		this.left = left;
 		this.right = right;
 	}
 
 	public static Addition add(Expression left, Expression right) {
-		return new Addition(left, right);
+		return new Addition(ProgramElement.locationBetween(left, right), left, right);
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class Addition implements BinaryOperator {
 	}
 
 	@Override
-	public Location location() {
-		return left.location();
+	public Location getLocation() {
+		return location;
 	}
 }

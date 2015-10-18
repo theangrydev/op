@@ -1,17 +1,22 @@
 package io.github.theangrydev.op.parser;
 
-public class TypeDeclaration {
+import io.github.theangrydev.opper.scanner.Location;
 
+public class TypeDeclaration implements ProgramElement {
+
+	private final Location location;
 	private final TypeExpression targetType;
 	private final TypeExpression existingType;
 
-	private TypeDeclaration(TypeExpression targetType, TypeExpression existingType) {
+	private TypeDeclaration(Location location, TypeExpression targetType, TypeExpression existingType) {
+		this.location = location;
 		this.targetType = targetType;
 		this.existingType = existingType;
 	}
 
 	public static TypeDeclaration of(TypeExpression targetType, TypeExpression existingType) {
-		return new TypeDeclaration(targetType, existingType);
+		Location location = ProgramElement.locationBetween(targetType, existingType);
+		return new TypeDeclaration(location, targetType, existingType);
 	}
 
 	public TypeExpression getTargetType() {
@@ -25,5 +30,10 @@ public class TypeDeclaration {
 	@Override
 	public String toString() {
 		return targetType + ":" + existingType;
+	}
+
+	@Override
+	public Location getLocation() {
+		return location;
 	}
 }

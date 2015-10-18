@@ -152,9 +152,6 @@
 						<packages>
 							<package>io.github.theangrydev</package>
 						</packages>
-						<classes>
-							<class>java_cup.runtime.Symbol</class>
-						</classes>
 						<generateAssertions>true</generateAssertions>
 						<generateBddAssertions>false</generateBddAssertions>
 						<generateSoftAssertions>false</generateSoftAssertions>

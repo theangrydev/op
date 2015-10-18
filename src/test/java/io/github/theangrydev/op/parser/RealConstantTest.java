@@ -7,17 +7,17 @@ public class RealConstantTest implements WithAssertions {
 
 	@Test
 	public void shouldStoreAValue() throws Exception {
-		assertThat(RealConstant.of("10.5")).hasValue(10.5);
+		assertThat(RealConstant.of(null, "10.5")).hasValue(10.5);
 	}
 
 	@Test
 	public void shouldToStringTheValue() throws Exception {
-		assertThat(RealConstant.of("100.105")).hasToString("100.105");
+		assertThat(RealConstant.of(null, "100.105")).hasToString("100.105");
 	}
 
 	@Test
 	public void acceptShouldVisitTheRealConstant() throws Exception {
-		RealConstant value = RealConstant.of("10.5");
+		RealConstant value = RealConstant.of(null, "10.5");
 		value.accept(new Expression.Visitor() {
 			@Override
 			public void visit(RealConstant realConstant) {

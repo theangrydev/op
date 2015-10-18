@@ -7,17 +7,17 @@ public class TypeExpressionTest implements WithAssertions {
 
 	@Test
 	public void shouldStoreTheValue() throws Exception {
-		assertThat(TypeExpression.of("ABC")).hasType("ABC");
+		assertThat(TypeExpression.of(null, "ABC")).hasType("ABC");
 	}
 
 	@Test
 	public void shouldToStringTheValue() throws Exception {
-		assertThat(TypeExpression.of("ABC")).hasToString("ABC");
+		assertThat(TypeExpression.of(null, "ABC")).hasToString("ABC");
 	}
 
 	@Test
 	public void acceptShouldVisitTheTypeDeclaration() throws Exception {
-		TypeExpression value = TypeExpression.of("target");
+		TypeExpression value = TypeExpression.of(null, "target");
 		value.accept(new Expression.Visitor() {
 			@Override
 			public void visit(TypeExpression typeExpression) {

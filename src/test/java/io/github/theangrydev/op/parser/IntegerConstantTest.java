@@ -11,17 +11,17 @@ public class IntegerConstantTest implements WithAssertions {
 
 	@Test
 	public void shouldStoreAValue() throws Exception {
-		assertThat(IntegerConstant.of("100")).hasValue(100);
+		assertThat(IntegerConstant.of(location, "100")).hasValue(100);
 	}
 
 	@Test
 	public void shouldToStringTheValue() throws Exception {
-		assertThat(IntegerConstant.of("100")).hasToString("100");
+		assertThat(IntegerConstant.of(location, "100")).hasToString("100");
 	}
 
 	@Test
 	public void acceptShouldVisitTheIntegerConstant() throws Exception {
-		IntegerConstant value = IntegerConstant.of("100");
+		IntegerConstant value = IntegerConstant.of(location, "100");
 		value.accept(new Expression.Visitor() {
 			@Override
 			public void visit(IntegerConstant integerConstant) {

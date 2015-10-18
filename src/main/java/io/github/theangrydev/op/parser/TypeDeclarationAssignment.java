@@ -3,18 +3,21 @@ package io.github.theangrydev.op.parser;
 import io.github.theangrydev.opper.scanner.Location;
 
 public class TypeDeclarationAssignment implements Assignment {
+	private final Location location;
 	private final TypeExpression existingType;
 	private final TypeExpression targetType;
 	private final Expression expression;
 
-	private TypeDeclarationAssignment(TypeExpression existingType, TypeExpression targetType, Expression expression) {
+	private TypeDeclarationAssignment(Location location, TypeExpression existingType, TypeExpression targetType, Expression expression) {
+		this.location = location;
 		this.existingType = existingType;
 		this.targetType = targetType;
 		this.expression = expression;
 	}
 
 	public static TypeDeclarationAssignment of(TypeDeclaration typeDeclaration, Expression expression) {
-		return new TypeDeclarationAssignment(typeDeclaration.getExistingType(), typeDeclaration.getTargetType(), expression);
+		Location location = ProgramElement.locationBetween(typeDeclaration, expression);
+		return new TypeDeclarationAssignment(location, typeDeclaration.getExistingType(), typeDeclaration.getTargetType(), expression);
 	}
 
 	public TypeExpression getExistingType() {
@@ -37,7 +40,7 @@ public class TypeDeclarationAssignment implements Assignment {
 	}
 
 	@Override
-	public Location location() {
-		return Location.between(targetType.location(), expression.location());
+	public Location getLocation() {
+		return location;
 	}
 }

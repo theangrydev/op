@@ -11,8 +11,8 @@ public class TypeExpression implements Expression {
 		this.type = type;
 	}
 
-	public static TypeExpression of(String type) {
-		return new TypeExpression(null, type);
+	public static TypeExpression of(Location location, String type) {
+		return new TypeExpression(location, type);
 	}
 
 	public String getType() {
@@ -30,7 +30,7 @@ public class TypeExpression implements Expression {
 	}
 
 	@Override
-	public Location location() {
+	public Location getLocation() {
 		return location;
 	}
 }

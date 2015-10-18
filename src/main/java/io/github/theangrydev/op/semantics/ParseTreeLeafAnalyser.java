@@ -2,6 +2,7 @@ package io.github.theangrydev.op.semantics;
 
 
 import io.github.theangrydev.opper.parser.tree.ParseTree;
+import io.github.theangrydev.opper.scanner.Location;
 
 public class ParseTreeLeafAnalyser<Result> implements ParseTreeAnalyser<Result> {
 
@@ -17,11 +18,11 @@ public class ParseTreeLeafAnalyser<Result> implements ParseTreeAnalyser<Result> 
 
 	@Override
 	public final Result analyse(ParseTree parseTree) {
-		return leafAnalyser.analyse(parseTree.content());
+		return leafAnalyser.analyse(parseTree.location(), parseTree.content());
 	}
 
 	@FunctionalInterface
 	public interface LeafAnalyser<Result> {
-		Result analyse(String content);
+		Result analyse(Location location, String content);
 	}
 }

@@ -1,35 +1,43 @@
 package io.github.theangrydev.op.parser;
 
 import io.github.theangrydev.WithAssertions;
+import io.github.theangrydev.opper.scanner.Location;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import static org.mockito.Mockito.mock;
 
 public class AdditionTest implements WithAssertions {
 
+	private final Location location = mock(Location.class);
+
 	@Test
 	public void shouldStoreLeftAndRight() throws Exception {
-		TypeExpression left = TypeExpression.of("A");
-		TypeExpression right = TypeExpression.of("B");
+		TypeExpression left = TypeExpression.of(location, "A");
+		TypeExpression right = TypeExpression.of(location, "B");
 		assertThat(Addition.add(left, right)).hasLeft(left).hasRight(right);
 	}
 
 	@Test
 	public void shouldToStringTheValue() throws Exception {
-		TypeExpression left = TypeExpression.of("A");
-		TypeExpression right = TypeExpression.of("B");
+		TypeExpression left = TypeExpression.of(location, "A");
+		TypeExpression right = TypeExpression.of(location, "B");
 		assertThat(Addition.add(left, right)).hasToString("A+B");
 	}
 
-//	@Test
-//	public void shouldStoreTheLocation() throws Exception {
-//		TypeExpression left = TypeExpression.of("A");
-//		TypeExpression right = TypeExpression.of("B");
-//		assertThat(Addition.add(left, right)).hasLocation(location);
-//	}
+	//TODO: fix test
+	@Ignore
+	@Test
+	public void shouldStoreTheLocation() throws Exception {
+		TypeExpression left = TypeExpression.of(location, "A");
+		TypeExpression right = TypeExpression.of(location, "B");
+		assertThat(Addition.add(left, right)).hasLocation(location);
+	}
 
 	@Test
 	public void acceptShouldVisitTheTypeAddition() throws Exception {
-		TypeExpression left = TypeExpression.of("A");
-		TypeExpression right = TypeExpression.of("B");
+		TypeExpression left = TypeExpression.of(location, "A");
+		TypeExpression right = TypeExpression.of(location, "B");
 		Addition value = Addition.add(left, right);
 		value.accept(new Expression.Visitor() {
 

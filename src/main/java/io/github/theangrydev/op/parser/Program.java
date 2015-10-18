@@ -6,14 +6,16 @@ import java.util.List;
 
 public class Program implements ProgramElement {
 
+	private final Location location;
 	private final List<Statement> statements;
 
-	private Program(List<Statement> statements) {
+	private Program(Location location, List<Statement> statements) {
+		this.location = location;
 		this.statements = statements;
 	}
 
 	public static Program of(List<Statement> statements) {
-		return new Program(statements);
+		return new Program(ProgramElement.locationBetween(statements.get(0), statements.get(statements.size() - 1)), statements);
 	}
 
 	public List<Statement> statements() {
@@ -26,15 +28,7 @@ public class Program implements ProgramElement {
 	}
 
 	@Override
-	public Location location() {
-		return Location.between(firstStatement().location(), lastStatement().location());
-	}
-
-	public Statement lastStatement() {
-		return statements.get(statements.size() - 1);
-	}
-
-	public Statement firstStatement() {
-		return statements.get(0);
+	public Location getLocation() {
+		return location;
 	}
 }
