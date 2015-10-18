@@ -5,7 +5,7 @@ import io.github.theangrydev.op.scanner.ScannerFactory;
 import io.github.theangrydev.op.semantics.ParseTreeAnalyser;
 import io.github.theangrydev.op.semantics.ParseTreeAnalysers;
 import io.github.theangrydev.op.semantics.SemanticAnalyser;
-import io.github.theangrydev.opper.common.SystemOutLogger;
+import io.github.theangrydev.opper.common.DoNothingLogger;
 import io.github.theangrydev.opper.grammar.GrammarBuilder;
 import io.github.theangrydev.opper.parser.EarlyParser;
 import io.github.theangrydev.opper.scanner.Scanner;
@@ -48,6 +48,7 @@ public class ProgramParser {
 			.withRule("TypeExpression", "Identifier")
 			.withRule("Expression", "Integer")
 			.withRule("Expression", "Real")
+			.withRule("Expression", "String")
 			.withRule("Expression", "TypeExpression")
 			.withRule("Expression", "Expression", "+", "Expression");
 
@@ -56,6 +57,7 @@ public class ProgramParser {
 		ParseTreeAnalysers<Expression> expressions = new ParseTreeAnalysers<>();
 		expressions.add(grammar.ruleByDefinition("Expression", "Integer"), analyser(consumeExpression(analyser(IntegerConstant::of))));
 		expressions.add(grammar.ruleByDefinition("Expression", "Real"), analyser(consumeExpression(analyser(RealConstant::of))));
+		expressions.add(grammar.ruleByDefinition("Expression", "String"), analyser(consumeExpression(analyser(StringConstant::of))));
 		expressions.add(grammar.ruleByDefinition("Expression", "TypeExpression"), analyser(consumeExpression(typeExpression)));
 		expressions.add(grammar.ruleByDefinition("Expression", "Expression", "+", "Expression"), analyser(binaryExpression(Addition::add, expressions)));
 
@@ -72,7 +74,7 @@ public class ProgramParser {
 		statementListAnalysers.add(grammar.ruleByDefinition("StatementList", "StatementList", "StatementWithSemicolon"), analyser(binaryExpression(ProgramParser::addStatement, 0, statementListAnalysers, 1, statementWithSemicolon)));
 
 		Scanner scanner = new ScannerFactory(grammar).scanner(input);
-		EarlyParser earlyParser = new EarlyParser(new SystemOutLogger(), grammar.build(), scanner);
+		EarlyParser earlyParser = new EarlyParser(new DoNothingLogger(), grammar.build(), scanner);
 
 		ParseTreeAnalyser<Program> programAnalyser = analyser(consumeExpression(statementListAnalysers, Program::of));
 		return new SemanticAnalyser<>(earlyParser, programAnalyser);

@@ -60,7 +60,6 @@ public class ProgramParserTest implements WithAssertions, WithTestState {
 		andTheRealConstantHasValue(7.5);
 	}
 
-	@Ignore //TODO: support strings
 	@Test
 	public void shouldParseAStatementWithAString() throws Exception {
 		givenAParserWithInput("Count=\"Hello World!\";");

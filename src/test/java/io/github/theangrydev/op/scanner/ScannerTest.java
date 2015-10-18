@@ -9,7 +9,6 @@ import io.github.theangrydev.WithAssertions;
 import io.github.theangrydev.opper.grammar.GrammarBuilder;
 import io.github.theangrydev.opper.scanner.ScannedSymbol;
 import io.github.theangrydev.opper.scanner.Scanner;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -94,7 +93,6 @@ public class ScannerTest implements WithTestState, WithAssertions {
 		andTheValueIs(input);
 	}
 
-	@Ignore //TODO: put string literals in the test grammar
 	@Table({
 		@Row({"\"\"", ""}),
 		@Row({"\"1.34\"", "1.34"}),
@@ -108,7 +106,7 @@ public class ScannerTest implements WithTestState, WithAssertions {
 		givenAScannerWithInput(input);
 		whenTheNextTokenIsFetched();
 		thenTheSymbolCodeIs("String");
-		andTheValueIs(value);
+		andTheValueIs('\"' + value + '\"');
 	}
 
 	@Test

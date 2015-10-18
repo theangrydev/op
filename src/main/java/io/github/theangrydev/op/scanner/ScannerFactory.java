@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.github.theangrydev.opper.scanner.definition.AlternativeExpression.either;
+import static io.github.theangrydev.opper.scanner.definition.CharacterClassExpression.characterClass;
 import static io.github.theangrydev.opper.scanner.definition.CharacterExpression.character;
 import static io.github.theangrydev.opper.scanner.definition.ConcatenateExpression.concatenate;
+import static io.github.theangrydev.opper.scanner.definition.NotCharacters.notCharacaters;
 import static io.github.theangrydev.opper.scanner.definition.RepeatExpression.repeat;
 import static io.github.theangrydev.opper.scanner.definition.SymbolDefinition.definition;
 
@@ -54,11 +56,22 @@ public class ScannerFactory {
 		symbolDefinitions.add(definition(grammarBuilder.symbolByName("Identifier"), concatenate(uppercase(), repeat(either(lowercase(), uppercase(), digit())))));
 		symbolDefinitions.add(definition(grammarBuilder.symbolByName("Integer"), integer()));
 		symbolDefinitions.add(definition(grammarBuilder.symbolByName("Real"), concatenate(concatenate(integer(), character('.')), integer())));
+		symbolDefinitions.add(definition(grammarBuilder.symbolByName("String"), concatenate(quote(), concatenate(repeat(either(concatenate(escape(), quote()), notQuote())), quote()))));
 		symbolDefinitions.add(definition(grammarBuilder.symbolByName("Whitespace"), either(character(' '), character('\n'), character('\t'))));
-
 		return new BFAScanner(symbolDefinitions, charactersToParse);
 	}
 
+	private Expression notQuote() {
+		return characterClass(notCharacaters("\""));
+	}
+
+	private Expression escape() {
+		return character('\\');
+	}
+
+	private Expression quote() {
+		return character('\"');
+	}
 
 	public Expression integer() {
 		return concatenate(digit(), repeat(digit()));

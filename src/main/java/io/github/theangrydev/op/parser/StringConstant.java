@@ -12,7 +12,7 @@ public class StringConstant implements Constant<String> {
 	}
 
 	public static StringConstant of(String value) {
-		return new StringConstant(null, value);
+		return new StringConstant(null, value.substring(1, value.length() - 1));
 	}
 
 	@Override
