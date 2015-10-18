@@ -4,14 +4,12 @@ import com.googlecode.yatspec.junit.SpecRunner;
 import io.github.theangrydev.TestState;
 import io.github.theangrydev.WithAssertions;
 import io.github.theangrydev.WithTestState;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(SpecRunner.class)
 public class ProgramParserTest implements WithAssertions, WithTestState {
 
-	@Ignore //TODO: support nullable rule definitions
 	@Test
 	public void shouldParseAnEmptyProgram() throws Exception {
 		givenAParserWithInput("");
