@@ -1,9 +1,9 @@
 package io.github.theangrydev.op.language;
 
 import com.googlecode.yatspec.junit.SpecRunner;
-import io.github.theangrydev.TestState;
-import io.github.theangrydev.WithAssertions;
-import io.github.theangrydev.WithTestState;
+import io.github.theangrydev.op.common.TestState;
+import io.github.theangrydev.op.common.WithAssertions;
+import io.github.theangrydev.op.common.WithTestState;
 import io.github.theangrydev.op.semantics.SemanticAnalyser;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 
 import java.io.StringReader;
 
-import static io.github.theangrydev.op.semantics.ProgramSemanticAnalyserFactory.programAnalyserFactory;
+import static io.github.theangrydev.op.parser.ProgramSemanticAnalyserFactory.programAnalyserFactory;
 
 @RunWith(SpecRunner.class)
 public class ProgramParserTest implements WithAssertions, WithTestState {

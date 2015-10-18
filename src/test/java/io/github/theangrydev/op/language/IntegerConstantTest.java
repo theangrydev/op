@@ -1,6 +1,6 @@
 package io.github.theangrydev.op.language;
 
-import io.github.theangrydev.WithAssertions;
+import io.github.theangrydev.op.common.WithAssertions;
 import io.github.theangrydev.opper.scanner.Location;
 import org.junit.Test;
 

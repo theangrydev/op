@@ -1,7 +1,8 @@
 package io.github.theangrydev.op.scanner;
 
 import com.google.common.base.Stopwatch;
-import io.github.theangrydev.op.grammar.ProgramGrammar;
+import io.github.theangrydev.op.parser.ProgramGrammar;
+import io.github.theangrydev.op.parser.ProgramScannerFactory;
 import io.github.theangrydev.opper.scanner.Scanner;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class ScannerPerformanceTest {
 	public static final int COUNT = 10000;
 
 	@Test
-	public void test() throws IOException {
+	public void shouldScanInAReasonableTime() throws IOException {
 		Scanner scanner = ProgramScannerFactory.programScannerFactory(ProgramGrammar.programGrammar()).scanner(new CharArrayReader(characters(COUNT)));
 		Stopwatch stopwatch = Stopwatch.createStarted();
 		for (int i = 0; i < COUNT; i++) {

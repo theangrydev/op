@@ -1,7 +1,5 @@
-package io.github.theangrydev.semantics;
+package io.github.theangrydev.op.semantics;
 
-import io.github.theangrydev.op.semantics.ParseTreeAnalysers;
-import io.github.theangrydev.op.semantics.SemanticAnalyser;
 import io.github.theangrydev.opper.grammar.Rule;
 import io.github.theangrydev.opper.parser.Parser;
 import io.github.theangrydev.opper.parser.tree.ParseTree;
@@ -16,7 +14,6 @@ import static io.github.theangrydev.op.semantics.ParseTreeLeafAnalyser.analyser;
 import static io.github.theangrydev.op.semantics.ParseTreeNodeAnalyser.analyser;
 import static io.github.theangrydev.opper.parser.tree.ParseTreeLeaf.leaf;
 import static io.github.theangrydev.opper.parser.tree.ParseTreeNode.node;
-import static io.github.theangrydev.semantics.SemanticAnalyserTest.FixedParser.parser;
 import static org.assertj.core.api.StrictAssertions.assertThat;
 import static org.mockito.Mockito.mock;
 
@@ -33,7 +30,7 @@ public class SemanticAnalyserTest {
 		numericAnalysers.add(add, analyser(binaryExpression(Addition::new, numericAnalysers)));
 		numericAnalysers.add(number, analyser(Number::number));
 
-		Parser parser = parser(parseTree(add, parseTree(add, parseTree(add, parseTree(number, "2"), parseTree("+"), parseTree(number, "3")), parseTree("+"), parseTree(number, "2")), parseTree("+"), parseTree(times, parseTree(number, "3"), parseTree("*"), parseTree(number, "4"))));
+		Parser parser = FixedParser.parser(parseTree(add, parseTree(add, parseTree(add, parseTree(number, "2"), parseTree("+"), parseTree(number, "3")), parseTree("+"), parseTree(number, "2")), parseTree("+"), parseTree(times, parseTree(number, "3"), parseTree("*"), parseTree(number, "4"))));
 
 		SemanticAnalyser<Numeric> semanticAnalyser = new SemanticAnalyser<>(parser, numericAnalysers);
 

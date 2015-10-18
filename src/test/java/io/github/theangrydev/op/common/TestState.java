@@ -1,4 +1,4 @@
-package io.github.theangrydev;
+package io.github.theangrydev.op.common;
 
 public class TestState extends com.googlecode.yatspec.state.givenwhenthen.TestState {
 

@@ -1,4 +1,4 @@
-package io.github.theangrydev.op.scanner;
+package io.github.theangrydev.op.parser;
 
 import io.github.theangrydev.opper.grammar.Grammar;
 import io.github.theangrydev.opper.scanner.BFAScannerFactory;

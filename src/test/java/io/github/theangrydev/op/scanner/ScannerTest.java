@@ -4,8 +4,8 @@ import com.googlecode.yatspec.junit.Row;
 import com.googlecode.yatspec.junit.SpecRunner;
 import com.googlecode.yatspec.junit.Table;
 import com.googlecode.yatspec.state.givenwhenthen.WithTestState;
-import io.github.theangrydev.TestState;
-import io.github.theangrydev.WithAssertions;
+import io.github.theangrydev.op.common.TestState;
+import io.github.theangrydev.op.common.WithAssertions;
 import io.github.theangrydev.opper.scanner.ScannedSymbol;
 import io.github.theangrydev.opper.scanner.Scanner;
 import org.junit.Test;
@@ -14,17 +14,17 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.StringReader;
 
-import static io.github.theangrydev.op.grammar.ProgramGrammar.programGrammar;
-import static io.github.theangrydev.op.scanner.ProgramScannerFactory.programScannerFactory;
+import static io.github.theangrydev.op.parser.ProgramGrammar.programGrammar;
+import static io.github.theangrydev.op.parser.ProgramScannerFactory.programScannerFactory;
 
 @RunWith(SpecRunner.class)
 public class ScannerTest implements WithTestState, WithAssertions {
 
 	@Table({
-//		@Row("+"),
-//		@Row(";"),
-		@Row(":")
-//		@Row("=")
+		@Row("+"),
+		@Row(";"),
+		@Row(":"),
+		@Row("=")
 	})
 	@Test
 	public void shouldScanReservedSymbols(String input) throws Exception {
