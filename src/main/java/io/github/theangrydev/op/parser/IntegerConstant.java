@@ -34,7 +34,7 @@ public class IntegerConstant implements NumericConstant<Integer> {
 	}
 
 	@Override
-	public Location getLocation() {
+	public Location location() {
 		return location;
 	}
 }

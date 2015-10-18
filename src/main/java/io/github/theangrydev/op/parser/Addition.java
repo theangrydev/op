@@ -37,7 +37,7 @@ public class Addition implements BinaryOperator {
 	}
 
 	@Override
-	public Location getLocation() {
-		return left.getLocation();
+	public Location location() {
+		return left.location();
 	}
 }

@@ -32,8 +32,7 @@ public class ExistingTypeAssignment implements Assignment {
 	}
 
 	@Override
-	public Location getLocation() {
-		return null;
-//		return Location.between(targetType, expression);
+	public Location location() {
+		return Location.between(targetType.location(), expression.location());
 	}
 }

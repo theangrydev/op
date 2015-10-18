@@ -30,7 +30,7 @@ public class TypeExpression implements Expression {
 	}
 
 	@Override
-	public Location getLocation() {
+	public Location location() {
 		return location;
 	}
 }

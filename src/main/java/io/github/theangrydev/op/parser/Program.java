@@ -26,16 +26,15 @@ public class Program implements ProgramElement {
 	}
 
 	@Override
-	public Location getLocation() {
-		return null;
-//		return Location.between(getFirstStatement(), getLastStatement());
+	public Location location() {
+		return Location.between(firstStatement().location(), lastStatement().location());
 	}
 
-	public Statement getLastStatement() {
+	public Statement lastStatement() {
 		return statements.get(statements.size() - 1);
 	}
 
-	public Statement getFirstStatement() {
+	public Statement firstStatement() {
 		return statements.get(0);
 	}
 }

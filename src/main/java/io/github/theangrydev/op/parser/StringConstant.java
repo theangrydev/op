@@ -31,7 +31,7 @@ public class StringConstant implements Constant<String> {
 	}
 
 	@Override
-	public Location getLocation() {
+	public Location location() {
 		return location;
 	}
 }

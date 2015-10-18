@@ -33,7 +33,7 @@ public class RealConstant implements NumericConstant<Double> {
 	}
 
 	@Override
-	public Location getLocation() {
+	public Location location() {
 		return location;
 	}
 }
