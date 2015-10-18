@@ -33,38 +33,4 @@ public class AdditionTest implements WithAssertions {
 		TypeExpression right = TypeExpression.of(location, "B");
 		assertThat(Addition.add(left, right)).hasLocation(location);
 	}
-
-	@Test
-	public void acceptShouldVisitTheTypeAddition() throws Exception {
-		TypeExpression left = TypeExpression.of(location, "A");
-		TypeExpression right = TypeExpression.of(location, "B");
-		Addition value = Addition.add(left, right);
-		value.accept(new Expression.Visitor() {
-
-			@Override
-			public void visit(Addition addition) {
-				assertThat(value).isSameAs(addition);
-			}
-
-			@Override
-			public void visit(RealConstant realConstant) {
-				fail("Should visit the Addition");
-			}
-
-			@Override
-			public void visit(StringConstant stringConstant) {
-				fail("Should visit the Addition");
-			}
-
-			@Override
-			public void visit(IntegerConstant integerConstant) {
-				fail("Should visit the Addition");
-			}
-
-			@Override
-			public void visit(TypeExpression typeExpression) {
-				fail("Should visit the Addition");
-			}
-		});
-	}
 }

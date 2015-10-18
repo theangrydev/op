@@ -29,11 +29,6 @@ public class IntegerConstant implements NumericConstant<Integer> {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
-	}
-
-	@Override
 	public Location getLocation() {
 		return location;
 	}

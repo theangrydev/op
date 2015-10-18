@@ -14,35 +14,4 @@ public class TypeExpressionTest implements WithAssertions {
 	public void shouldToStringTheValue() throws Exception {
 		assertThat(TypeExpression.of(null, "ABC")).hasToString("ABC");
 	}
-
-	@Test
-	public void acceptShouldVisitTheTypeDeclaration() throws Exception {
-		TypeExpression value = TypeExpression.of(null, "target");
-		value.accept(new Expression.Visitor() {
-			@Override
-			public void visit(TypeExpression typeExpression) {
-				assertThat(value).isSameAs(typeExpression);
-			}
-
-			@Override
-			public void visit(IntegerConstant integerConstant) {
-				fail("Should visit the TypeExpression");
-			}
-
-			@Override
-			public void visit(RealConstant realConstant) {
-				fail("Should visit the TypeExpression");
-			}
-
-			@Override
-			public void visit(StringConstant stringConstant) {
-				fail("Should visit the TypeExpression");
-			}
-
-			@Override
-			public void visit(Addition addition) {
-				fail("Should visit the TypeExpression");
-			}
-		});
-	}
 }

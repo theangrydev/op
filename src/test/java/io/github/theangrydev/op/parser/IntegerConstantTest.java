@@ -18,35 +18,4 @@ public class IntegerConstantTest implements WithAssertions {
 	public void shouldToStringTheValue() throws Exception {
 		assertThat(IntegerConstant.of(location, "100")).hasToString("100");
 	}
-
-	@Test
-	public void acceptShouldVisitTheIntegerConstant() throws Exception {
-		IntegerConstant value = IntegerConstant.of(location, "100");
-		value.accept(new Expression.Visitor() {
-			@Override
-			public void visit(IntegerConstant integerConstant) {
-				assertThat(value).isSameAs(integerConstant);
-			}
-
-			@Override
-			public void visit(RealConstant realConstant) {
-				fail("Should visit the IntegerConstant");
-			}
-
-			@Override
-			public void visit(StringConstant stringConstant) {
-				fail("Should visit the IntegerConstant");
-			}
-
-			@Override
-			public void visit(TypeExpression typeExpression) {
-				fail("Should visit the IntegerConstant");
-			}
-
-			@Override
-			public void visit(Addition addition) {
-				fail("Should visit the IntegerConstant");
-			}
-		});
-	}
 }

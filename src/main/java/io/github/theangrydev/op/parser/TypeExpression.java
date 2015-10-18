@@ -20,11 +20,6 @@ public class TypeExpression implements Expression {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
-	}
-
-	@Override
 	public String toString() {
 		return type;
 	}
