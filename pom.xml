@@ -25,20 +25,6 @@
 		</repository>
 	</repositories>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>project</id>
-			<releases>
-				<enabled>true</enabled>
-				<checksumPolicy>ignore</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>file://${project.basedir}/repo</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<properties>
 		<!-- Project -->
 		<java.language.level>1.8</java.language.level>
