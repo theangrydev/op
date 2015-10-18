@@ -1,10 +1,10 @@
-package io.github.theangrydev.op.language;
+package io.github.theangrydev.op.semantics;
 
 import com.googlecode.yatspec.junit.SpecRunner;
 import io.github.theangrydev.op.common.TestState;
 import io.github.theangrydev.op.common.WithAssertions;
 import io.github.theangrydev.op.common.WithTestState;
-import io.github.theangrydev.op.semantics.SemanticAnalyser;
+import io.github.theangrydev.op.language.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
