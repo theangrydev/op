@@ -1,6 +1,8 @@
 package io.github.theangrydev.op.parser;
 
 
+import io.github.theangrydev.opper.scanner.Location;
+
 public class ExistingTypeAssignment implements Assignment {
 	private final TypeExpression targetType;
 	private final Expression expression;
@@ -31,6 +33,7 @@ public class ExistingTypeAssignment implements Assignment {
 
 	@Override
 	public Location getLocation() {
-		return Location.between(targetType, expression);
+		return null;
+//		return Location.between(targetType, expression);
 	}
 }

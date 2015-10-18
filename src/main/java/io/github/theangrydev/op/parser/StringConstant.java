@@ -1,5 +1,7 @@
 package io.github.theangrydev.op.parser;
 
+import io.github.theangrydev.opper.scanner.Location;
+
 public class StringConstant implements Constant<String> {
 	private final Location location;
 	private final String value;
@@ -9,8 +11,8 @@ public class StringConstant implements Constant<String> {
 		this.value = value;
 	}
 
-	public static StringConstant of(Location location, String value) {
-		return new StringConstant(location, value);
+	public static StringConstant of(String value) {
+		return new StringConstant(null, value);
 	}
 
 	@Override

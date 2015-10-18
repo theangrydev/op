@@ -1,5 +1,9 @@
 package io.github.theangrydev.op.parser;
 
+import io.github.theangrydev.opper.scanner.Location;
+
+import static java.lang.Double.parseDouble;
+
 public class RealConstant implements NumericConstant<Double> {
 	private final Location location;
 	private final Double value;
@@ -9,8 +13,8 @@ public class RealConstant implements NumericConstant<Double> {
 		this.value = value;
 	}
 
-	public static RealConstant of(Location location, Double value) {
-		return new RealConstant(location, value);
+	public static RealConstant of(String value) {
+		return new RealConstant(null, parseDouble(value));
 	}
 
 	@Override

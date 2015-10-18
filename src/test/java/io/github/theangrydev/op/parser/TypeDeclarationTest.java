@@ -5,8 +5,8 @@ import org.junit.Test;
 
 public class TypeDeclarationTest implements WithAssertions {
 
-	private final TypeExpression target = TypeExpression.of(null, "target");
-	private final TypeExpression existing = TypeExpression.of(null, "existing");
+	private final TypeExpression target = TypeExpression.of("target");
+	private final TypeExpression existing = TypeExpression.of("existing");
 
 	@Test
 	public void shouldStoreTargetAndExistingType() throws Exception {

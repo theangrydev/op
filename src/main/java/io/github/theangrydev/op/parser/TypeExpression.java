@@ -1,5 +1,7 @@
 package io.github.theangrydev.op.parser;
 
+import io.github.theangrydev.opper.scanner.Location;
+
 public class TypeExpression implements Expression {
 	private final Location location;
 	private final String type;
@@ -9,8 +11,8 @@ public class TypeExpression implements Expression {
 		this.type = type;
 	}
 
-	public static TypeExpression of(Location location, String type) {
-		return new TypeExpression(location, type);
+	public static TypeExpression of(String type) {
+		return new TypeExpression(null, type);
 	}
 
 	public String getType() {

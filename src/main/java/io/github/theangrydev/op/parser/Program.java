@@ -1,5 +1,7 @@
 package io.github.theangrydev.op.parser;
 
+import io.github.theangrydev.opper.scanner.Location;
+
 import java.util.List;
 
 public class Program implements ProgramElement {
@@ -25,7 +27,8 @@ public class Program implements ProgramElement {
 
 	@Override
 	public Location getLocation() {
-		return Location.between(getFirstStatement(), getLastStatement());
+		return null;
+//		return Location.between(getFirstStatement(), getLastStatement());
 	}
 
 	public Statement getLastStatement() {

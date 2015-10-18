@@ -1,6 +1,10 @@
 package io.github.theangrydev.op.parser;
 
 
+import io.github.theangrydev.opper.scanner.Location;
+
+import static java.lang.Integer.parseInt;
+
 public class IntegerConstant implements NumericConstant<Integer> {
 	private final Location location;
 	private final Integer value;
@@ -10,8 +14,8 @@ public class IntegerConstant implements NumericConstant<Integer> {
 		this.value = value;
 	}
 
-	public static IntegerConstant of(Location location, Integer value) {
-		return new IntegerConstant(location, value);
+	public static IntegerConstant of(String value) {
+		return new IntegerConstant(null, parseInt(value));
 	}
 
 	@Override
