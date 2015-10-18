@@ -4,9 +4,14 @@ import com.googlecode.yatspec.junit.SpecRunner;
 import io.github.theangrydev.TestState;
 import io.github.theangrydev.WithAssertions;
 import io.github.theangrydev.WithTestState;
+import io.github.theangrydev.op.semantics.SemanticAnalyser;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.StringReader;
+
+import static io.github.theangrydev.op.semantics.ProgramSemanticAnalyserFactory.programAnalyserFactory;
 
 @RunWith(SpecRunner.class)
 public class ProgramParserTest implements WithAssertions, WithTestState {
@@ -91,7 +96,7 @@ public class ProgramParserTest implements WithAssertions, WithTestState {
 	private static final String ASSIGNED_VALUE = "assigned value";
 	private static final String THE_PROGRAM = "program";
 	private final TestState state = new TestState();
-	private ProgramParser programParser;
+	private SemanticAnalyser<Program> programParser;
 
 	private void andTheIntegerConstantHasValue(int expected) {
 		assertThat(theAssignedIntegerConstant()).hasValue(expected);
@@ -207,11 +212,11 @@ public class ProgramParserTest implements WithAssertions, WithTestState {
 	}
 
 	private void whenTheInputIsParsed() throws Exception {
-		state.store(THE_PROGRAM,  programParser.parse());
+		state.store(THE_PROGRAM,  programParser.analyse().get());
 	}
 
 	private void givenAParserWithInput(String input) {
-		programParser = new ProgramParser(input);
+		programParser = programAnalyserFactory().programSemanticAnalyser(new StringReader(input));
 	}
 
 	@Override
