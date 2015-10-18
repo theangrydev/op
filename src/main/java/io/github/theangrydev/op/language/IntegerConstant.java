@@ -54,16 +54,16 @@ public class IntegerConstant implements NumericConstant<Integer> {
 
 	@Override
 	public Optional<Expression> addToLeft(RealConstant left) {
-		return of(realConstant(ProgramElement.locationBetween(left, this), value + left.getValue()));
+		return of(realConstant(locationBetween(left, this), value + left.getValue()));
 	}
 
 	@Override
 	public Optional<Expression> addToLeft(IntegerConstant left) {
-		return of(integerConstant(ProgramElement.locationBetween(left, this), value + left.getValue()));
+		return of(integerConstant(locationBetween(left, this), value + left.getValue()));
 	}
 
 	@Override
 	public Optional<Expression> addToLeft(StringConstant left) {
-		return of(stringConstant(ProgramElement.locationBetween(left, this), left.getValue() + value));
+		return of(stringConstant(locationBetween(left, this), left.getValue() + value));
 	}
 }

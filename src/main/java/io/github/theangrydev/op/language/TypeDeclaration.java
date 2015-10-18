@@ -8,15 +8,14 @@ public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 	private final TypeExpression targetType;
 	private final TypeExpression existingType;
 
-	private TypeDeclaration(Location location, TypeExpression targetType, TypeExpression existingType) {
-		this.location = location;
+	private TypeDeclaration(TypeExpression targetType, TypeExpression existingType) {
+		this.location = locationBetween(targetType, existingType);
 		this.targetType = targetType;
 		this.existingType = existingType;
 	}
 
 	public static TypeDeclaration of(TypeExpression targetType, TypeExpression existingType) {
-		Location location = ProgramElement.locationBetween(targetType, existingType);
-		return new TypeDeclaration(location, targetType, existingType);
+		return new TypeDeclaration(targetType, existingType);
 	}
 
 	public TypeExpression getTargetType() {

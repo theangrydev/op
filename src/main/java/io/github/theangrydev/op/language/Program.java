@@ -9,13 +9,13 @@ public class Program implements ProgramElement<Program> {
 	private final Location location;
 	private final List<Statement<?>> statements;
 
-	private Program(Location location, List<Statement<?>> statements) {
-		this.location = location;
+	private Program(List<Statement<?>> statements) {
+		this.location = locationBetween(statements.get(0), statements.get(statements.size() - 1));
 		this.statements = statements;
 	}
 
 	public static Program of(List<Statement<?>> statements) {
-		return new Program(ProgramElement.locationBetween(statements.get(0), statements.get(statements.size() - 1)), statements);
+		return new Program(statements);
 	}
 
 	public List<Statement<?>> statements() {

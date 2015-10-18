@@ -6,7 +6,7 @@ public interface ProgramElement<T extends ProgramElement<T>> {
 	Location getLocation();
 	T simplify();
 
-	static Location locationBetween(ProgramElement start, ProgramElement end) {
+	default Location locationBetween(ProgramElement start, ProgramElement end) {
 		return Location.between(start.getLocation(), end.getLocation());
 	}
 }

@@ -10,14 +10,14 @@ public class Addition implements BinaryOperator {
 	private Expression left;
 	private Expression right;
 
-	private Addition(Location location, Expression left, Expression right) {
-		this.location = location;
+	private Addition(Expression left, Expression right) {
+		this.location = locationBetween(left, right);
 		this.left = left;
 		this.right = right;
 	}
 
 	public static Addition add(Expression left, Expression right) {
-		return new Addition(ProgramElement.locationBetween(left, right), left, right);
+		return new Addition(left, right);
 	}
 
 	@Override

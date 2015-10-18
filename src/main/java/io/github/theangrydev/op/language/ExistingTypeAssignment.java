@@ -8,15 +8,14 @@ public class ExistingTypeAssignment implements Assignment<ExistingTypeAssignment
 	private final TypeExpression targetType;
 	private Expression expression;
 
-	private ExistingTypeAssignment(Location location, TypeExpression targetType, Expression expression) {
-		this.location = location;
+	private ExistingTypeAssignment(TypeExpression targetType, Expression expression) {
+		this.location = locationBetween(targetType, expression);
 		this.targetType = targetType;
 		this.expression = expression;
 	}
 
 	public static ExistingTypeAssignment of(TypeExpression targetType, Expression expression) {
-		Location location = ProgramElement.locationBetween(targetType, expression);
-		return new ExistingTypeAssignment(location, targetType, expression);
+		return new ExistingTypeAssignment(targetType, expression);
 	}
 
 	@Override

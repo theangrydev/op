@@ -8,16 +8,15 @@ public class TypeDeclarationAssignment implements Assignment<TypeDeclarationAssi
 	private final TypeExpression targetType;
 	private Expression expression;
 
-	private TypeDeclarationAssignment(Location location, TypeExpression existingType, TypeExpression targetType, Expression expression) {
-		this.location = location;
+	private TypeDeclarationAssignment(TypeExpression targetType, TypeExpression existingType, Expression expression) {
+		this.location = locationBetween(targetType, existingType);
 		this.existingType = existingType;
 		this.targetType = targetType;
 		this.expression = expression;
 	}
 
 	public static TypeDeclarationAssignment of(TypeDeclaration typeDeclaration, Expression expression) {
-		Location location = ProgramElement.locationBetween(typeDeclaration, expression);
-		return new TypeDeclarationAssignment(location, typeDeclaration.getExistingType(), typeDeclaration.getTargetType(), expression);
+		return new TypeDeclarationAssignment(typeDeclaration.getTargetType(), typeDeclaration.getExistingType(), expression);
 	}
 
 	public TypeExpression getExistingType() {

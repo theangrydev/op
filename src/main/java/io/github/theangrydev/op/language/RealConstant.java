@@ -51,16 +51,16 @@ public class RealConstant implements NumericConstant<Double> {
 
 	@Override
 	public Optional<Expression> addToLeft(RealConstant left) {
-		return Optional.of(realConstant(ProgramElement.locationBetween(left, this), left.value + value));
+		return Optional.of(realConstant(locationBetween(left, this), left.value + value));
 	}
 
 	@Override
 	public Optional<Expression> addToLeft(IntegerConstant left) {
-		return Optional.of(realConstant(ProgramElement.locationBetween(left, this), left.getValue() + value));
+		return Optional.of(realConstant(locationBetween(left, this), left.getValue() + value));
 	}
 
 	@Override
 	public Optional<Expression> addToLeft(StringConstant left) {
-		return Optional.of(stringConstant(ProgramElement.locationBetween(left, this), left.getValue() + value));
+		return Optional.of(stringConstant(locationBetween(left, this), left.getValue() + value));
 	}
 }

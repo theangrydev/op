@@ -62,6 +62,6 @@ public class StringConstant implements Constant<String> {
 	}
 
 	private Optional<Expression> concatenate(Constant<?> left) {
-		return Optional.of(stringConstant(ProgramElement.locationBetween(left, this), left.toString() + value));
+		return Optional.of(stringConstant(locationBetween(left, this), left.toString() + value));
 	}
 }
