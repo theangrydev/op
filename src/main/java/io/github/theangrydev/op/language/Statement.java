@@ -1,4 +1,4 @@
 package io.github.theangrydev.op.language;
 
-public interface Statement extends ProgramElement {
+public interface Statement<T extends Statement<T>> extends ProgramElement<T> {
 }

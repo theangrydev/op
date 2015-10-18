@@ -2,11 +2,11 @@ package io.github.theangrydev.op.language;
 
 import io.github.theangrydev.opper.scanner.Location;
 
-public class TypeDeclarationAssignment implements Assignment {
+public class TypeDeclarationAssignment implements Assignment<TypeDeclarationAssignment> {
 	private final Location location;
 	private final TypeExpression existingType;
 	private final TypeExpression targetType;
-	private final Expression expression;
+	private Expression expression;
 
 	private TypeDeclarationAssignment(Location location, TypeExpression existingType, TypeExpression targetType, Expression expression) {
 		this.location = location;
@@ -42,5 +42,11 @@ public class TypeDeclarationAssignment implements Assignment {
 	@Override
 	public Location getLocation() {
 		return location;
+	}
+
+	@Override
+	public TypeDeclarationAssignment simplify() {
+		expression = expression.simplify();
+		return this;
 	}
 }

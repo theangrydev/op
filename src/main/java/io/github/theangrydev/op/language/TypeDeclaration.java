@@ -2,7 +2,7 @@ package io.github.theangrydev.op.language;
 
 import io.github.theangrydev.opper.scanner.Location;
 
-public class TypeDeclaration implements ProgramElement {
+public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 
 	private final Location location;
 	private final TypeExpression targetType;
@@ -35,5 +35,10 @@ public class TypeDeclaration implements ProgramElement {
 	@Override
 	public Location getLocation() {
 		return location;
+	}
+
+	@Override
+	public TypeDeclaration simplify() {
+		return this;
 	}
 }

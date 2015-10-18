@@ -3,10 +3,10 @@ package io.github.theangrydev.op.language;
 
 import io.github.theangrydev.opper.scanner.Location;
 
-public class ExistingTypeAssignment implements Assignment {
+public class ExistingTypeAssignment implements Assignment<ExistingTypeAssignment> {
 	private final Location location;
 	private final TypeExpression targetType;
-	private final Expression expression;
+	private Expression expression;
 
 	private ExistingTypeAssignment(Location location, TypeExpression targetType, Expression expression) {
 		this.location = location;
@@ -37,5 +37,11 @@ public class ExistingTypeAssignment implements Assignment {
 	@Override
 	public Location getLocation() {
 		return location;
+	}
+
+	@Override
+	public ExistingTypeAssignment simplify() {
+		expression = expression.simplify();
+		return this;
 	}
 }

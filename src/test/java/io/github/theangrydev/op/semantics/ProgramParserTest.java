@@ -25,6 +25,54 @@ public class ProgramParserTest implements WithAssertions, WithTestState {
 	}
 
 	@Test
+	public void shouldSimplifyIntegerConstants() throws Exception {
+		givenAParserWithInput("Count:Integer=6+4+2;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
+		andTheStatementIsATypeDeclarationAssignment();
+		andTheAssignmentHasExistingType("Integer");
+		andTheAssignmentHasTargetType("Count");
+		andTheAssignedValueIsAnIntegerConstant();
+		andTheIntegerConstantHasValue(12);
+	}
+
+	@Test
+	public void shouldUpCastIntegerToReal() throws Exception {
+		givenAParserWithInput("Count:Real=6+4.2;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
+		andTheStatementIsATypeDeclarationAssignment();
+		andTheAssignmentHasExistingType("Real");
+		andTheAssignmentHasTargetType("Count");
+		andTheAssignedValueIsARealConstant();
+		andTheRealConstantHasValue(10.2);
+	}
+
+	@Test
+	public void shouldUpCastIntegerToString() throws Exception {
+		givenAParserWithInput("Count:String=\"hello\"+4;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
+		andTheStatementIsATypeDeclarationAssignment();
+		andTheAssignmentHasExistingType("String");
+		andTheAssignmentHasTargetType("Count");
+		andTheAssignedValueIsAStringConstant();
+		andTheStringConstantHasValue("hello4");
+	}
+
+	@Test
+	public void shouldUpCastRealToString() throws Exception {
+		givenAParserWithInput("Count:String=\"hello\"+4.2;");
+		whenTheInputIsParsed();
+		thenTheProgramContainsASingleStatement();
+		andTheStatementIsATypeDeclarationAssignment();
+		andTheAssignmentHasExistingType("String");
+		andTheAssignmentHasTargetType("Count");
+		andTheAssignedValueIsAStringConstant();
+		andTheStringConstantHasValue("hello4.2");
+	}
+
+	@Test
 	public void shouldParseATypeDeclarationAssignmentStatement() throws Exception {
 		givenAParserWithInput("Count:Integer=6;");
 		whenTheInputIsParsed();
@@ -212,7 +260,7 @@ public class ProgramParserTest implements WithAssertions, WithTestState {
 	}
 
 	private void whenTheInputIsParsed() throws Exception {
-		state.store(THE_PROGRAM,  programParser.analyse().get());
+		state.store(THE_PROGRAM,  programParser.analyse().get().simplify());
 	}
 
 	private void givenAParserWithInput(String input) {

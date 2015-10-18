@@ -18,9 +18,9 @@ public class ProgramParseTreeAnalyserFactory {
 		ParseTreeAnalyser<TypeExpression> typeExpression = analyser(consumeExpression(analyser(TypeExpression::of)));
 
 		ParseTreeAnalysers<Expression> expressions = new ParseTreeAnalysers<>();
-		expressions.add(grammar.ruleByDefinition("Expression", "Integer"), analyser(consumeExpression(analyser(IntegerConstant::of))));
-		expressions.add(grammar.ruleByDefinition("Expression", "Real"), analyser(consumeExpression(analyser(RealConstant::of))));
-		expressions.add(grammar.ruleByDefinition("Expression", "String"), analyser(consumeExpression(analyser(StringConstant::of))));
+		expressions.add(grammar.ruleByDefinition("Expression", "Integer"), analyser(consumeExpression(analyser(IntegerConstant::integerConstant))));
+		expressions.add(grammar.ruleByDefinition("Expression", "Real"), analyser(consumeExpression(analyser(RealConstant::realConstant))));
+		expressions.add(grammar.ruleByDefinition("Expression", "String"), analyser(consumeExpression(analyser(StringConstant::quotedStringConstant))));
 		expressions.add(grammar.ruleByDefinition("Expression", "TypeExpression"), analyser(consumeExpression(typeExpression)));
 		expressions.add(grammar.ruleByDefinition("Expression", "Expression", "+", "Expression"), analyser(binaryExpression(Addition::add, expressions)));
 
@@ -32,14 +32,14 @@ public class ProgramParseTreeAnalyserFactory {
 
 		ParseTreeAnalyser<Statement> statementWithSemicolon = analyser(consumeExpression(statements));
 
-		ParseTreeAnalysers<List<Statement>> statementListAnalysers = new ParseTreeAnalysers<>();
+		ParseTreeAnalysers<List<Statement<?>>> statementListAnalysers = new ParseTreeAnalysers<>();
 		statementListAnalysers.add(grammar.ruleByDefinition("StatementList", "StatementWithSemicolon"), analyser(consumeExpression(statementWithSemicolon, Lists::newArrayList)));
 		statementListAnalysers.add(grammar.ruleByDefinition("StatementList", "StatementList", "StatementWithSemicolon"), analyser(binaryExpression(ProgramParseTreeAnalyserFactory::addStatement, 0, statementListAnalysers, 1, statementWithSemicolon)));
 
 		return analyser(consumeExpression(statementListAnalysers, Program::of));
 	}
 
-	private static List<Statement> addStatement(List<Statement> statements, Statement statement) {
+	private static List<Statement<?>> addStatement(List<Statement<?>> statements, Statement statement) {
 		statements.add(statement);
 		return statements;
 	}

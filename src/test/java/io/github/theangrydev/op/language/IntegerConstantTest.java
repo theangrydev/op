@@ -11,11 +11,11 @@ public class IntegerConstantTest implements WithAssertions {
 
 	@Test
 	public void shouldStoreAValue() throws Exception {
-		assertThat(IntegerConstant.of(location, "100")).hasValue(100);
+		assertThat(IntegerConstant.integerConstant(location, "100")).hasValue(100);
 	}
 
 	@Test
 	public void shouldToStringTheValue() throws Exception {
-		assertThat(IntegerConstant.of(location, "100")).hasToString("100");
+		assertThat(IntegerConstant.integerConstant(location, "100")).hasToString("100");
 	}
 }
