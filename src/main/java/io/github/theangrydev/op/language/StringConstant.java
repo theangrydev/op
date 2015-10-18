@@ -1,4 +1,4 @@
-package io.github.theangrydev.op.parser;
+package io.github.theangrydev.op.language;
 
 import io.github.theangrydev.opper.scanner.Location;
 

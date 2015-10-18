@@ -1,4 +1,4 @@
-package io.github.theangrydev.op.parser;
+package io.github.theangrydev.op.language;
 
 import com.googlecode.yatspec.junit.SpecRunner;
 import io.github.theangrydev.TestState;

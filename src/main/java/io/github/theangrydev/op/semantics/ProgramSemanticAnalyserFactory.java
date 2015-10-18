@@ -1,7 +1,7 @@
 package io.github.theangrydev.op.semantics;
 
 import com.google.common.collect.Lists;
-import io.github.theangrydev.op.parser.*;
+import io.github.theangrydev.op.language.*;
 import io.github.theangrydev.opper.grammar.Grammar;
 import io.github.theangrydev.opper.parser.Parser;
 import io.github.theangrydev.opper.parser.ParserFactory;
