@@ -2,8 +2,6 @@ package io.github.theangrydev.op.language;
 
 import io.github.theangrydev.opper.scanner.Location;
 
-import java.util.Optional;
-
 public class Addition implements BinaryOperator {
 
 	private final Location location;
@@ -25,26 +23,6 @@ public class Addition implements BinaryOperator {
 		left = left.simplify();
 		right = right.simplify();
 		return left.addToRight(right).orElse(this);
-	}
-
-	@Override
-	public Optional<Expression> addToRight(Expression right) {
-		return Optional.empty();
-	}
-
-	@Override
-	public Optional<Expression> addToLeft(RealConstant left) {
-		return Optional.empty();
-	}
-
-	@Override
-	public Optional<Expression> addToLeft(IntegerConstant left) {
-		return Optional.empty();
-	}
-
-	@Override
-	public Optional<Expression> addToLeft(StringConstant left) {
-		return Optional.empty();
 	}
 
 	@Override
