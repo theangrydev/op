@@ -8,13 +8,18 @@ import io.github.theangrydev.opper.grammar.Grammar;
 
 import java.util.List;
 
+import static io.github.theangrydev.op.parser.ProgramGrammar.PROGRAM_GRAMMAR;
 import static io.github.theangrydev.op.semantics.BinaryExpressionAnalyser.binaryExpression;
 import static io.github.theangrydev.op.semantics.ConsumeExpressionAnalyser.consumeExpression;
+import static io.github.theangrydev.op.semantics.EmptyExpressionAnalyser.emptyExpression;
 import static io.github.theangrydev.op.semantics.ParseTreeLeafAnalyser.analyser;
 import static io.github.theangrydev.op.semantics.ParseTreeNodeAnalyser.analyser;
 
 public class ProgramParseTreeAnalyserFactory {
-	public static ParseTreeAnalyser<Program> programParseTreeAnalyser(Grammar grammar) {
+
+	public static ParseTreeAnalyser<Program> PROGRAM_PARSE_TREE_ANALYSER_FACTORY = programParseTreeAnalyser(PROGRAM_GRAMMAR);
+
+	private static ParseTreeAnalyser<Program> programParseTreeAnalyser(Grammar grammar) {
 		ParseTreeAnalyser<TypeExpression> typeExpression = analyser(consumeExpression(analyser(TypeExpression::of)));
 
 		ParseTreeAnalysers<Expression> expressions = new ParseTreeAnalysers<>();
@@ -33,7 +38,7 @@ public class ProgramParseTreeAnalyserFactory {
 		ParseTreeAnalyser<Statement> statementWithSemicolon = analyser(consumeExpression(statements));
 
 		ParseTreeAnalysers<List<Statement<?>>> statementListAnalysers = new ParseTreeAnalysers<>();
-		statementListAnalysers.add(grammar.ruleByDefinition("StatementList", "StatementWithSemicolon"), analyser(consumeExpression(statementWithSemicolon, Lists::newArrayList)));
+		statementListAnalysers.add(grammar.ruleByDefinition("StatementList", "Empty"), emptyExpression(Lists::newArrayList));
 		statementListAnalysers.add(grammar.ruleByDefinition("StatementList", "StatementList", "StatementWithSemicolon"), analyser(binaryExpression(ProgramParseTreeAnalyserFactory::addStatement, 0, statementListAnalysers, 1, statementWithSemicolon)));
 
 		return analyser(consumeExpression(statementListAnalysers, Program::of));

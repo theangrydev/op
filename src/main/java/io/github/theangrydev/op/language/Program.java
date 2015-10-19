@@ -10,8 +10,15 @@ public class Program implements ProgramElement<Program> {
 	private final List<Statement<?>> statements;
 
 	private Program(List<Statement<?>> statements) {
-		this.location = locationBetween(statements.get(0), statements.get(statements.size() - 1));
+		this.location = location(statements);
 		this.statements = statements;
+	}
+
+	private Location location(List<Statement<?>> statements) {
+		if (statements.isEmpty()) {
+			return Location.location(0, 0, 0, 0);
+		}
+		return locationBetween(statements.get(0), statements.get(statements.size() - 1));
 	}
 
 	public static Program of(List<Statement<?>> statements) {

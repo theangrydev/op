@@ -5,18 +5,17 @@ import io.github.theangrydev.op.common.TestState;
 import io.github.theangrydev.op.common.WithAssertions;
 import io.github.theangrydev.op.common.WithTestState;
 import io.github.theangrydev.op.language.*;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.StringReader;
 
-import static io.github.theangrydev.op.parser.ProgramSemanticAnalyserFactory.programAnalyserFactory;
+import static io.github.theangrydev.op.parser.ProgramSemanticAnalyserFactory.PROGRAM_SEMANTIC_ANALYSER_FACTORY;
+
 
 @RunWith(SpecRunner.class)
 public class ProgramParserTest implements WithAssertions, WithTestState {
 
-	@Ignore //TODO: support nullable rule definitions
 	@Test
 	public void shouldParseAnEmptyProgram() throws Exception {
 		givenAParserWithInput("");
@@ -264,7 +263,7 @@ public class ProgramParserTest implements WithAssertions, WithTestState {
 	}
 
 	private void givenAParserWithInput(String input) {
-		programParser = programAnalyserFactory().programSemanticAnalyser(new StringReader(input));
+		programParser = PROGRAM_SEMANTIC_ANALYSER_FACTORY.programSemanticAnalyser(new StringReader(input));
 	}
 
 	@Override

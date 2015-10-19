@@ -9,6 +9,7 @@ import io.github.theangrydev.opper.scanner.definition.SymbolDefinition;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.github.theangrydev.op.parser.ProgramGrammar.PROGRAM_GRAMMAR;
 import static io.github.theangrydev.opper.scanner.definition.AlternativeExpression.either;
 import static io.github.theangrydev.opper.scanner.definition.CharacterClassExpression.characterClass;
 import static io.github.theangrydev.opper.scanner.definition.CharacterExpression.character;
@@ -19,7 +20,9 @@ import static io.github.theangrydev.opper.scanner.definition.SymbolDefinition.de
 
 public class ProgramScannerFactory {
 
-	public static ScannerFactory programScannerFactory(Grammar grammar) {
+	public static final ScannerFactory PROGRAM_SCANNER_FACTORY = programScannerFactory(PROGRAM_GRAMMAR);
+
+	private static ScannerFactory programScannerFactory(Grammar grammar) {
 		List<SymbolDefinition> symbolDefinitions = new ArrayList<>();
 		symbolDefinitions.add(definition(grammar.symbolByName("+"), character('+')));
 		symbolDefinitions.add(definition(grammar.symbolByName(";"), character(';')));

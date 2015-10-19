@@ -6,6 +6,7 @@ import com.googlecode.yatspec.junit.Table;
 import com.googlecode.yatspec.state.givenwhenthen.WithTestState;
 import io.github.theangrydev.op.common.TestState;
 import io.github.theangrydev.op.common.WithAssertions;
+import io.github.theangrydev.op.parser.ProgramScannerFactory;
 import io.github.theangrydev.opper.scanner.ScannedSymbol;
 import io.github.theangrydev.opper.scanner.Scanner;
 import org.junit.Test;
@@ -13,9 +14,6 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.io.StringReader;
-
-import static io.github.theangrydev.op.parser.ProgramGrammar.programGrammar;
-import static io.github.theangrydev.op.parser.ProgramScannerFactory.programScannerFactory;
 
 @RunWith(SpecRunner.class)
 public class ScannerTest implements WithTestState, WithAssertions {
@@ -108,7 +106,7 @@ public class ScannerTest implements WithTestState, WithAssertions {
 	}
 
 	private void givenAScannerWithInput(String input) {
-		scanner = programScannerFactory(programGrammar()).scanner(new StringReader(input));
+		scanner = ProgramScannerFactory.PROGRAM_SCANNER_FACTORY.scanner(new StringReader(input));
 	}
 
 	private void whenTheNextTokenIsFetched() throws IOException {
