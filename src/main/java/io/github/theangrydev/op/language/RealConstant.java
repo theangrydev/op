@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import static java.lang.Double.parseDouble;
 
-public class RealConstant implements NumericConstant<Double>, SimplifyingAddition {
+public class RealConstant implements NumericConstant<Double>, SimplifyingConstantAddition {
 	private final Location location;
 	private final double value;
 
@@ -49,6 +49,11 @@ public class RealConstant implements NumericConstant<Double>, SimplifyingAdditio
 	}
 
 	@Override
+	public Optional<Expression> simplifyAddToLeft(TypeExpression left) {
+		return left.simplifyAddTypeToRight(this);
+	}
+
+	@Override
 	public Expression addToLeft(RealConstant left) {
 		return addRealToLeft(left);
 	}
@@ -69,5 +74,10 @@ public class RealConstant implements NumericConstant<Double>, SimplifyingAdditio
 
 	public RealConstant addRealToRight(NumericConstant<?> right) {
 		return realConstant(locationBetween(this, right), value + right.getValue().doubleValue());
+	}
+
+	@Override
+	public boolean isZero() {
+		return value == 0.0d;
 	}
 }

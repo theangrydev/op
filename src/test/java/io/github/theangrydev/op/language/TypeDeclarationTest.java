@@ -9,8 +9,8 @@ import static org.mockito.Mockito.mock;
 public class TypeDeclarationTest implements WithAssertions {
 
 	private final Location location = mock(Location.class);
-	private final TypeExpression target = TypeExpression.of(location, "target");
-	private final TypeExpression existing = TypeExpression.of(location, "existing");
+	private final TypeExpression target = TypeExpression.typeExpression(location, "target");
+	private final TypeExpression existing = TypeExpression.typeExpression(location, "existing");
 
 	@Test
 	public void shouldStoreTargetAndExistingType() throws Exception {

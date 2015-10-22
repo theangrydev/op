@@ -4,7 +4,7 @@ import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
-public class StringConstant implements Constant<String>, SimplifyingAddition {
+public class StringConstant implements Constant<String>, SimplifyingConstantAddition {
 	private final Location location;
 	private final String value;
 

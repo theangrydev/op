@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
 
-public class IntegerConstant implements NumericConstant<Integer>, SimplifyingAddition {
+public class IntegerConstant implements NumericConstant<Integer>, SimplifyingConstantAddition {
 	private final Location location;
 	private final int value;
 
@@ -50,6 +50,11 @@ public class IntegerConstant implements NumericConstant<Integer>, SimplifyingAdd
 	}
 
 	@Override
+	public Optional<Expression> simplifyAddToLeft(TypeExpression left) {
+		return left.simplifyAddTypeToRight(this);
+	}
+
+	@Override
 	public Expression addToLeft(RealConstant left) {
 		return left.addRealToRight(this);
 	}
@@ -62,5 +67,10 @@ public class IntegerConstant implements NumericConstant<Integer>, SimplifyingAdd
 	@Override
 	public Expression addToLeft(StringConstant left) {
 		return left.concatenateToRight(this);
+	}
+
+	@Override
+	public boolean isZero() {
+		return value == 0;
 	}
 }

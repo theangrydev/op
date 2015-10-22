@@ -2,7 +2,7 @@ package io.github.theangrydev.op.language;
 
 import java.util.Optional;
 
-public interface SimplifyingAddition extends AdditionSimplifier {
+public interface SimplifyingConstantAddition extends AdditionSimplifier {
 	default Optional<Expression> simplifyAddToLeft(RealConstant left) {
 		return Optional.of(addToLeft(left));
 	}

@@ -2,7 +2,12 @@ package io.github.theangrydev.op.language;
 
 import io.github.theangrydev.opper.scanner.Location;
 
-public class TypeExpression implements Expression, NotSimplifyingAddition {
+import java.util.Optional;
+
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
+public class TypeExpression implements Expression {
 	private final Location location;
 	private final String type;
 
@@ -11,7 +16,7 @@ public class TypeExpression implements Expression, NotSimplifyingAddition {
 		this.type = type;
 	}
 
-	public static TypeExpression of(Location location, String type) {
+	public static TypeExpression typeExpression(Location location, String type) {
 		return new TypeExpression(location, type);
 	}
 
@@ -32,5 +37,34 @@ public class TypeExpression implements Expression, NotSimplifyingAddition {
 	@Override
 	public Expression simplify() {
 		return this;
+	}
+
+	@Override
+	public Optional<Expression> simplifyAddToRight(Expression right) {
+		return right.simplifyAddToLeft(this);
+	}
+
+	@Override
+	public Optional<Expression> simplifyAddToLeft(RealConstant left) {
+		return simplifyAddTypeToLeft(left);
+	}
+
+	@Override
+	public Optional<Expression> simplifyAddToLeft(IntegerConstant left) {
+		return simplifyAddTypeToLeft(left);
+	}
+
+	public Optional<Expression> simplifyAddTypeToLeft(NumericConstant<?> left) {
+		if (left.isZero()) {
+			return of(typeExpression(locationBetween(left, this), type));
+		}
+		return empty();
+	}
+
+	public Optional<Expression> simplifyAddTypeToRight(NumericConstant<?> right) {
+		if (right.isZero()) {
+			return of(typeExpression(locationBetween(this, right), type));
+		}
+		return empty();
 	}
 }

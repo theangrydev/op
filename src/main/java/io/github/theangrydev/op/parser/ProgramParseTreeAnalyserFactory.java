@@ -20,7 +20,7 @@ public class ProgramParseTreeAnalyserFactory {
 	public static ParseTreeAnalyser<Program> PROGRAM_PARSE_TREE_ANALYSER_FACTORY = programParseTreeAnalyser(PROGRAM_GRAMMAR);
 
 	private static ParseTreeAnalyser<Program> programParseTreeAnalyser(Grammar grammar) {
-		ParseTreeAnalyser<TypeExpression> typeExpression = analyser(consumeExpression(analyser(TypeExpression::of)));
+		ParseTreeAnalyser<TypeExpression> typeExpression = analyser(consumeExpression(analyser(TypeExpression::typeExpression)));
 
 		ParseTreeAnalysers<Expression> expressions = new ParseTreeAnalysers<>();
 		expressions.add(grammar.ruleByDefinition("Expression", "Integer"), analyser(consumeExpression(analyser(IntegerConstant::integerConstant))));

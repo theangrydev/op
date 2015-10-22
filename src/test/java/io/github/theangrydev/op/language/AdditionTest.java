@@ -13,15 +13,15 @@ public class AdditionTest implements WithAssertions {
 
 	@Test
 	public void shouldStoreLeftAndRight() throws Exception {
-		TypeExpression left = TypeExpression.of(location, "A");
-		TypeExpression right = TypeExpression.of(location, "B");
+		TypeExpression left = TypeExpression.typeExpression(location, "A");
+		TypeExpression right = TypeExpression.typeExpression(location, "B");
 		assertThat(Addition.add(left, right)).hasLeft(left).hasRight(right);
 	}
 
 	@Test
 	public void shouldToStringTheValue() throws Exception {
-		TypeExpression left = TypeExpression.of(location, "A");
-		TypeExpression right = TypeExpression.of(location, "B");
+		TypeExpression left = TypeExpression.typeExpression(location, "A");
+		TypeExpression right = TypeExpression.typeExpression(location, "B");
 		assertThat(Addition.add(left, right)).hasToString("A+B");
 	}
 
@@ -29,8 +29,8 @@ public class AdditionTest implements WithAssertions {
 	@Ignore
 	@Test
 	public void shouldStoreTheLocation() throws Exception {
-		TypeExpression left = TypeExpression.of(location, "A");
-		TypeExpression right = TypeExpression.of(location, "B");
+		TypeExpression left = TypeExpression.typeExpression(location, "A");
+		TypeExpression right = TypeExpression.typeExpression(location, "B");
 		assertThat(Addition.add(left, right)).hasLocation(location);
 	}
 }
