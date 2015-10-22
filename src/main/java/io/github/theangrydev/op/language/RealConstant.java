@@ -4,10 +4,9 @@ import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
-import static io.github.theangrydev.op.language.StringConstant.stringConstant;
 import static java.lang.Double.parseDouble;
 
-public class RealConstant implements NumericConstant<Double> {
+public class RealConstant implements NumericConstant<Double>, SimplifyingAddition {
 	private final Location location;
 	private final double value;
 
@@ -45,22 +44,30 @@ public class RealConstant implements NumericConstant<Double> {
 	}
 
 	@Override
-	public Optional<Expression> addToRight(Expression right) {
-		return right.addToLeft(this);
+	public Optional<Expression> simplifyAddToRight(Expression right) {
+		return right.simplifyAddToLeft(this);
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(RealConstant left) {
-		return Optional.of(realConstant(locationBetween(left, this), left.value + value));
+	public Expression addToLeft(RealConstant left) {
+		return addRealToLeft(left);
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(IntegerConstant left) {
-		return Optional.of(realConstant(locationBetween(left, this), left.getValue() + value));
+	public Expression addToLeft(IntegerConstant left) {
+		return addRealToLeft(left);
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(StringConstant left) {
-		return Optional.of(stringConstant(locationBetween(left, this), left.getValue() + value));
+	public Expression addToLeft(StringConstant left) {
+		return left.concatenateToRight(this);
+	}
+
+	public RealConstant addRealToLeft(NumericConstant<?> left) {
+		return realConstant(locationBetween(left, this), left.getValue().doubleValue() + value);
+	}
+
+	public RealConstant addRealToRight(NumericConstant<?> right) {
+		return realConstant(locationBetween(this, right), value + right.getValue().doubleValue());
 	}
 }

@@ -22,7 +22,7 @@ public class Addition implements BinaryOperator {
 	public Expression simplify() {
 		left = left.simplify();
 		right = right.simplify();
-		return left.addToRight(right).orElse(this);
+		return left.simplifyAddToRight(right).orElse(this);
 	}
 
 	@Override

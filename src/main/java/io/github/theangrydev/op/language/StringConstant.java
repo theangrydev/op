@@ -4,7 +4,7 @@ import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
-public class StringConstant implements Constant<String> {
+public class StringConstant implements Constant<String>, SimplifyingAddition {
 	private final Location location;
 	private final String value;
 
@@ -42,26 +42,30 @@ public class StringConstant implements Constant<String> {
 	}
 
 	@Override
-	public Optional<Expression> addToRight(Expression right) {
-		return right.addToLeft(this);
+	public Optional<Expression> simplifyAddToRight(Expression right) {
+		return right.simplifyAddToLeft(this);
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(RealConstant left) {
-		return concatenate(left);
+	public Expression addToLeft(RealConstant left) {
+		return concatenateToLeft(left);
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(IntegerConstant left) {
-		return concatenate(left);
+	public Expression addToLeft(IntegerConstant left) {
+		return concatenateToLeft(left);
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(StringConstant left) {
-		return concatenate(left);
+	public Expression addToLeft(StringConstant left) {
+		return concatenateToLeft(left);
 	}
 
-	private Optional<Expression> concatenate(Constant<?> left) {
-		return Optional.of(stringConstant(locationBetween(left, this), left.toString() + value));
+	public Expression concatenateToLeft(Constant<?> left) {
+		return stringConstant(locationBetween(left, this), left.toString() + value);
+	}
+
+	public Expression concatenateToRight(Constant<?> right) {
+		return stringConstant(locationBetween(this, right), value + right.toString());
 	}
 }

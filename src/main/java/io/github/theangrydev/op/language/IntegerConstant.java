@@ -5,12 +5,9 @@ import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
-import static io.github.theangrydev.op.language.RealConstant.realConstant;
-import static io.github.theangrydev.op.language.StringConstant.stringConstant;
 import static java.lang.Integer.parseInt;
-import static java.util.Optional.of;
 
-public class IntegerConstant implements NumericConstant<Integer> {
+public class IntegerConstant implements NumericConstant<Integer>, SimplifyingAddition {
 	private final Location location;
 	private final int value;
 
@@ -48,22 +45,22 @@ public class IntegerConstant implements NumericConstant<Integer> {
 	}
 
 	@Override
-	public Optional<Expression> addToRight(Expression right) {
-		return right.addToLeft(this);
+	public Optional<Expression> simplifyAddToRight(Expression right) {
+		return right.simplifyAddToLeft(this);
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(RealConstant left) {
-		return of(realConstant(locationBetween(left, this), value + left.getValue()));
+	public Expression addToLeft(RealConstant left) {
+		return left.addRealToRight(this);
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(IntegerConstant left) {
-		return of(integerConstant(locationBetween(left, this), value + left.getValue()));
+	public Expression addToLeft(IntegerConstant left) {
+		return integerConstant(locationBetween(left, this), value + left.getValue());
 	}
 
 	@Override
-	public Optional<Expression> addToLeft(StringConstant left) {
-		return of(stringConstant(locationBetween(left, this), left.getValue() + value));
+	public Expression addToLeft(StringConstant left) {
+		return left.concatenateToRight(this);
 	}
 }
