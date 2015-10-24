@@ -1,6 +1,7 @@
 package io.github.theangrydev.op.language.assignment;
 
 import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.generation.VariableReference;
 import io.github.theangrydev.op.language.ProgramElement;
 import io.github.theangrydev.op.language.expression.TypeExpression;
 import io.github.theangrydev.opper.scanner.Location;
@@ -10,6 +11,7 @@ public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 	private final Location location;
 	private final TypeExpression targetType;
 	private final Type existingType;
+	private VariableReference<?> variableReference;
 
 	private TypeDeclaration(TypeExpression targetType, Type existingType) {
 		this.location = locationBetween(targetType, existingType);
@@ -47,13 +49,12 @@ public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 	@Override
 	public void checkTypes(ProgramCompiler programCompiler) {
 		existingType.checkTypes(programCompiler);
-		programCompiler.registerVariableReference(targetType.getType(), existingType.underlyingType());
-		targetType.checkTypes(programCompiler);
+		variableReference = programCompiler.registerVariableReference(targetType.getType(), existingType.underlyingType());
 	}
 
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
 		//TODO: compile default expression here for the underlying type
-		targetType.typeReference().store(programCompiler);
+		variableReference.store(programCompiler);
 	}
 }

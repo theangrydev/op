@@ -4,6 +4,7 @@ import io.github.theangrydev.op.language.Program;
 import org.junit.Test;
 
 import java.io.StringReader;
+import java.util.Optional;
 
 import static io.github.theangrydev.op.parser.ProgramSemanticAnalyserFactory.PROGRAM_SEMANTIC_ANALYSER_FACTORY;
 
@@ -53,19 +54,19 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
+		public VariableReference<?> registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
 			System.out.println("registerVariableReference(" + targetTypeName + "," + existingType + ")");
-			symbolTable.registerVariableReference(targetTypeName, existingType);
+			return symbolTable.registerVariableReference(targetTypeName, existingType);
 		}
 
 		@Override
-		public VariableReference<?> lookupVariableReference(String typeName) {
+		public Optional<VariableReference<?>> lookupVariableReference(String typeName) {
 			System.out.println("lookupVariableReference(" + typeName + ")");
 			return symbolTable.lookupVariableReference(typeName);
 		}
 
 		@Override
-		public UnderlyingType<?> underlyingType(String typeName) {
+		public Optional<UnderlyingType<?>> underlyingType(String typeName) {
 			System.out.println("underlyingType(" + typeName + ")");
 			return symbolTable.underlyingType(typeName);
 		}

@@ -1,9 +1,6 @@
 package io.github.theangrydev.op.generation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static io.github.theangrydev.op.generation.ConstantReference.constantReference;
 import static io.github.theangrydev.op.generation.IntegerType.INTEGER_TYPE;
@@ -28,22 +25,22 @@ public class SymbolTable {
 		}
 	}
 
-	public void registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
-		variableReferences.registerTypeReference(targetTypeName, existingType);
+	public VariableReference<?> registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
+		return variableReferences.registerTypeReference(targetTypeName, existingType);
 	}
 
-	public UnderlyingType<?> underlyingType(String typeName) {
+	public Optional<UnderlyingType<?>> underlyingType(String typeName) {
 		if (isDefaultType(typeName)) {
-			return defaultUnderlyingTypesByName.get(typeName);
+			return Optional.of(defaultUnderlyingTypesByName.get(typeName));
 		}
-		return variableReferences.typeReferenceByName(typeName).underlyingType();
+		return lookupVariableReference(typeName).map(VariableReference::underlyingType);
 	}
 
 	public boolean isDefaultType(String typeName) {
 		return defaultUnderlyingTypesByName.containsKey(typeName);
 	}
 
-	public VariableReference<?> lookupVariableReference(String typeName) {
+	public Optional<VariableReference<?>> lookupVariableReference(String typeName) {
 		return variableReferences.typeReferenceByName(typeName);
 	}
 

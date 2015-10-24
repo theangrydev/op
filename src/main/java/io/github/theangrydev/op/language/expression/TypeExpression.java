@@ -1,5 +1,6 @@
 package io.github.theangrydev.op.language.expression;
 
+import com.google.common.base.Preconditions;
 import io.github.theangrydev.op.generation.ProgramCompiler;
 import io.github.theangrydev.op.generation.VariableReference;
 import io.github.theangrydev.opper.scanner.Location;
@@ -44,7 +45,9 @@ public class TypeExpression implements Expression {
 
 	@Override
 	public void checkTypes(ProgramCompiler programCompiler) {
-		variableReference = programCompiler.lookupVariableReference(type);
+		Optional<VariableReference<?>> variableReference = programCompiler.lookupVariableReference(type);
+		Preconditions.checkState(variableReference.isPresent(), "There is no variable with type '%s'", type);
+		this.variableReference = variableReference.get();
 	}
 
 	@Override

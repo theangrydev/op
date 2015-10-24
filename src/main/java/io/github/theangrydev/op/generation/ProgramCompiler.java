@@ -1,13 +1,15 @@
 package io.github.theangrydev.op.generation;
 
+import java.util.Optional;
+
 public interface ProgramCompiler {
 	ConstantReference<IntegerType> registerIntegerConstant(int value);
 	ConstantReference<RealType> registerRealConstant(double value);
 	ConstantReference<StringType> registerStringConstant(String value);
 
-	void registerVariableReference(String targetTypeName, UnderlyingType<?> existingType);
-	VariableReference<?> lookupVariableReference(String typeName);
-	UnderlyingType<?> underlyingType(String typeName);
+	VariableReference<?> registerVariableReference(String targetTypeName, UnderlyingType<?> existingType);
+	Optional<VariableReference<?>> lookupVariableReference(String typeName);
+	Optional<UnderlyingType<?>> underlyingType(String typeName);
 
 	void storeInteger(VariableReference<IntegerType> typeToStoreIn);
 	void storeReal(VariableReference<RealType> typeToStoreIn);

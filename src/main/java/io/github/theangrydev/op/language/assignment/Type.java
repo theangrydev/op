@@ -1,9 +1,12 @@
 package io.github.theangrydev.op.language.assignment;
 
+import com.google.common.base.Preconditions;
 import io.github.theangrydev.op.generation.ProgramCompiler;
 import io.github.theangrydev.op.generation.UnderlyingType;
 import io.github.theangrydev.op.language.ProgramElement;
 import io.github.theangrydev.opper.scanner.Location;
+
+import java.util.Optional;
 
 public class Type implements ProgramElement<Type> {
 	private final Location location;
@@ -40,7 +43,9 @@ public class Type implements ProgramElement<Type> {
 
 	@Override
 	public void checkTypes(ProgramCompiler programCompiler) {
-		underlyingType = programCompiler.underlyingType(type);
+		Optional<UnderlyingType<?>> underlyingType = programCompiler.underlyingType(type);
+		Preconditions.checkState(underlyingType.isPresent(), "Type '%s' does not exist", type);
+		this.underlyingType = underlyingType.get();
 	}
 
 	@Override

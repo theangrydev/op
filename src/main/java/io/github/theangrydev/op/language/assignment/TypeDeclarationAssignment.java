@@ -1,6 +1,7 @@
 package io.github.theangrydev.op.language.assignment;
 
 import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.generation.VariableReference;
 import io.github.theangrydev.op.language.expression.Expression;
 import io.github.theangrydev.op.language.expression.TypeExpression;
 import io.github.theangrydev.opper.scanner.Location;
@@ -10,6 +11,7 @@ public class TypeDeclarationAssignment implements Assignment<TypeDeclarationAssi
 	private final Type existingType;
 	private final TypeExpression targetType;
 	private Expression expression;
+	private VariableReference<?> variableReference;
 
 	private TypeDeclarationAssignment(TypeExpression targetType, Type existingType, Expression expression) {
 		this.location = locationBetween(targetType, existingType);
@@ -50,14 +52,13 @@ public class TypeDeclarationAssignment implements Assignment<TypeDeclarationAssi
 	public void checkTypes(ProgramCompiler programCompiler) {
 		expression.checkTypes(programCompiler);
 		existingType.checkTypes(programCompiler);
-		programCompiler.registerVariableReference(targetType.getType(), existingType.underlyingType());
-		targetType.checkTypes(programCompiler);
+		variableReference = programCompiler.registerVariableReference(targetType.getType(), existingType.underlyingType());
 	}
 
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
 		expression.compile(programCompiler);
-		targetType.typeReference().store(programCompiler);
+		variableReference.store(programCompiler);
 	}
 
 	@Override
