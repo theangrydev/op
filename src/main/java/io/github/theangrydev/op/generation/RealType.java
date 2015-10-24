@@ -35,4 +35,9 @@ public class RealType implements UnderlyingType<RealType> {
 	public String name() {
 		return "Real";
 	}
+
+	@Override
+	public String toString() {
+		return name();
+	}
 }

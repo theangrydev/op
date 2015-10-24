@@ -35,4 +35,9 @@ public class StringType implements UnderlyingType<StringType> {
 	public String name() {
 		return "String";
 	}
+
+	@Override
+	public String toString() {
+		return name();
+	}
 }

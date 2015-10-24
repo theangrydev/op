@@ -35,4 +35,9 @@ public class IntegerType implements UnderlyingType<IntegerType> {
 	public String name() {
 		return "Integer";
 	}
+
+	@Override
+	public String toString() {
+		return name();
+	}
 }
