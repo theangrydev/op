@@ -7,7 +7,7 @@ public class StringType implements UnderlyingType<StringType> {
 	private StringType() {}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, TypeReference typeReference) {
+	public void store(ProgramCompiler programCompiler, VariableReference typeReference) {
 		programCompiler.storeString(typeReference);
 	}
 

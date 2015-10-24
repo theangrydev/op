@@ -18,7 +18,7 @@ public class UserUnderlyingType implements UnderlyingType<UserUnderlyingType> {
 	}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, TypeReference typeReference) {
+	public void store(ProgramCompiler programCompiler, VariableReference typeReference) {
 		programCompiler.storeReference(typeReference);
 	}
 

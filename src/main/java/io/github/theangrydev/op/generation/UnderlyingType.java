@@ -9,7 +9,7 @@ import static io.github.theangrydev.op.generation.RealType.REAL_TYPE;
 import static io.github.theangrydev.op.generation.StringType.STRING_TYPE;
 
 public interface UnderlyingType<T extends UnderlyingType<T>> {
-	void store(ProgramCompiler programCompiler, TypeReference typeReference);
+	void store(ProgramCompiler programCompiler, VariableReference typeReference);
 	void load(ProgramCompiler programCompiler, VariableReference variableReference);
 	void load(ProgramCompiler programCompiler, ConstantReference<T> constantReference);
 	void add(ProgramCompiler programCompiler);

@@ -7,7 +7,7 @@ public class RealType implements UnderlyingType<RealType> {
 	private RealType() {}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, TypeReference typeReference) {
+	public void store(ProgramCompiler programCompiler, VariableReference typeReference) {
 		programCompiler.storeReal(typeReference);
 	}
 

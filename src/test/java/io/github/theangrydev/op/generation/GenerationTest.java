@@ -71,22 +71,22 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void storeInteger(TypeReference typeToStoreIn) {
+		public void storeInteger(VariableReference typeToStoreIn) {
 			System.out.println("storeInteger(" + typeToStoreIn + ")");
 		}
 
 		@Override
-		public void storeReal(TypeReference typeToStoreIn) {
+		public void storeReal(VariableReference typeToStoreIn) {
 			System.out.println("storeReal(" + typeToStoreIn + ")");
 		}
 
 		@Override
-		public void storeString(TypeReference typeToStoreIn) {
+		public void storeString(VariableReference typeToStoreIn) {
 			System.out.println("storeString(" + typeToStoreIn + ")");
 		}
 
 		@Override
-		public void storeReference(TypeReference typeToStoreIn) {
+		public void storeReference(VariableReference typeToStoreIn) {
 			System.out.println("storeReference(" + typeToStoreIn + ")");
 		}
 

@@ -1,7 +1,6 @@
 package io.github.theangrydev.op.language.expression;
 
 import io.github.theangrydev.op.generation.ProgramCompiler;
-import io.github.theangrydev.op.generation.TypeReference;
 import io.github.theangrydev.op.generation.VariableReference;
 import io.github.theangrydev.opper.scanner.Location;
 
@@ -83,7 +82,7 @@ public class TypeExpression implements Expression {
 	}
 
 	@Override
-	public TypeReference typeReference() {
+	public VariableReference typeReference() {
 		return variableReference;
 	}
 }

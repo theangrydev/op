@@ -7,7 +7,7 @@ public class IntegerType implements UnderlyingType<IntegerType> {
 	private IntegerType() {}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, TypeReference typeReference) {
+	public void store(ProgramCompiler programCompiler, VariableReference typeReference) {
 		programCompiler.storeInteger(typeReference);
 	}
 

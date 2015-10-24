@@ -8,10 +8,10 @@ public interface ProgramCompiler {
 	VariableReference lookupVariableReference(String typeName);
 	UnderlyingType<?> underlyingType(String typeName);
 
-	void storeInteger(TypeReference typeToStoreIn);
-	void storeReal(TypeReference typeToStoreIn);
-	void storeString(TypeReference typeToStoreIn);
-	void storeReference(TypeReference typeToStoreIn);
+	void storeInteger(VariableReference typeToStoreIn);
+	void storeReal(VariableReference typeToStoreIn);
+	void storeString(VariableReference typeToStoreIn);
+	void storeReference(VariableReference typeToStoreIn);
 
 	void loadIntegerFromConstant(ConstantReference<IntegerType> constantToLoad);
 	void loadRealFromConstant(ConstantReference<RealType> constantToLoad);
