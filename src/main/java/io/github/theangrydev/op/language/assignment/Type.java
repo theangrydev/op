@@ -1,12 +1,14 @@
 package io.github.theangrydev.op.language.assignment;
 
 import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.generation.UnderlyingType;
 import io.github.theangrydev.op.language.ProgramElement;
 import io.github.theangrydev.opper.scanner.Location;
 
 public class Type implements ProgramElement<Type> {
 	private final Location location;
 	private final String type;
+	private UnderlyingType<?> underlyingType;
 
 	private Type(Location location, String type) {
 		this.location = location;
@@ -38,11 +40,15 @@ public class Type implements ProgramElement<Type> {
 
 	@Override
 	public void checkTypes(ProgramCompiler programCompiler) {
-		//TODO: check that the type exists
+		underlyingType = programCompiler.underlyingType(type);
 	}
 
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
 
+	}
+
+	public UnderlyingType<?> underlyingType() {
+		return underlyingType;
 	}
 }

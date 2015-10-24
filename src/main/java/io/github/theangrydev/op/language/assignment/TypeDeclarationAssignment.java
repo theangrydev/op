@@ -50,7 +50,7 @@ public class TypeDeclarationAssignment implements Assignment<TypeDeclarationAssi
 	public void checkTypes(ProgramCompiler programCompiler) {
 		expression.checkTypes(programCompiler);
 		existingType.checkTypes(programCompiler);
-		programCompiler.registerVariableReference(targetType.getType(), existingType.getType());
+		programCompiler.registerVariableReference(targetType.getType(), existingType.underlyingType());
 		targetType.checkTypes(programCompiler);
 	}
 

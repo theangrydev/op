@@ -4,8 +4,9 @@ public interface ProgramCompiler {
 	ConstantReference<IntegerType> registerIntegerConstant(int value);
 	ConstantReference<RealType> registerRealConstant(double value);
 	ConstantReference<StringType> registerStringConstant(String value);
-	VariableReference registerVariableReference(String targetTypeName, String existingTypeName);
+	VariableReference registerVariableReference(String targetTypeName, UnderlyingType<?> existingType);
 	VariableReference lookupVariableReference(String typeName);
+	UnderlyingType<?> underlyingType(String typeName);
 
 	void storeInteger(TypeReference typeToStoreIn);
 	void storeReal(TypeReference typeToStoreIn);

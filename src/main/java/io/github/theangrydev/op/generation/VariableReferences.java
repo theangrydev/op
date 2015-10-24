@@ -22,9 +22,9 @@ public class VariableReferences {
 		return typeReference;
 	}
 
-	public VariableReference registerTypeReference(String name, UnderlyingType underlyingType) {
-		VariableReference typeReference = variableReference(currentIndex++, name, underlyingType);
-		typeReferencesByName.put(name, typeReference);
+	public VariableReference registerTypeReference(String targetTypeName, UnderlyingType underlyingType) {
+		VariableReference typeReference = variableReference(currentIndex++, targetTypeName, underlyingType);
+		typeReferencesByName.put(targetTypeName, typeReference);
 		return typeReference;
 	}
 }

@@ -53,15 +53,21 @@ public class GenerationTest {
 		}
 
 		@Override
-		public VariableReference registerVariableReference(String targetTypeName, String existingTypeName) {
-			System.out.println("registerVariableReference(" + targetTypeName + "," + existingTypeName + ")");
-			return symbolTable.registerVariableReference(targetTypeName, existingTypeName);
+		public VariableReference registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
+			System.out.println("registerVariableReference(" + targetTypeName + "," + existingType + ")");
+			return symbolTable.registerVariableReference(targetTypeName, existingType);
 		}
 
 		@Override
 		public VariableReference lookupVariableReference(String typeName) {
 			System.out.println("lookupVariableReference(" + typeName + ")");
 			return symbolTable.lookupVariableReference(typeName);
+		}
+
+		@Override
+		public UnderlyingType<?> underlyingType(String typeName) {
+			System.out.println("underlyingType(" + typeName + ")");
+			return symbolTable.underlyingType(typeName);
 		}
 
 		@Override

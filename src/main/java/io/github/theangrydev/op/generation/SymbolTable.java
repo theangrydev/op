@@ -1,7 +1,5 @@
 package io.github.theangrydev.op.generation;
 
-import com.google.common.base.Preconditions;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +12,7 @@ import static io.github.theangrydev.op.generation.StringType.STRING_TYPE;
 import static io.github.theangrydev.op.generation.UnderlyingType.DEFAULT_TYPES;
 
 public class SymbolTable {
-	private Map<String, UnderlyingType> defaultUnderlyingTypesByName;
+	private Map<String, UnderlyingType<?>> defaultUnderlyingTypesByName;
 	private VariableReferences variableReferences;
 	private List<ConstantReference<?>> constants;
 
@@ -30,13 +28,11 @@ public class SymbolTable {
 		}
 	}
 
-	public VariableReference registerVariableReference(String targetTypeName, String existingTypeName) {
-		UnderlyingType underlyingType = underlyingType(existingTypeName);
-		Preconditions.checkNotNull(underlyingType, "Type with name '%s' does not exist", existingTypeName);
-		return variableReferences.registerTypeReference(targetTypeName, underlyingType(existingTypeName));
+	public VariableReference registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
+		return variableReferences.registerTypeReference(targetTypeName, existingType);
 	}
 
-	private UnderlyingType underlyingType(String typeName) {
+	public UnderlyingType<?> underlyingType(String typeName) {
 		if (isDefaultType(typeName)) {
 			return defaultUnderlyingTypesByName.get(typeName);
 		}

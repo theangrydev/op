@@ -47,7 +47,8 @@ public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 	@Override
 	public void checkTypes(ProgramCompiler programCompiler) {
 		existingType.checkTypes(programCompiler);
-		programCompiler.registerVariableReference(targetType.getType(), existingType.getType());
+		programCompiler.registerVariableReference(targetType.getType(), existingType.underlyingType());
+		targetType.checkTypes(programCompiler);
 	}
 
 	@Override
