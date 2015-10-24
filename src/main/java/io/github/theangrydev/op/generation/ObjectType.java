@@ -1,15 +1,15 @@
 package io.github.theangrydev.op.generation;
 
-public class UserUnderlyingType implements UnderlyingType<UserUnderlyingType> {
+public class ObjectType implements UnderlyingType<ObjectType> {
 
 	private final String name;
 
-	private UserUnderlyingType(String name) {
+	private ObjectType(String name) {
 		this.name = name;
 	}
 
 	public static UnderlyingType underlyingType(String name) {
-		return new UserUnderlyingType(name);
+		return new ObjectType(name);
 	}
 
 	@Override
@@ -18,22 +18,22 @@ public class UserUnderlyingType implements UnderlyingType<UserUnderlyingType> {
 	}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, VariableReference<UserUnderlyingType> variableReference) {
+	public void store(ProgramCompiler programCompiler, VariableReference<ObjectType> variableReference) {
 		programCompiler.storeReference(variableReference);
 	}
 
 	@Override
-	public void load(ProgramCompiler programCompiler, VariableReference<UserUnderlyingType> variableReference) {
+	public void load(ProgramCompiler programCompiler, VariableReference<ObjectType> variableReference) {
 		programCompiler.loadReferenceFromVariable(variableReference);
 	}
 
 	@Override
-	public void load(ProgramCompiler programCompiler, ConstantReference<UserUnderlyingType> constantReference) {
+	public void load(ProgramCompiler programCompiler, ConstantReference<ObjectType> constantReference) {
 		programCompiler.loadReferenceFromConstant(constantReference);
 	}
 
 	@Override
-	public VariableReference<UserUnderlyingType> variableReference(int variableIndex, String targetTypeName) {
+	public VariableReference<ObjectType> variableReference(int variableIndex, String targetTypeName) {
 		return VariableReference.variableReference(variableIndex, targetTypeName, this);
 	}
 
