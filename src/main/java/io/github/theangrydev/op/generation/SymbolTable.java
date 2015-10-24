@@ -63,7 +63,7 @@ public class SymbolTable {
 		return registerConstant(REAL_TYPE);
 	}
 
-	public <T extends UnderlyingType> ConstantReference<T> registerConstant(T underlyingType) {
+	public <T extends UnderlyingType<T>> ConstantReference<T> registerConstant(T underlyingType) {
 		int index = constants.size() + 1;
 		ConstantReference<T> constantReference = constantReference(index, underlyingType);
 		constants.add(constantReference);

@@ -21,7 +21,7 @@ public class VariableReference implements TypeReference {
 	}
 
 	@Override
-	public UnderlyingType underlyingType() {
+	public UnderlyingType<?> underlyingType() {
 		return underlyingType;
 	}
 
