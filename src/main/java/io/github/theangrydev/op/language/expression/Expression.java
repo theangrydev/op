@@ -6,7 +6,7 @@ import io.github.theangrydev.op.language.ProgramElement;
 
 public interface Expression extends ProgramElement<Expression>, AdditionSimplifier {
 	TypeReference typeReference();
-	default UnderlyingType underlyingType() {
+	default UnderlyingType<?> underlyingType() {
 		return typeReference().underlyingType();
 	}
 }
