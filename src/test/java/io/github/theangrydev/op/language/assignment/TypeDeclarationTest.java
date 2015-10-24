@@ -1,8 +1,6 @@
-package io.github.theangrydev.op.language;
+package io.github.theangrydev.op.language.assignment;
 
 import io.github.theangrydev.op.common.WithAssertions;
-import io.github.theangrydev.op.language.assignment.Type;
-import io.github.theangrydev.op.language.assignment.TypeDeclaration;
 import io.github.theangrydev.op.language.expression.TypeExpression;
 import io.github.theangrydev.opper.scanner.Location;
 import org.junit.Test;
