@@ -2,19 +2,19 @@ package io.github.theangrydev.op.language.expression;
 
 import io.github.theangrydev.op.generation.ConstantReference;
 import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.generation.RealType;
 import io.github.theangrydev.op.generation.TypeReference;
-import io.github.theangrydev.op.generation.UnderlyingType;
 import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
-import static io.github.theangrydev.op.generation.UnderlyingType.REAL;
+import static io.github.theangrydev.op.generation.RealType.REAL_TYPE;
 import static java.lang.Double.parseDouble;
 
 public class RealConstant implements NumericConstant<Double>, SimplifyingConstantAddition {
 	private final Location location;
 	private final double value;
-	private ConstantReference constantReference;
+	private ConstantReference<RealType> constantReference;
 
 	private RealConstant(Location location, Double value) {
 		this.location = location;
@@ -98,8 +98,8 @@ public class RealConstant implements NumericConstant<Double>, SimplifyingConstan
 	}
 
 	@Override
-	public UnderlyingType underlyingType() {
-		return REAL;
+	public RealType underlyingType() {
+		return REAL_TYPE;
 	}
 
 	@Override

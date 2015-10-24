@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.Map;
 
 import static io.github.theangrydev.op.generation.ConstantReference.constantReference;
-import static io.github.theangrydev.op.generation.UnderlyingType.*;
+import static io.github.theangrydev.op.generation.IntegerType.INTEGER_TYPE;
+import static io.github.theangrydev.op.generation.RealType.REAL_TYPE;
+import static io.github.theangrydev.op.generation.StringType.STRING_TYPE;
+import static io.github.theangrydev.op.generation.UnderlyingType.DEFAULT_TYPES;
 
 public class SymbolTable {
 	private Map<String, UnderlyingType> defaultUnderlyingTypesByName;
 	private VariableReferences variableReferences;
-	private List<TypeReference> constants;
+	private List<ConstantReference<?>> constants;
 
 	public SymbolTable(VariableReferences variableReferences) {
 		this.variableReferences = variableReferences;
@@ -48,21 +51,21 @@ public class SymbolTable {
 		return variableReferences.typeReferenceByName(typeName);
 	}
 
-	public ConstantReference registerIntegerConstant() {
-		return registerConstant(INTEGER);
+	public ConstantReference<IntegerType> registerIntegerConstant() {
+		return registerConstant(INTEGER_TYPE);
 	}
 
-	public ConstantReference registerStringConstant() {
-		return registerConstant(STRING);
+	public ConstantReference<StringType> registerStringConstant() {
+		return registerConstant(STRING_TYPE);
 	}
 
-	public ConstantReference registerRealConstant() {
-		return registerConstant(REAL);
+	public ConstantReference<RealType> registerRealConstant() {
+		return registerConstant(REAL_TYPE);
 	}
 
-	public ConstantReference registerConstant(UnderlyingType underlyingType) {
+	public <T extends UnderlyingType> ConstantReference<T> registerConstant(T underlyingType) {
 		int index = constants.size() + 1;
-		ConstantReference constantReference = constantReference(index, underlyingType);
+		ConstantReference<T> constantReference = constantReference(index, underlyingType);
 		constants.add(constantReference);
 		return constantReference;
 	}

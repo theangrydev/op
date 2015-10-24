@@ -1,16 +1,16 @@
 package io.github.theangrydev.op.generation;
 
-public class ConstantReference implements TypeReference {
+public class ConstantReference<T extends UnderlyingType> implements TypeReference {
 	private final int index;
-	private final UnderlyingType underlyingType;
+	private final T underlyingType;
 
-	private ConstantReference(int index, UnderlyingType underlyingType) {
+	private ConstantReference(int index, T underlyingType) {
 		this.index = index;
 		this.underlyingType = underlyingType;
 	}
 
-	public static ConstantReference constantReference(int index, UnderlyingType underlyingType) {
-		return new ConstantReference(index, underlyingType);
+	public static <T extends UnderlyingType> ConstantReference<T> constantReference(int index, T underlyingType) {
+		return new ConstantReference<>(index, underlyingType);
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class ConstantReference implements TypeReference {
 	}
 
 	@Override
-	public UnderlyingType underlyingType() {
+	public T underlyingType() {
 		return underlyingType;
 	}
 

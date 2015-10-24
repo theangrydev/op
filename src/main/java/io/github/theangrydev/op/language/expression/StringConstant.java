@@ -2,18 +2,18 @@ package io.github.theangrydev.op.language.expression;
 
 import io.github.theangrydev.op.generation.ConstantReference;
 import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.generation.StringType;
 import io.github.theangrydev.op.generation.TypeReference;
-import io.github.theangrydev.op.generation.UnderlyingType;
 import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
-import static io.github.theangrydev.op.generation.UnderlyingType.STRING;
+import static io.github.theangrydev.op.generation.StringType.STRING_TYPE;
 
 public class StringConstant implements Constant<String>, SimplifyingConstantAddition {
 	private final Location location;
 	private final String value;
-	private ConstantReference constantReference;
+	private ConstantReference<StringType> constantReference;
 
 	private StringConstant(Location location, String value) {
 		this.location = location;
@@ -87,8 +87,8 @@ public class StringConstant implements Constant<String>, SimplifyingConstantAddi
 	}
 
 	@Override
-	public UnderlyingType underlyingType() {
-		return STRING;
+	public StringType underlyingType() {
+		return STRING_TYPE;
 	}
 
 	@Override

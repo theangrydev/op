@@ -35,19 +35,19 @@ public class GenerationTest {
 		}
 
 		@Override
-		public ConstantReference registerIntegerConstant(int value) {
+		public ConstantReference<IntegerType> registerIntegerConstant(int value) {
 			System.out.println("registerIntegerConstant(" + value + ")");
 			return symbolTable.registerIntegerConstant();
 		}
 
 		@Override
-		public ConstantReference registerRealConstant(double value) {
+		public ConstantReference<RealType> registerRealConstant(double value) {
 			System.out.println("registerRealConstant(" + value + ")");
 			return symbolTable.registerRealConstant();
 		}
 
 		@Override
-		public ConstantReference registerStringConstant(String value) {
+		public ConstantReference<StringType> registerStringConstant(String value) {
 			System.out.println("registerStringConstant(" + value + ")");
 			return symbolTable.registerStringConstant();
 		}
@@ -85,7 +85,7 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void loadIntegerFromConstant(ConstantReference constantToLoad) {
+		public void loadIntegerFromConstant(ConstantReference<IntegerType> constantToLoad) {
 			System.out.println("loadIntegerFromConstant(" + constantToLoad + ")");
 		}
 
@@ -95,7 +95,7 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void loadRealFromConstant(ConstantReference constantToLoad) {
+		public void loadRealFromConstant(ConstantReference<RealType> constantToLoad) {
 			System.out.println("loadRealFromConstant(" + constantToLoad + ")");
 		}
 
@@ -105,7 +105,7 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void loadStringFromConstant(ConstantReference constantToLoad) {
+		public void loadStringFromConstant(ConstantReference<StringType> constantToLoad) {
 			System.out.println("loadStringFromConstant(" + constantToLoad + ")");
 		}
 

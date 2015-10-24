@@ -1,9 +1,9 @@
 package io.github.theangrydev.op.generation;
 
 public interface ProgramCompiler {
-	ConstantReference registerIntegerConstant(int value);
-	ConstantReference registerRealConstant(double value);
-	ConstantReference registerStringConstant(String value);
+	ConstantReference<IntegerType> registerIntegerConstant(int value);
+	ConstantReference<RealType> registerRealConstant(double value);
+	ConstantReference<StringType> registerStringConstant(String value);
 	VariableReference registerVariableReference(String targetTypeName, String existingTypeName);
 	VariableReference lookupVariableReference(String typeName);
 
@@ -12,10 +12,10 @@ public interface ProgramCompiler {
 	void storeString(TypeReference typeToStoreIn);
 	void storeReference(TypeReference typeToStoreIn);
 
-	void loadIntegerFromConstant(ConstantReference constantToLoad);
-	void loadRealFromConstant(ConstantReference constantToLoad);
-	void loadStringFromConstant(ConstantReference constantToLoad);
-	void loadReferenceFromConstant(ConstantReference constantToLoad);
+	void loadIntegerFromConstant(ConstantReference<IntegerType> constantToLoad);
+	void loadRealFromConstant(ConstantReference<RealType> constantToLoad);
+	void loadStringFromConstant(ConstantReference<StringType> constantToLoad);
+	void loadReferenceFromConstant(ConstantReference<UserUnderlyingType> constantToLoad);
 
 	void loadIntegerFromVariable(VariableReference variableToLoad);
 	void loadRealFromVariable(VariableReference variableToLoad);

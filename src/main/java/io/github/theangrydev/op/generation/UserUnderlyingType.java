@@ -1,6 +1,6 @@
 package io.github.theangrydev.op.generation;
 
-public class UserUnderlyingType implements UnderlyingType {
+public class UserUnderlyingType implements UnderlyingType<UserUnderlyingType> {
 
 	private final String name;
 
@@ -28,7 +28,7 @@ public class UserUnderlyingType implements UnderlyingType {
 	}
 
 	@Override
-	public void load(ProgramCompiler programCompiler, ConstantReference constantReference) {
+	public void load(ProgramCompiler programCompiler, ConstantReference<UserUnderlyingType> constantReference) {
 		programCompiler.loadReferenceFromConstant(constantReference);
 	}
 

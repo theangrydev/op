@@ -2,20 +2,20 @@ package io.github.theangrydev.op.language.expression;
 
 
 import io.github.theangrydev.op.generation.ConstantReference;
+import io.github.theangrydev.op.generation.IntegerType;
 import io.github.theangrydev.op.generation.ProgramCompiler;
 import io.github.theangrydev.op.generation.TypeReference;
-import io.github.theangrydev.op.generation.UnderlyingType;
 import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
-import static io.github.theangrydev.op.generation.UnderlyingType.INTEGER;
+import static io.github.theangrydev.op.generation.IntegerType.INTEGER_TYPE;
 import static java.lang.Integer.parseInt;
 
 public class IntegerConstant implements NumericConstant<Integer>, SimplifyingConstantAddition {
 	private final Location location;
 	private final int value;
-	private ConstantReference constantReference;
+	private ConstantReference<IntegerType> constantReference;
 
 	private IntegerConstant(Location location, int value) {
 		this.location = location;
@@ -91,8 +91,8 @@ public class IntegerConstant implements NumericConstant<Integer>, SimplifyingCon
 	}
 
 	@Override
-	public UnderlyingType underlyingType() {
-		return INTEGER;
+	public IntegerType underlyingType() {
+		return INTEGER_TYPE;
 	}
 
 	@Override
