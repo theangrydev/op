@@ -36,4 +36,9 @@ public class UserUnderlyingType implements UnderlyingType {
 	public void add(ProgramCompiler programCompiler) {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public boolean supportsAdd() {
+		return false;
+	}
 }

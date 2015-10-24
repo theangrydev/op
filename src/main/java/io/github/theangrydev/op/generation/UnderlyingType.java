@@ -7,6 +7,8 @@ public interface UnderlyingType {
 	void load(ProgramCompiler programCompiler, VariableReference variableReference);
 	void load(ProgramCompiler programCompiler, ConstantReference constantReference);
 	void add(ProgramCompiler programCompiler);
+	boolean supportsAdd();
+
 	String name();
 
 	UnderlyingType INTEGER = new UnderlyingType() {
@@ -28,6 +30,11 @@ public interface UnderlyingType {
 		@Override
 		public void add(ProgramCompiler programCompiler) {
 			programCompiler.addTwoIntegers();
+		}
+
+		@Override
+		public boolean supportsAdd() {
+			return true;
 		}
 
 		@Override
@@ -58,6 +65,11 @@ public interface UnderlyingType {
 		}
 
 		@Override
+		public boolean supportsAdd() {
+			return true;
+		}
+
+		@Override
 		public String name() {
 			return "Real";
 		}
@@ -82,6 +94,11 @@ public interface UnderlyingType {
 		@Override
 		public void add(ProgramCompiler programCompiler) {
 			programCompiler.addTwoStrings();
+		}
+
+		@Override
+		public boolean supportsAdd() {
+			return true;
 		}
 
 		@Override

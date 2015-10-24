@@ -38,6 +38,8 @@ public class Addition implements BinaryOperator {
 		TypeReference rightType = right.typeReference();
 		Preconditions.checkState(leftType == rightType, "Left type '%s' should match right type '%s'", leftType, rightType);
 		typeReference = leftType;
+
+		Preconditions.checkState(typeReference.underlyingType().supportsAdd(), "Type '%s' does not support addition", typeReference);
 	}
 
 	@Override
