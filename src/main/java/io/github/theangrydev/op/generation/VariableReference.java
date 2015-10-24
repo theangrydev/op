@@ -5,13 +5,13 @@ public class VariableReference implements TypeReference {
 	private final String name;
 	private final UnderlyingType underlyingType;
 
-	private VariableReference(int index, String name, UnderlyingType underlyingType) {
+	private VariableReference(int index, String name, UnderlyingType<?> underlyingType) {
 		this.index = index;
 		this.name = name;
 		this.underlyingType = underlyingType;
 	}
 
-	public static VariableReference variableReference(int index, String name, UnderlyingType underlyingType) {
+	public static VariableReference variableReference(int index, String name, UnderlyingType<?> underlyingType) {
 		return new VariableReference(index, name, underlyingType);
 	}
 
