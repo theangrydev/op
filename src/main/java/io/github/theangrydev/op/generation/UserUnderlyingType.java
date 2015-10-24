@@ -18,18 +18,23 @@ public class UserUnderlyingType implements UnderlyingType<UserUnderlyingType> {
 	}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, VariableReference typeReference) {
-		programCompiler.storeReference(typeReference);
+	public void store(ProgramCompiler programCompiler, VariableReference<UserUnderlyingType> variableReference) {
+		programCompiler.storeReference(variableReference);
 	}
 
 	@Override
-	public void load(ProgramCompiler programCompiler, VariableReference variableReference) {
+	public void load(ProgramCompiler programCompiler, VariableReference<UserUnderlyingType> variableReference) {
 		programCompiler.loadReferenceFromVariable(variableReference);
 	}
 
 	@Override
 	public void load(ProgramCompiler programCompiler, ConstantReference<UserUnderlyingType> constantReference) {
 		programCompiler.loadReferenceFromConstant(constantReference);
+	}
+
+	@Override
+	public VariableReference<UserUnderlyingType> variableReference(int variableIndex, String targetTypeName) {
+		return VariableReference.variableReference(variableIndex, targetTypeName, this);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package io.github.theangrydev.op.generation;
 
+
 public class IntegerType implements UnderlyingType<IntegerType> {
 
 	public static final IntegerType INTEGER_TYPE = new IntegerType();
@@ -7,12 +8,12 @@ public class IntegerType implements UnderlyingType<IntegerType> {
 	private IntegerType() {}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, VariableReference typeReference) {
-		programCompiler.storeInteger(typeReference);
+	public void store(ProgramCompiler programCompiler, VariableReference<IntegerType> variableReference) {
+		programCompiler.storeInteger(variableReference);
 	}
 
 	@Override
-	public void load(ProgramCompiler programCompiler, VariableReference variableReference) {
+	public void load(ProgramCompiler programCompiler, VariableReference<IntegerType> variableReference) {
 		programCompiler.loadIntegerFromVariable(variableReference);
 	}
 
@@ -39,5 +40,10 @@ public class IntegerType implements UnderlyingType<IntegerType> {
 	@Override
 	public String toString() {
 		return name();
+	}
+
+	@Override
+	public VariableReference<IntegerType> variableReference(int variableIndex, String targetTypeName) {
+		return VariableReference.variableReference(variableIndex, targetTypeName, this);
 	}
 }

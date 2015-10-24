@@ -54,6 +54,6 @@ public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
 		//TODO: compile default expression here for the underlying type
-		targetType.underlyingType().store(programCompiler, targetType.typeReference());
+		targetType.typeReference().store(programCompiler);
 	}
 }

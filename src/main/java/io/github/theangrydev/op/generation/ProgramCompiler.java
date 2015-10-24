@@ -4,24 +4,25 @@ public interface ProgramCompiler {
 	ConstantReference<IntegerType> registerIntegerConstant(int value);
 	ConstantReference<RealType> registerRealConstant(double value);
 	ConstantReference<StringType> registerStringConstant(String value);
-	VariableReference registerVariableReference(String targetTypeName, UnderlyingType<?> existingType);
-	VariableReference lookupVariableReference(String typeName);
+
+	void registerVariableReference(String targetTypeName, UnderlyingType<?> existingType);
+	VariableReference<?> lookupVariableReference(String typeName);
 	UnderlyingType<?> underlyingType(String typeName);
 
-	void storeInteger(VariableReference typeToStoreIn);
-	void storeReal(VariableReference typeToStoreIn);
-	void storeString(VariableReference typeToStoreIn);
-	void storeReference(VariableReference typeToStoreIn);
+	void storeInteger(VariableReference<IntegerType> typeToStoreIn);
+	void storeReal(VariableReference<RealType> typeToStoreIn);
+	void storeString(VariableReference<StringType> typeToStoreIn);
+	void storeReference(VariableReference<UserUnderlyingType> typeToStoreIn);
 
 	void loadIntegerFromConstant(ConstantReference<IntegerType> constantToLoad);
 	void loadRealFromConstant(ConstantReference<RealType> constantToLoad);
 	void loadStringFromConstant(ConstantReference<StringType> constantToLoad);
 	void loadReferenceFromConstant(ConstantReference<UserUnderlyingType> constantToLoad);
 
-	void loadIntegerFromVariable(VariableReference variableToLoad);
-	void loadRealFromVariable(VariableReference variableToLoad);
-	void loadStringFromVariable(VariableReference variableToLoad);
-	void loadReferenceFromVariable(VariableReference variableToLoad);
+	void loadIntegerFromVariable(VariableReference<IntegerType> variableToLoad);
+	void loadRealFromVariable(VariableReference<RealType> variableToLoad);
+	void loadStringFromVariable(VariableReference<StringType> variableToLoad);
+	void loadReferenceFromVariable(VariableReference<UserUnderlyingType> variableToLoad);
 
 	void addTwoIntegers();
 	void addTwoReals();

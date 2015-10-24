@@ -57,7 +57,7 @@ public class IntegerConstant implements NumericConstant<Integer>, SimplifyingCon
 
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
-		underlyingType().load(programCompiler, constantReference);
+		constantReference.load(programCompiler);
 	}
 
 	@Override

@@ -53,13 +53,13 @@ public class GenerationTest {
 		}
 
 		@Override
-		public VariableReference registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
+		public void registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
 			System.out.println("registerVariableReference(" + targetTypeName + "," + existingType + ")");
-			return symbolTable.registerVariableReference(targetTypeName, existingType);
+			symbolTable.registerVariableReference(targetTypeName, existingType);
 		}
 
 		@Override
-		public VariableReference lookupVariableReference(String typeName) {
+		public VariableReference<?> lookupVariableReference(String typeName) {
 			System.out.println("lookupVariableReference(" + typeName + ")");
 			return symbolTable.lookupVariableReference(typeName);
 		}
@@ -71,22 +71,22 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void storeInteger(VariableReference typeToStoreIn) {
+		public void storeInteger(VariableReference<IntegerType> typeToStoreIn) {
 			System.out.println("storeInteger(" + typeToStoreIn + ")");
 		}
 
 		@Override
-		public void storeReal(VariableReference typeToStoreIn) {
+		public void storeReal(VariableReference<RealType> typeToStoreIn) {
 			System.out.println("storeReal(" + typeToStoreIn + ")");
 		}
 
 		@Override
-		public void storeString(VariableReference typeToStoreIn) {
+		public void storeString(VariableReference<StringType> typeToStoreIn) {
 			System.out.println("storeString(" + typeToStoreIn + ")");
 		}
 
 		@Override
-		public void storeReference(VariableReference typeToStoreIn) {
+		public void storeReference(VariableReference<UserUnderlyingType> typeToStoreIn) {
 			System.out.println("storeReference(" + typeToStoreIn + ")");
 		}
 
@@ -96,7 +96,7 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void loadIntegerFromVariable(VariableReference variableToLoad) {
+		public void loadIntegerFromVariable(VariableReference<IntegerType> variableToLoad) {
 			System.out.println("loadIntegerVariable(" + variableToLoad + ")");
 		}
 
@@ -106,7 +106,7 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void loadRealFromVariable(VariableReference variableToLoad) {
+		public void loadRealFromVariable(VariableReference<RealType> variableToLoad) {
 			System.out.println("loadRealFromVariable(" + variableToLoad + ")");
 		}
 
@@ -116,7 +116,7 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void loadStringFromVariable(VariableReference variableToLoad) {
+		public void loadStringFromVariable(VariableReference<StringType> variableToLoad) {
 			System.out.println("loadStringFromVariable(" + variableToLoad + ")");
 		}
 
@@ -126,7 +126,7 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void loadReferenceFromVariable(VariableReference variableToLoad) {
+		public void loadReferenceFromVariable(VariableReference<UserUnderlyingType> variableToLoad) {
 			System.out.println("loadReferenceFromVariable(" + variableToLoad + ")");
 		}
 	};

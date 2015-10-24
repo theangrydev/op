@@ -1,6 +1,7 @@
 package io.github.theangrydev.op.generation;
 
-public interface TypeReference {
+public interface TypeReference<T extends UnderlyingType<T>> {
 	int index();
-	UnderlyingType<?> underlyingType();
+	T underlyingType();
+	void load(ProgramCompiler programCompiler);
 }

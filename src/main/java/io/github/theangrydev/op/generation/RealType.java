@@ -1,5 +1,6 @@
 package io.github.theangrydev.op.generation;
 
+
 public class RealType implements UnderlyingType<RealType> {
 
 	public static final RealType REAL_TYPE = new RealType();
@@ -7,12 +8,12 @@ public class RealType implements UnderlyingType<RealType> {
 	private RealType() {}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, VariableReference typeReference) {
-		programCompiler.storeReal(typeReference);
+	public void store(ProgramCompiler programCompiler, VariableReference<RealType> variableReference) {
+		programCompiler.storeReal(variableReference);
 	}
 
 	@Override
-	public void load(ProgramCompiler programCompiler, VariableReference variableReference) {
+	public void load(ProgramCompiler programCompiler, VariableReference<RealType> variableReference) {
 		programCompiler.loadRealFromVariable(variableReference);
 	}
 
@@ -39,5 +40,10 @@ public class RealType implements UnderlyingType<RealType> {
 	@Override
 	public String toString() {
 		return name();
+	}
+
+	@Override
+	public VariableReference<RealType> variableReference(int variableIndex, String targetTypeName) {
+		return VariableReference.variableReference(variableIndex, targetTypeName, this);
 	}
 }

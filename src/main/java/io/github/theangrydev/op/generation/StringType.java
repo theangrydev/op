@@ -7,12 +7,12 @@ public class StringType implements UnderlyingType<StringType> {
 	private StringType() {}
 
 	@Override
-	public void store(ProgramCompiler programCompiler, VariableReference typeReference) {
-		programCompiler.storeString(typeReference);
+	public void store(ProgramCompiler programCompiler, VariableReference<StringType> variableReference) {
+		programCompiler.storeString(variableReference);
 	}
 
 	@Override
-	public void load(ProgramCompiler programCompiler, VariableReference variableReference) {
+	public void load(ProgramCompiler programCompiler, VariableReference<StringType> variableReference) {
 		programCompiler.loadStringFromVariable(variableReference);
 	}
 
@@ -39,5 +39,10 @@ public class StringType implements UnderlyingType<StringType> {
 	@Override
 	public String toString() {
 		return name();
+	}
+
+	@Override
+	public VariableReference<StringType> variableReference(int variableIndex, String targetTypeName) {
+		return VariableReference.variableReference(variableIndex, targetTypeName, this);
 	}
 }

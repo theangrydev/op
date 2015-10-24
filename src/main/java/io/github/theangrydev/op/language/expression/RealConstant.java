@@ -56,7 +56,7 @@ public class RealConstant implements NumericConstant<Double>, SimplifyingConstan
 
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
-		underlyingType().load(programCompiler, constantReference);
+		constantReference.load(programCompiler);
 	}
 
 	@Override

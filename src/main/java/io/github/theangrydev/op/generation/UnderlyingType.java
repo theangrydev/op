@@ -9,11 +9,12 @@ import static io.github.theangrydev.op.generation.RealType.REAL_TYPE;
 import static io.github.theangrydev.op.generation.StringType.STRING_TYPE;
 
 public interface UnderlyingType<T extends UnderlyingType<T>> {
-	void store(ProgramCompiler programCompiler, VariableReference typeReference);
-	void load(ProgramCompiler programCompiler, VariableReference variableReference);
+	void store(ProgramCompiler programCompiler, VariableReference<T> variableReference);
+	void load(ProgramCompiler programCompiler, VariableReference<T> variableReference);
 	void load(ProgramCompiler programCompiler, ConstantReference<T> constantReference);
 	void add(ProgramCompiler programCompiler);
 	boolean supportsAdd();
 	String name();
 	Set<UnderlyingType> DEFAULT_TYPES = ImmutableSet.of(INTEGER_TYPE, REAL_TYPE, STRING_TYPE);
+	VariableReference<T> variableReference(int variableIndex, String targetTypeName);
 }

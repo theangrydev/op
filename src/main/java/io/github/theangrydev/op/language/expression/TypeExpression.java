@@ -12,7 +12,7 @@ import static java.util.Optional.of;
 public class TypeExpression implements Expression {
 	private final Location location;
 	private final String type;
-	private VariableReference variableReference;
+	private VariableReference<?> variableReference;
 
 	private TypeExpression(Location location, String type) {
 		this.location = location;
@@ -49,7 +49,7 @@ public class TypeExpression implements Expression {
 
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
-		underlyingType().load(programCompiler, variableReference);
+		variableReference.load(programCompiler);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class TypeExpression implements Expression {
 	}
 
 	@Override
-	public VariableReference typeReference() {
+	public VariableReference<?> typeReference() {
 		return variableReference;
 	}
 }

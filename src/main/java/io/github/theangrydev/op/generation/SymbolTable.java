@@ -28,8 +28,8 @@ public class SymbolTable {
 		}
 	}
 
-	public VariableReference registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
-		return variableReferences.registerTypeReference(targetTypeName, existingType);
+	public void registerVariableReference(String targetTypeName, UnderlyingType<?> existingType) {
+		variableReferences.registerTypeReference(targetTypeName, existingType);
 	}
 
 	public UnderlyingType<?> underlyingType(String typeName) {
@@ -43,7 +43,7 @@ public class SymbolTable {
 		return defaultUnderlyingTypesByName.containsKey(typeName);
 	}
 
-	public VariableReference lookupVariableReference(String typeName) {
+	public VariableReference<?> lookupVariableReference(String typeName) {
 		return variableReferences.typeReferenceByName(typeName);
 	}
 

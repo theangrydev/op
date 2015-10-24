@@ -57,7 +57,7 @@ public class TypeDeclarationAssignment implements Assignment<TypeDeclarationAssi
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
 		expression.compile(programCompiler);
-		targetType.underlyingType().store(programCompiler, targetType.typeReference());
+		targetType.typeReference().store(programCompiler);
 	}
 
 	@Override

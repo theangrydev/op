@@ -1,6 +1,6 @@
 package io.github.theangrydev.op.generation;
 
-public class ConstantReference<T extends UnderlyingType<T>> implements TypeReference {
+public class ConstantReference<T extends UnderlyingType<T>> implements TypeReference<T> {
 	private final int index;
 	private final T underlyingType;
 
@@ -26,5 +26,10 @@ public class ConstantReference<T extends UnderlyingType<T>> implements TypeRefer
 	@Override
 	public String toString() {
 		return underlyingType.name() + "[" + index + "]";
+	}
+
+	@Override
+	public void load(ProgramCompiler programCompiler) {
+		underlyingType.load(programCompiler, this);
 	}
 }

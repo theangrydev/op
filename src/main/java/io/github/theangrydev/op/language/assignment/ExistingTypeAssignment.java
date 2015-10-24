@@ -61,6 +61,6 @@ public class ExistingTypeAssignment implements Assignment<ExistingTypeAssignment
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
 		expression.compile(programCompiler);
-		targetType.underlyingType().store(programCompiler, targetType.typeReference());
+		targetType.typeReference().store(programCompiler);
 	}
 }

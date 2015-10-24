@@ -55,7 +55,7 @@ public class StringConstant implements Constant<String>, SimplifyingConstantAddi
 
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
-		underlyingType().load(programCompiler, constantReference);
+		constantReference.load(programCompiler);
 	}
 
 	@Override
