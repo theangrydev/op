@@ -1,7 +1,13 @@
 package io.github.theangrydev.op.parser;
 
 import com.google.common.collect.Lists;
-import io.github.theangrydev.op.language.*;
+import io.github.theangrydev.op.language.Program;
+import io.github.theangrydev.op.language.Statement;
+import io.github.theangrydev.op.language.assignment.ExistingTypeAssignment;
+import io.github.theangrydev.op.language.assignment.Type;
+import io.github.theangrydev.op.language.assignment.TypeDeclaration;
+import io.github.theangrydev.op.language.assignment.TypeDeclarationAssignment;
+import io.github.theangrydev.op.language.expression.*;
 import io.github.theangrydev.op.semantics.ParseTreeAnalyser;
 import io.github.theangrydev.op.semantics.ParseTreeAnalysers;
 import io.github.theangrydev.op.semantics.ParseTreeLeafAnalyser;

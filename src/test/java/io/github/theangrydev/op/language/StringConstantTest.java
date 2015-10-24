@@ -1,6 +1,7 @@
 package io.github.theangrydev.op.language;
 
 import io.github.theangrydev.op.common.WithAssertions;
+import io.github.theangrydev.op.language.expression.StringConstant;
 import org.junit.Test;
 
 public class StringConstantTest implements WithAssertions {

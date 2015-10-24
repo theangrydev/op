@@ -1,6 +1,7 @@
 package io.github.theangrydev.op.common;
 
-import io.github.theangrydev.op.language.*;
+import io.github.theangrydev.op.language.assignment.*;
+import io.github.theangrydev.op.language.expression.*;
 
 public interface WithAssertions extends org.assertj.core.api.WithAssertions {
 

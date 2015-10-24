@@ -1,9 +1,11 @@
-package io.github.theangrydev.op.language;
+package io.github.theangrydev.op.language.assignment;
 
 
 import com.google.common.base.Preconditions;
 import io.github.theangrydev.op.generation.ProgramCompiler;
 import io.github.theangrydev.op.generation.TypeReference;
+import io.github.theangrydev.op.language.expression.Expression;
+import io.github.theangrydev.op.language.expression.TypeExpression;
 import io.github.theangrydev.opper.scanner.Location;
 
 public class ExistingTypeAssignment implements Assignment<ExistingTypeAssignment> {

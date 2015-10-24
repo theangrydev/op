@@ -4,7 +4,12 @@ import com.googlecode.yatspec.junit.SpecRunner;
 import io.github.theangrydev.op.common.TestState;
 import io.github.theangrydev.op.common.WithAssertions;
 import io.github.theangrydev.op.common.WithTestState;
-import io.github.theangrydev.op.language.*;
+import io.github.theangrydev.op.language.Program;
+import io.github.theangrydev.op.language.Statement;
+import io.github.theangrydev.op.language.assignment.Assignment;
+import io.github.theangrydev.op.language.assignment.ExistingTypeAssignment;
+import io.github.theangrydev.op.language.assignment.TypeDeclarationAssignment;
+import io.github.theangrydev.op.language.expression.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

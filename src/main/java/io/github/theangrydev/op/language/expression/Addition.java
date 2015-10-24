@@ -1,4 +1,4 @@
-package io.github.theangrydev.op.language;
+package io.github.theangrydev.op.language.expression;
 
 import com.google.common.base.Preconditions;
 import io.github.theangrydev.op.generation.ProgramCompiler;

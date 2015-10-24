@@ -1,6 +1,8 @@
-package io.github.theangrydev.op.language;
+package io.github.theangrydev.op.language.assignment;
 
 import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.language.ProgramElement;
+import io.github.theangrydev.op.language.expression.TypeExpression;
 import io.github.theangrydev.opper.scanner.Location;
 
 public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
