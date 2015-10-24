@@ -1,5 +1,6 @@
 package io.github.theangrydev.op.language;
 
+import io.github.theangrydev.op.generation.ProgramCompiler;
 import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.List;
@@ -45,5 +46,20 @@ public class Program implements ProgramElement<Program> {
 			statements.set(i, statements.get(i).simplify());
 		}
 		return this;
+	}
+
+	@Override
+	public void checkTypes(ProgramCompiler programCompiler) {
+		programCompiler.populateDefaultTypes();
+		for (Statement statement : statements) {
+			statement.checkTypes(programCompiler);
+		}
+	}
+
+	@Override
+	public void compile(ProgramCompiler programCompiler) {
+		for (Statement statement : statements) {
+			statement.compile(programCompiler);
+		}
 	}
 }

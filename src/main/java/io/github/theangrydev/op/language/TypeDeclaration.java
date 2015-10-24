@@ -1,20 +1,21 @@
 package io.github.theangrydev.op.language;
 
+import io.github.theangrydev.op.generation.ProgramCompiler;
 import io.github.theangrydev.opper.scanner.Location;
 
 public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 
 	private final Location location;
 	private final TypeExpression targetType;
-	private final TypeExpression existingType;
+	private final Type existingType;
 
-	private TypeDeclaration(TypeExpression targetType, TypeExpression existingType) {
+	private TypeDeclaration(TypeExpression targetType, Type existingType) {
 		this.location = locationBetween(targetType, existingType);
 		this.targetType = targetType;
 		this.existingType = existingType;
 	}
 
-	public static TypeDeclaration of(TypeExpression targetType, TypeExpression existingType) {
+	public static TypeDeclaration of(TypeExpression targetType, Type existingType) {
 		return new TypeDeclaration(targetType, existingType);
 	}
 
@@ -22,7 +23,7 @@ public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 		return targetType;
 	}
 
-	public TypeExpression getExistingType() {
+	public Type getExistingType() {
 		return existingType;
 	}
 
@@ -39,5 +40,17 @@ public class TypeDeclaration implements ProgramElement<TypeDeclaration> {
 	@Override
 	public TypeDeclaration simplify() {
 		return this;
+	}
+
+	@Override
+	public void checkTypes(ProgramCompiler programCompiler) {
+		existingType.checkTypes(programCompiler);
+		programCompiler.registerVariableReference(targetType.getType(), existingType.getType());
+	}
+
+	@Override
+	public void compile(ProgramCompiler programCompiler) {
+		//TODO: compile default expression here for the underlying type
+		targetType.underlyingType().store(programCompiler, targetType.typeReference());
 	}
 }

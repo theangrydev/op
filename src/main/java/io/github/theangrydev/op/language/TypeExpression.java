@@ -1,5 +1,8 @@
 package io.github.theangrydev.op.language;
 
+import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.generation.TypeReference;
+import io.github.theangrydev.op.generation.VariableReference;
 import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
@@ -10,6 +13,7 @@ import static java.util.Optional.of;
 public class TypeExpression implements Expression {
 	private final Location location;
 	private final String type;
+	private VariableReference variableReference;
 
 	private TypeExpression(Location location, String type) {
 		this.location = location;
@@ -40,6 +44,16 @@ public class TypeExpression implements Expression {
 	}
 
 	@Override
+	public void checkTypes(ProgramCompiler programCompiler) {
+		variableReference = programCompiler.lookupVariableReference(type);
+	}
+
+	@Override
+	public void compile(ProgramCompiler programCompiler) {
+		underlyingType().load(programCompiler, variableReference);
+	}
+
+	@Override
 	public Optional<Expression> simplifyAddToRight(Expression right) {
 		return right.simplifyAddToLeft(this);
 	}
@@ -66,5 +80,10 @@ public class TypeExpression implements Expression {
 			return of(typeExpression(locationBetween(this, right), type));
 		}
 		return empty();
+	}
+
+	@Override
+	public TypeReference typeReference() {
+		return variableReference;
 	}
 }

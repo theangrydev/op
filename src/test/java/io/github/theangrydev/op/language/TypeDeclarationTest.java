@@ -10,7 +10,7 @@ public class TypeDeclarationTest implements WithAssertions {
 
 	private final Location location = mock(Location.class);
 	private final TypeExpression target = TypeExpression.typeExpression(location, "target");
-	private final TypeExpression existing = TypeExpression.typeExpression(location, "existing");
+	private final Type existing = Type.type(location, "existing");
 
 	@Test
 	public void shouldStoreTargetAndExistingType() throws Exception {

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import io.github.theangrydev.op.language.*;
 import io.github.theangrydev.op.semantics.ParseTreeAnalyser;
 import io.github.theangrydev.op.semantics.ParseTreeAnalysers;
+import io.github.theangrydev.op.semantics.ParseTreeLeafAnalyser;
 import io.github.theangrydev.opper.grammar.Grammar;
 
 import java.util.List;
@@ -29,7 +30,8 @@ public class ProgramParseTreeAnalyserFactory {
 		expressions.add(grammar.ruleByDefinition("Expression", "TypeExpression"), analyser(consumeExpression(typeExpression)));
 		expressions.add(grammar.ruleByDefinition("Expression", "Expression", "+", "Expression"), analyser(binaryExpression(Addition::add, expressions)));
 
-		ParseTreeAnalyser<TypeDeclaration> typeDeclaration = analyser(binaryExpression(TypeDeclaration::of, typeExpression));
+		ParseTreeAnalyser<Type> type = analyser(consumeExpression(ParseTreeLeafAnalyser.analyser(Type::type)));
+		ParseTreeAnalyser<TypeDeclaration> typeDeclaration = analyser(binaryExpression(TypeDeclaration::of, typeExpression, type));
 
 		ParseTreeAnalysers<Statement> statements = new ParseTreeAnalysers<>();
 		statements.add(grammar.ruleByDefinition("Statement", "TypeDeclaration", "=", "Expression"), analyser(binaryExpression(TypeDeclarationAssignment::of, typeDeclaration, expressions)));

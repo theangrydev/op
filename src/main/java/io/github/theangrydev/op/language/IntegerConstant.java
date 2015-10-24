@@ -1,15 +1,21 @@
 package io.github.theangrydev.op.language;
 
 
+import io.github.theangrydev.op.generation.ConstantReference;
+import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.generation.TypeReference;
+import io.github.theangrydev.op.generation.UnderlyingType;
 import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
+import static io.github.theangrydev.op.generation.UnderlyingType.INTEGER;
 import static java.lang.Integer.parseInt;
 
 public class IntegerConstant implements NumericConstant<Integer>, SimplifyingConstantAddition {
 	private final Location location;
 	private final int value;
+	private ConstantReference constantReference;
 
 	private IntegerConstant(Location location, int value) {
 		this.location = location;
@@ -45,6 +51,16 @@ public class IntegerConstant implements NumericConstant<Integer>, SimplifyingCon
 	}
 
 	@Override
+	public void checkTypes(ProgramCompiler programCompiler) {
+		constantReference = programCompiler.registerIntegerConstant(value);
+	}
+
+	@Override
+	public void compile(ProgramCompiler programCompiler) {
+		underlyingType().load(programCompiler, constantReference);
+	}
+
+	@Override
 	public Optional<Expression> simplifyAddToRight(Expression right) {
 		return right.simplifyAddToLeft(this);
 	}
@@ -72,5 +88,15 @@ public class IntegerConstant implements NumericConstant<Integer>, SimplifyingCon
 	@Override
 	public boolean isZero() {
 		return value == 0;
+	}
+
+	@Override
+	public UnderlyingType underlyingType() {
+		return INTEGER;
+	}
+
+	@Override
+	public TypeReference typeReference() {
+		return constantReference;
 	}
 }

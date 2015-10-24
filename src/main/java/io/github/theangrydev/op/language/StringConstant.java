@@ -1,12 +1,19 @@
 package io.github.theangrydev.op.language;
 
+import io.github.theangrydev.op.generation.ConstantReference;
+import io.github.theangrydev.op.generation.ProgramCompiler;
+import io.github.theangrydev.op.generation.TypeReference;
+import io.github.theangrydev.op.generation.UnderlyingType;
 import io.github.theangrydev.opper.scanner.Location;
 
 import java.util.Optional;
 
+import static io.github.theangrydev.op.generation.UnderlyingType.STRING;
+
 public class StringConstant implements Constant<String>, SimplifyingConstantAddition {
 	private final Location location;
 	private final String value;
+	private ConstantReference constantReference;
 
 	private StringConstant(Location location, String value) {
 		this.location = location;
@@ -42,6 +49,16 @@ public class StringConstant implements Constant<String>, SimplifyingConstantAddi
 	}
 
 	@Override
+	public void checkTypes(ProgramCompiler programCompiler) {
+		constantReference = programCompiler.registerStringConstant(value);
+	}
+
+	@Override
+	public void compile(ProgramCompiler programCompiler) {
+		underlyingType().load(programCompiler, constantReference);
+	}
+
+	@Override
 	public Optional<Expression> simplifyAddToRight(Expression right) {
 		return right.simplifyAddToLeft(this);
 	}
@@ -67,5 +84,15 @@ public class StringConstant implements Constant<String>, SimplifyingConstantAddi
 
 	public Expression concatenateToRight(Constant<?> right) {
 		return stringConstant(locationBetween(this, right), value + right.toString());
+	}
+
+	@Override
+	public UnderlyingType underlyingType() {
+		return STRING;
+	}
+
+	@Override
+	public TypeReference typeReference() {
+		return constantReference;
 	}
 }
