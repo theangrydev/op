@@ -19,17 +19,17 @@ public class ObjectType implements UnderlyingType<ObjectType> {
 
 	@Override
 	public void store(ProgramCompiler programCompiler, VariableReference<ObjectType> variableReference) {
-		programCompiler.storeReference(variableReference);
+		programCompiler.storeObject(variableReference);
 	}
 
 	@Override
 	public void load(ProgramCompiler programCompiler, VariableReference<ObjectType> variableReference) {
-		programCompiler.loadReferenceFromVariable(variableReference);
+		programCompiler.loadObjectFromVariable(variableReference);
 	}
 
 	@Override
 	public void load(ProgramCompiler programCompiler, ConstantReference<ObjectType> constantReference) {
-		programCompiler.loadReferenceFromConstant(constantReference);
+		programCompiler.loadObjectFromConstant(constantReference);
 	}
 
 	@Override

@@ -86,7 +86,7 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void storeReference(VariableReference<ObjectType> typeToStoreIn) {
+		public void storeObject(VariableReference<ObjectType> typeToStoreIn) {
 			System.out.println("storeReference(" + typeToStoreIn + ")");
 		}
 
@@ -121,12 +121,12 @@ public class GenerationTest {
 		}
 
 		@Override
-		public void loadReferenceFromConstant(ConstantReference constantToLoad) {
+		public void loadObjectFromConstant(ConstantReference constantToLoad) {
 			System.out.println("loadReferenceFromConstant(" + constantToLoad + ")");
 		}
 
 		@Override
-		public void loadReferenceFromVariable(VariableReference<ObjectType> variableToLoad) {
+		public void loadObjectFromVariable(VariableReference<ObjectType> variableToLoad) {
 			System.out.println("loadReferenceFromVariable(" + variableToLoad + ")");
 		}
 	};

@@ -12,17 +12,17 @@ public interface ProgramCompiler {
 	void storeInteger(VariableReference<IntegerType> typeToStoreIn);
 	void storeReal(VariableReference<RealType> typeToStoreIn);
 	void storeString(VariableReference<StringType> typeToStoreIn);
-	void storeReference(VariableReference<ObjectType> typeToStoreIn);
+	void storeObject(VariableReference<ObjectType> typeToStoreIn);
 
 	void loadIntegerFromConstant(ConstantReference<IntegerType> constantToLoad);
 	void loadRealFromConstant(ConstantReference<RealType> constantToLoad);
 	void loadStringFromConstant(ConstantReference<StringType> constantToLoad);
-	void loadReferenceFromConstant(ConstantReference<ObjectType> constantToLoad);
+	void loadObjectFromConstant(ConstantReference<ObjectType> constantToLoad);
 
 	void loadIntegerFromVariable(VariableReference<IntegerType> variableToLoad);
 	void loadRealFromVariable(VariableReference<RealType> variableToLoad);
 	void loadStringFromVariable(VariableReference<StringType> variableToLoad);
-	void loadReferenceFromVariable(VariableReference<ObjectType> variableToLoad);
+	void loadObjectFromVariable(VariableReference<ObjectType> variableToLoad);
 
 	void addTwoIntegers();
 	void addTwoReals();
