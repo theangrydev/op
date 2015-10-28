@@ -1,22 +1,18 @@
 package io.github.theangrydev.op.generation;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
-import static io.github.theangrydev.op.generation.ConstantReference.constantReference;
-import static io.github.theangrydev.op.generation.IntegerType.INTEGER_TYPE;
-import static io.github.theangrydev.op.generation.RealType.REAL_TYPE;
-import static io.github.theangrydev.op.generation.StringType.STRING_TYPE;
 import static io.github.theangrydev.op.generation.UnderlyingType.DEFAULT_TYPES;
 
 public class SymbolTable {
 	private Map<String, UnderlyingType<?>> defaultUnderlyingTypesByName;
 	private VariableReferences variableReferences;
-	private List<ConstantReference<?>> constants;
 
 	public SymbolTable(VariableReferences variableReferences) {
 		this.variableReferences = variableReferences;
 		defaultUnderlyingTypesByName = new HashMap<>();
-		constants = new ArrayList<>();
 	}
 
 	public void populateDefaultTypes() {
@@ -44,22 +40,4 @@ public class SymbolTable {
 		return variableReferences.typeReferenceByName(typeName);
 	}
 
-	public ConstantReference<IntegerType> registerIntegerConstant() {
-		return registerConstant(INTEGER_TYPE);
-	}
-
-	public ConstantReference<StringType> registerStringConstant() {
-		return registerConstant(STRING_TYPE);
-	}
-
-	public ConstantReference<RealType> registerRealConstant() {
-		return registerConstant(REAL_TYPE);
-	}
-
-	public <T extends UnderlyingType<T>> ConstantReference<T> registerConstant(T underlyingType) {
-		int index = constants.size() + 1;
-		ConstantReference<T> constantReference = constantReference(index, underlyingType);
-		constants.add(constantReference);
-		return constantReference;
-	}
 }

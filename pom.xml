@@ -224,6 +224,7 @@
 		</dependency>
 
 		<!-- Test dependencies -->
+
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
