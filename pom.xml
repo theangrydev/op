@@ -30,6 +30,10 @@
 			<id>repo.bodar.com</id>
 			<url>http://repo.bodar.com</url>
 		</repository>
+		<repository>
+			<id>bintray-theangrydev-maven</id>
+			<url>http://dl.bintray.com/theangrydev/maven</url>
+		</repository>
 	</repositories>
 
 	<properties>
@@ -62,6 +66,7 @@
 		<apache.commons.lang.version>3.4</apache.commons.lang.version>
 		<reflections.version>0.9.10</reflections.version>
 		<junit.version>4.11</junit.version>
+		<opper.version>0.1.0</opper.version>
 	</properties>
 
 	<build>
@@ -155,6 +160,7 @@
 						<packages>
 							<package>io.github.theangrydev</package>
 						</packages>
+						<entryPointClassPackage>io.github.theangrydev.op</entryPointClassPackage>
 						<generateAssertions>true</generateAssertions>
 						<generateBddAssertions>false</generateBddAssertions>
 						<generateSoftAssertions>false</generateSoftAssertions>
@@ -213,7 +219,7 @@
 		<dependency>
 			<groupId>io.github.theangrydev</groupId>
 			<artifactId>opper</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${opper.version}</version>
 		</dependency>
 
 		<!-- Apache commons lang-->
