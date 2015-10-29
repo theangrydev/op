@@ -15,6 +15,6 @@ public interface UnderlyingType<T extends UnderlyingType<T>> {
 	void add(ProgramCompiler programCompiler);
 	boolean supportsAdd();
 	String name();
-	Set<UnderlyingType> DEFAULT_TYPES = ImmutableSet.of(INTEGER_TYPE, REAL_TYPE, STRING_TYPE);
+	Set<UnderlyingType<?>> DEFAULT_TYPES = ImmutableSet.of(INTEGER_TYPE, REAL_TYPE, STRING_TYPE);
 	VariableReference<T> variableReference(int variableIndex, String targetTypeName);
 }
