@@ -18,7 +18,7 @@ import static io.github.theangrydev.op.generation.jvm.constant.Utf8InfoConstant.
 public class Utf8InfoConstantTest implements WithAssertions {
 
 	@Test
-	public void tagIs1() {
+	public void tagMatchesTheJvmSpecification() {
 		assertThat(utf8InfoConstant("").tag()).isEqualTo((byte) 1);
 	}
 
@@ -27,7 +27,7 @@ public class Utf8InfoConstantTest implements WithAssertions {
 		@Row("non empty string")
 	})
 	@Test
-	public void writesBytesInBigEndian(String string) throws Exception {
+	public void writesLengthBytesThenUtf8Bytes(String string) throws Exception {
 		assertThat(bytesWrittenBy(utf8InfoConstant(string))).containsExactly(bytes(lengthBytes(string), string.getBytes()));
 	}
 
