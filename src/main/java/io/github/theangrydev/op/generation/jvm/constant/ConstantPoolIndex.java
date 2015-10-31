@@ -9,7 +9,8 @@ import java.io.IOException;
 
 import static io.github.theangrydev.op.generation.jvm.ShortValue.shortValue;
 
-public class ConstantPoolIndex implements ClassFileWriter, WithSizeInBytes {
+@SuppressWarnings("unused") // Type is used to ensure type safety
+public class ConstantPoolIndex<T> implements ClassFileWriter, WithSizeInBytes {
 
 	private final ShortValue index;
 
@@ -17,8 +18,8 @@ public class ConstantPoolIndex implements ClassFileWriter, WithSizeInBytes {
 		this.index = index;
 	}
 
-	public static ConstantPoolIndex constantPoolIndex(int index) {
-		return new ConstantPoolIndex(shortValue(index));
+	public static <T> ConstantPoolIndex<T> constantPoolIndex(int index) {
+		return new ConstantPoolIndex<>(shortValue(index));
 	}
 
 	public int index() {
@@ -32,6 +33,6 @@ public class ConstantPoolIndex implements ClassFileWriter, WithSizeInBytes {
 
 	@Override
 	public int sizeInBytes() {
-		return 2;
+		return index.sizeInBytes();
 	}
 }

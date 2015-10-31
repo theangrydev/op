@@ -40,32 +40,32 @@ public class ConstantPool implements ClassFileWriter {
 		}
 	}
 
-	public ConstantPoolIndex addInteger(int value) {
+	private <T extends ConstantInfo> ConstantPoolIndex<T> addConstant(T constantInfo) {
+		constants.add(constant(constantInfo));
+		return constantPoolIndex(constants.size());
+	}
+
+	public ConstantPoolIndex<IntegerConstantInfo> addInteger(int value) {
 		return addConstant(integerConstant(value));
 	}
 
-	public ConstantPoolIndex addUtf8Info(String value) {
+	public ConstantPoolIndex<Utf8InfoConstant> addUtf8Info(String value) {
 		return addConstant(utf8InfoConstant(value));
 	}
 
-	private ConstantPoolIndex addConstant(ConstantInfo constantInfo) {
-		constants.add(constant(constantInfo));
-		return constantPoolIndex((short) constants.size());
-	}
-
-	public ConstantPoolIndex addClassInfo(String className) {
+	public ConstantPoolIndex<ClassInfoConstant> addClassInfo(String className) {
 		return addConstant(classInfo(addUtf8Info(className)));
 	}
 
-	public ConstantPoolIndex addFieldReference(String classWithField, String fieldName, String fieldType) {
+	public ConstantPoolIndex<FieldReferenceInfoConstant> addFieldReference(String classWithField, String fieldName, String fieldType) {
 		return addConstant(fieldReferenceInfoConstant(addClassInfo(classWithField), addNameAndType(addUtf8Info(fieldName), addUtf8Info(fieldType))));
 	}
 
-	private ConstantPoolIndex addNameAndType(ConstantPoolIndex nameIndex, ConstantPoolIndex descriptorIndex) {
+	private ConstantPoolIndex<NameAndTypeInfoConstant> addNameAndType(ConstantPoolIndex<Utf8InfoConstant> nameIndex, ConstantPoolIndex<Utf8InfoConstant> descriptorIndex) {
 		return addConstant(nameAndTypeInfoConstant(nameIndex, descriptorIndex));
 	}
 
-	public ConstantPoolIndex addMethodReference(String classWithMethod, String methodName, String methodSignature) {
+	public ConstantPoolIndex<MethodReferenceInfoConstant> addMethodReference(String classWithMethod, String methodName, String methodSignature) {
 		return addConstant(methodReferenceInfoConstant(addClassInfo(classWithMethod), addNameAndType(addUtf8Info(methodName), addUtf8Info(methodSignature))));
 	}
 }

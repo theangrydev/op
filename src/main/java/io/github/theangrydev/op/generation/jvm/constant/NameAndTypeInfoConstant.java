@@ -5,15 +5,15 @@ import java.io.IOException;
 
 public class NameAndTypeInfoConstant implements ConstantInfo {
 
-	private final ConstantPoolIndex nameIndex;
-	private final ConstantPoolIndex descriptorIndex;
+	private final ConstantPoolIndex<Utf8InfoConstant> nameIndex;
+	private final ConstantPoolIndex<Utf8InfoConstant> descriptorIndex;
 
-	private NameAndTypeInfoConstant(ConstantPoolIndex nameIndex, ConstantPoolIndex descriptorIndex) {
+	private NameAndTypeInfoConstant(ConstantPoolIndex<Utf8InfoConstant> nameIndex, ConstantPoolIndex<Utf8InfoConstant> descriptorIndex) {
 		this.nameIndex = nameIndex;
 		this.descriptorIndex = descriptorIndex;
 	}
 
-	public static NameAndTypeInfoConstant nameAndTypeInfoConstant(ConstantPoolIndex nameIndex, ConstantPoolIndex descriptorIndex) {
+	public static NameAndTypeInfoConstant nameAndTypeInfoConstant(ConstantPoolIndex<Utf8InfoConstant> nameIndex, ConstantPoolIndex<Utf8InfoConstant> descriptorIndex) {
 		return new NameAndTypeInfoConstant(nameIndex, descriptorIndex);
 	}
 

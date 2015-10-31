@@ -5,13 +5,13 @@ import java.io.IOException;
 
 public class ClassInfoConstant implements ConstantInfo {
 
-	private final ConstantPoolIndex nameIndex;
+	private final ConstantPoolIndex<Utf8InfoConstant> nameIndex;
 
-	private ClassInfoConstant(ConstantPoolIndex nameIndex) {
+	private ClassInfoConstant(ConstantPoolIndex<Utf8InfoConstant> nameIndex) {
 		this.nameIndex = nameIndex;
 	}
 
-	public static ClassInfoConstant classInfo(ConstantPoolIndex constantPoolIndex) {
+	public static ClassInfoConstant classInfo(ConstantPoolIndex<Utf8InfoConstant> constantPoolIndex) {
 		return new ClassInfoConstant(constantPoolIndex);
 	}
 

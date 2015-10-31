@@ -16,11 +16,6 @@ public class VariableReference<T extends UnderlyingType<T>> implements TypeRefer
 	}
 
 	@Override
-	public int index() {
-		return index;
-	}
-
-	@Override
 	public T underlyingType() {
 		return underlyingType;
 	}

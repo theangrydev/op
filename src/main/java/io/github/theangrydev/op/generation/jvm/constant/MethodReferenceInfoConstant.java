@@ -5,15 +5,15 @@ import java.io.IOException;
 
 public class MethodReferenceInfoConstant implements ConstantInfo {
 
-	private final ConstantPoolIndex classIndex;
-	private final ConstantPoolIndex nameAndTypeIndex;
+	private final ConstantPoolIndex<ClassInfoConstant> classIndex;
+	private final ConstantPoolIndex<NameAndTypeInfoConstant> nameAndTypeIndex;
 
-	private MethodReferenceInfoConstant(ConstantPoolIndex classIndex, ConstantPoolIndex nameAndTypeIndex) {
+	private MethodReferenceInfoConstant(ConstantPoolIndex<ClassInfoConstant> classIndex, ConstantPoolIndex<NameAndTypeInfoConstant> nameAndTypeIndex) {
 		this.classIndex = classIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
 	}
 
-	public static MethodReferenceInfoConstant methodReferenceInfoConstant(ConstantPoolIndex classIndex, ConstantPoolIndex nameAndTypeIndex) {
+	public static MethodReferenceInfoConstant methodReferenceInfoConstant(ConstantPoolIndex<ClassInfoConstant> classIndex, ConstantPoolIndex<NameAndTypeInfoConstant> nameAndTypeIndex) {
 		return new MethodReferenceInfoConstant(classIndex, nameAndTypeIndex);
 	}
 
