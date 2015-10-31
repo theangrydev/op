@@ -64,7 +64,6 @@
 		<mockito.version>1.10.19</mockito.version>
 		<yatspec.version>1.11</yatspec.version>
 		<apache.commons.lang.version>3.4</apache.commons.lang.version>
-		<reflections.version>0.9.10</reflections.version>
 		<junit.version>4.11</junit.version>
 		<opper.version>0.1.0</opper.version>
 	</properties>
@@ -267,20 +266,6 @@
 			<artifactId>yatspec</artifactId>
 			<version>${yatspec.version}</version>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- Reflections -->
-		<dependency>
-			<groupId>org.reflections</groupId>
-			<artifactId>reflections</artifactId>
-			<version>${reflections.version}</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.guava</groupId>
-					<artifactId>guava</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 
