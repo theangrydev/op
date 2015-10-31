@@ -14,7 +14,7 @@ public class IntValue implements ClassFileWriter, WithSizeInBytes{
 	}
 
 	public static IntValue intValue(int value) {
-		Preconditions.checkState(value >= 0, "%s may not be negative but was %s", name(), value);
+		Preconditions.checkArgument(value >= 0, "%s may not be negative but was %s", name(), value);
 		return new IntValue(value);
 	}
 

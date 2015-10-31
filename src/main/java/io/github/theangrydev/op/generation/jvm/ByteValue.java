@@ -15,8 +15,8 @@ public class ByteValue implements ClassFileWriter, WithSizeInBytes{
 	}
 
 	public static ByteValue byteValue(int value) {
-		Preconditions.checkState(value >= 0, "%s may not be negative but was %s", name(), value);
-		Preconditions.checkState(value <= MAX_BYTE_VALUE, "%s can be at most %s but was %s", name(), MAX_BYTE_VALUE, value);
+		Preconditions.checkArgument(value >= 0, "%s may not be negative but was %s", name(), value);
+		Preconditions.checkArgument(value <= MAX_BYTE_VALUE, "%s can be at most %s but was %s", name(), MAX_BYTE_VALUE, value);
 		return new ByteValue(value);
 	}
 
