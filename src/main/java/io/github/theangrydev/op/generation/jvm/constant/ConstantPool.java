@@ -13,7 +13,7 @@ import static io.github.theangrydev.op.generation.jvm.constant.ClassInfoConstant
 import static io.github.theangrydev.op.generation.jvm.constant.Constant.constant;
 import static io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex.constantPoolIndex;
 import static io.github.theangrydev.op.generation.jvm.constant.FieldReferenceInfoConstant.fieldReferenceInfoConstant;
-import static io.github.theangrydev.op.generation.jvm.constant.IntegerConstant.integerConstant;
+import static io.github.theangrydev.op.generation.jvm.constant.IntegerConstantInfo.integerConstant;
 import static io.github.theangrydev.op.generation.jvm.constant.MethodReferenceInfoConstant.methodReferenceInfoConstant;
 import static io.github.theangrydev.op.generation.jvm.constant.NameAndTypeInfoConstant.nameAndTypeInfoConstant;
 import static io.github.theangrydev.op.generation.jvm.constant.Utf8InfoConstant.utf8InfoConstant;
