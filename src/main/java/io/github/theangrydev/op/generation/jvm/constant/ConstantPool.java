@@ -5,8 +5,8 @@ import io.github.theangrydev.op.generation.jvm.ShortValue;
 
 import java.io.DataOutput;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static io.github.theangrydev.op.generation.jvm.ShortValue.shortValue;
 import static io.github.theangrydev.op.generation.jvm.constant.ClassInfoConstant.classInfo;
@@ -21,10 +21,11 @@ import static io.github.theangrydev.op.generation.jvm.constant.Utf8InfoConstant.
 
 public class ConstantPool implements ClassFileWriter {
 
-	private final List<Constant> constants;
+	private final Map<Constant, Integer> constantIndexes;
+	private int nextIndex = 1;
 
 	private ConstantPool() {
-		constants = new ArrayList<>();
+		constantIndexes = new LinkedHashMap<>();
 	}
 
 	public static ConstantPool constantPool() {
@@ -33,16 +34,26 @@ public class ConstantPool implements ClassFileWriter {
 
 	@Override
 	public void writeTo(DataOutput dataOutput) throws IOException {
-		ShortValue constantPoolCount = shortValue(constants.size() + 1);
+		ShortValue constantPoolCount = shortValue(constantIndexes.size() + 1);
 		constantPoolCount.writeTo(dataOutput);
-		for (Constant constant : constants) {
+		for (Constant constant : constantIndexes.keySet()) {
 			constant.writeTo(dataOutput);
 		}
 	}
 
 	private <T extends ConstantInfo> ConstantPoolIndex<T> addConstant(T constantInfo) {
-		constants.add(constant(constantInfo));
-		return constantPoolIndex(constants.size());
+		return addConstant(constantInfo, 1);
+	}
+
+	private <T extends ConstantInfo> ConstantPoolIndex<T> addConstant(T constantInfo, int numberOfIndexSlotsUsed) {
+		Constant constant = constant(constantInfo);
+		if (constantIndexes.containsKey(constant)) {
+			return constantPoolIndex(constantIndexes.get(constant));
+		}
+		constantIndexes.put(constant, nextIndex);
+		ConstantPoolIndex<T> constantPoolIndex = constantPoolIndex(nextIndex);
+		nextIndex += numberOfIndexSlotsUsed;
+		return constantPoolIndex;
 	}
 
 	public ConstantPoolIndex<IntegerConstantInfo> addInteger(int value) {

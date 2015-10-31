@@ -1,9 +1,11 @@
 package io.github.theangrydev.op.generation.jvm.constant;
 
+import io.github.theangrydev.op.common.WithReflectiveEqualsAndHashCode;
+
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Utf8InfoConstant implements ConstantInfo {
+public class Utf8InfoConstant extends WithReflectiveEqualsAndHashCode implements ConstantInfo {
 
 	private final String value;
 

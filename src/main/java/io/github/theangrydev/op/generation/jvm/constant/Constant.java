@@ -1,5 +1,6 @@
 package io.github.theangrydev.op.generation.jvm.constant;
 
+import io.github.theangrydev.op.common.WithReflectiveEqualsAndHashCode;
 import io.github.theangrydev.op.generation.jvm.ByteValue;
 import io.github.theangrydev.op.generation.jvm.ClassFileWriter;
 
@@ -8,7 +9,7 @@ import java.io.IOException;
 
 import static io.github.theangrydev.op.generation.jvm.ByteValue.byteValue;
 
-public class Constant implements ClassFileWriter {
+public class Constant extends WithReflectiveEqualsAndHashCode implements ClassFileWriter {
 
 	private final ByteValue tag;
 	private final ConstantInfo constantInfo;

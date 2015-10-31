@@ -1,11 +1,12 @@
 package io.github.theangrydev.op.generation.jvm;
 
 import com.google.common.base.Preconditions;
+import io.github.theangrydev.op.common.WithReflectiveEqualsAndHashCode;
 
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class ByteValue implements ClassFileWriter, WithSizeInBytes{
+public class ByteValue extends WithReflectiveEqualsAndHashCode implements ClassFileWriter, WithSizeInBytes {
 
 	private static final int MAX_BYTE_VALUE = 255;
 	private final int value;

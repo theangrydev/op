@@ -1,5 +1,6 @@
 package io.github.theangrydev.op.generation.jvm.constant;
 
+import io.github.theangrydev.op.common.WithReflectiveEqualsAndHashCode;
 import io.github.theangrydev.op.generation.jvm.IntValue;
 
 import java.io.DataOutput;
@@ -7,7 +8,7 @@ import java.io.IOException;
 
 import static io.github.theangrydev.op.generation.jvm.IntValue.intValue;
 
-public class IntegerConstantInfo implements ConstantInfo {
+public class IntegerConstantInfo extends WithReflectiveEqualsAndHashCode implements ConstantInfo {
 
 	private final IntValue value;
 

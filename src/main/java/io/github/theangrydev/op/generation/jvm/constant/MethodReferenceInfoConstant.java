@@ -1,9 +1,11 @@
 package io.github.theangrydev.op.generation.jvm.constant;
 
+import io.github.theangrydev.op.common.WithReflectiveEqualsAndHashCode;
+
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class MethodReferenceInfoConstant implements ConstantInfo {
+public class MethodReferenceInfoConstant extends WithReflectiveEqualsAndHashCode implements ConstantInfo {
 
 	private final ConstantPoolIndex<ClassInfoConstant> classIndex;
 	private final ConstantPoolIndex<NameAndTypeInfoConstant> nameAndTypeIndex;
