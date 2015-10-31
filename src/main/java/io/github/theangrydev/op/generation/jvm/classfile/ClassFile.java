@@ -40,6 +40,8 @@ import static io.github.theangrydev.op.generation.jvm.attribute.instruction.Iret
 import static io.github.theangrydev.op.generation.jvm.attribute.instruction.Istore1.istore1;
 import static io.github.theangrydev.op.generation.jvm.attribute.instruction.Istore2.istore2;
 import static io.github.theangrydev.op.generation.jvm.attribute.instruction.VoidReturn.voidreturn;
+import static io.github.theangrydev.op.generation.jvm.classfile.ClassAccessFlag.TREAT_SUPER_METHODS_SPECIALLY;
+import static io.github.theangrydev.op.generation.jvm.classfile.ClassAccessFlags.classAccessFlags;
 import static io.github.theangrydev.op.generation.jvm.classfile.Version.java8;
 import static io.github.theangrydev.op.generation.jvm.method.MethodAccessFlag.PUBLIC;
 import static io.github.theangrydev.op.generation.jvm.method.MethodAccessFlag.STATIC;
@@ -52,7 +54,7 @@ public class ClassFile implements ClassFileWriter {
 
 	private final Version version = java8();
 	private final ConstantPool constantPool;
-	private final ClassAccessFlags classAccessFlags = new ClassAccessFlags();
+	private final ClassAccessFlags accessFlags;
 	private final Interfaces classInterfaces = new Interfaces();
 	private final Fields classFields = new Fields();
 	private final Methods classMethods;
@@ -63,8 +65,7 @@ public class ClassFile implements ClassFileWriter {
 	private ClassFile(ConstantPool constantPool, List<MethodInfo> classMethods) {
 		this.classMethods = methods(classMethods);
 		this.constantPool = constantPool;
-		classAccessFlags.markPublic();
-		classAccessFlags.treatSuperClassMethodsSpecially();
+		this.accessFlags = classAccessFlags(ClassAccessFlag.PUBLIC, TREAT_SUPER_METHODS_SPECIALLY);
 		thisIndex = constantPool.addClassInfo("Test");
 		superIndex = constantPool.addClassInfo("java/lang/Object");
 	}
@@ -112,7 +113,7 @@ public class ClassFile implements ClassFileWriter {
 		writeMagicNumber(dataOutput);
 		version.writeTo(dataOutput);
 		constantPool.writeTo(dataOutput);
-		classAccessFlags.writeTo(dataOutput);
+		accessFlags.writeTo(dataOutput);
 		thisIndex.writeTo(dataOutput);
 		superIndex.writeTo(dataOutput);
 		classInterfaces.writeTo(dataOutput);

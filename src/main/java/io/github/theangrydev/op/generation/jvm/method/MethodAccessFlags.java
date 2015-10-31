@@ -7,8 +7,8 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Set;
 
+import static io.github.theangrydev.op.generation.jvm.Flag.combine;
 import static io.github.theangrydev.op.generation.jvm.ShortValue.shortValue;
-import static io.github.theangrydev.op.generation.jvm.method.MethodAccessFlag.combine;
 
 public class MethodAccessFlags implements ClassFileWriter {
 

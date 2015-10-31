@@ -1,24 +1,23 @@
 package io.github.theangrydev.op.generation.jvm.method;
 
-import java.util.Set;
+import io.github.theangrydev.op.generation.jvm.Flag;
 
-public enum MethodAccessFlag {
+public enum MethodAccessFlag implements Flag {
 	PUBLIC(0x0001),
 	STATIC(0x0008);
 
-	private int value;
+	private final int value;
 
 	MethodAccessFlag(int value) {
 		this.value = value;
 	}
 
-	public int value() {
-		return value;
+	public static MethodAccessFlag methodAccessFlag(String name) {
+		return MethodAccessFlag.valueOf(name);
 	}
 
-	public static int combine(Set<MethodAccessFlag> flags) {
-		return flags.stream()
-			.mapToInt(MethodAccessFlag::value)
-			.reduce(0, (flagsSoFar, flagToOr) -> flagsSoFar | flagToOr);
+	@Override
+	public int value() {
+		return value;
 	}
 }

@@ -1,24 +1,34 @@
 package io.github.theangrydev.op.generation.jvm.classfile;
 
 import io.github.theangrydev.op.generation.jvm.ClassFileWriter;
+import io.github.theangrydev.op.generation.jvm.ShortValue;
 
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
+import static io.github.theangrydev.op.generation.jvm.Flag.combine;
+import static io.github.theangrydev.op.generation.jvm.ShortValue.shortValue;
 
 public class ClassAccessFlags implements ClassFileWriter {
 
-	private short flags;
+	private final ShortValue flags;
+
+	public ClassAccessFlags(ShortValue flags) {
+		this.flags = flags;
+	}
 
 	@Override
 	public void writeTo(DataOutput dataOutput) throws IOException {
-		dataOutput.writeShort(flags);
+		flags.writeTo(dataOutput);
 	}
 
-	public void markPublic() {
-		flags |= 0x0001;
+	public static ClassAccessFlags classAccessFlags(Set<ClassAccessFlag> flags) {
+		return new ClassAccessFlags(shortValue(combine(flags)));
 	}
 
-	public void treatSuperClassMethodsSpecially() {
-		flags |= 0x0020;
+	public static ClassAccessFlags classAccessFlags(ClassAccessFlag... flags) {
+		return classAccessFlags(newHashSet(flags));
 	}
 }
