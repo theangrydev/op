@@ -8,10 +8,13 @@ import java.io.IOException;
 
 public class ByteWriter {
 
-	public static byte[] bytesWrittenBy(ClassFileWriter classFileWriter) throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		classFileWriter.writeTo(new DataOutputStream(out));
-		return out.toByteArray();
+	public static byte[] bytesWrittenBy(ClassFileWriter... classFileWriters) throws IOException {
+		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+		DataOutputStream dataOutput = new DataOutputStream(byteStream);
+		for (ClassFileWriter classFileWriter : classFileWriters) {
+			classFileWriter.writeTo(dataOutput);
+		}
+		return byteStream.toByteArray();
 	}
 
 	public static byte[] bytes(byte first, byte... rest) {
