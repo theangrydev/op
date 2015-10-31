@@ -15,9 +15,13 @@ public class ByteWriter {
 	}
 
 	public static byte[] bytes(byte first, byte... rest) {
-		byte[] joined = new byte[rest.length + 1];
-		joined[0] = first;
-		System.arraycopy(rest, 0, joined, 1, rest.length);
+		return bytes(new byte[]{first}, rest);
+	}
+
+	public static byte[] bytes(byte[] first, byte[] second) {
+		byte[] joined = new byte[first.length + second.length];
+		System.arraycopy(first, 0, joined, 0, first.length);
+		System.arraycopy(second, 0, joined, first.length, second.length);
 		return joined;
 	}
 }
