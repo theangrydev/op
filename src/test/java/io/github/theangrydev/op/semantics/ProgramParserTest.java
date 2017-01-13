@@ -31,6 +31,7 @@ import io.github.theangrydev.op.language.expression.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.io.StringReader;
 
 import static io.github.theangrydev.op.parser.ProgramSemanticAnalyserFactory.PROGRAM_SEMANTIC_ANALYSER_FACTORY;
@@ -285,7 +286,7 @@ public class ProgramParserTest implements WithAssertions, WithTestState {
 		state.store(THE_PROGRAM,  programParser.analyse().get().simplify());
 	}
 
-	private void givenAParserWithInput(String input) {
+	private void givenAParserWithInput(String input) throws IOException {
 		programParser = PROGRAM_SEMANTIC_ANALYSER_FACTORY.programSemanticAnalyser(new StringReader(input));
 	}
 

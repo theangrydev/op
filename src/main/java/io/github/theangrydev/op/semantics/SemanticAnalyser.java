@@ -21,6 +21,7 @@ package io.github.theangrydev.op.semantics;
 
 import io.github.theangrydev.opper.parser.Parser;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class SemanticAnalyser<Result> {
@@ -33,7 +34,7 @@ public class SemanticAnalyser<Result> {
 		this.parseTreeAnalyser = parseTreeAnalyser;
 	}
 
-	public Optional<Result> analyse() {
+	public Optional<Result> analyse() throws IOException {
 		return parser.parse().map(parseTreeAnalyser::analyse);
 	}
 }

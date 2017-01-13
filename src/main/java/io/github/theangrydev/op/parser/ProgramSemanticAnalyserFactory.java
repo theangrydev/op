@@ -26,6 +26,7 @@ import io.github.theangrydev.opper.parser.ParserFactory;
 import io.github.theangrydev.opper.scanner.Scanner;
 import io.github.theangrydev.opper.scanner.ScannerFactory;
 
+import java.io.IOException;
 import java.io.Reader;
 
 import static io.github.theangrydev.op.parser.ProgramParseTreeAnalyserFactory.PROGRAM_PARSE_TREE_ANALYSER_FACTORY;
@@ -45,7 +46,7 @@ public class ProgramSemanticAnalyserFactory {
 		this.parserFactory = parserFactory;
 	}
 
-	public SemanticAnalyser<Program> programSemanticAnalyser(Reader charactersToParse) {
+	public SemanticAnalyser<Program> programSemanticAnalyser(Reader charactersToParse) throws IOException {
 		Scanner scanner = scannerFactory.scanner(charactersToParse);
 		Parser parser = parserFactory.parser(scanner);
 		return new SemanticAnalyser<>(parser, programParseTreeAnalyser);

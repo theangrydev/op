@@ -123,7 +123,7 @@ public class ScannerTest implements WithTestState, WithAssertions {
 		assertThat(symbol.content()).describedAs("Value of symbol should be '%s'", input).isEqualTo(input);
 	}
 
-	private void givenAScannerWithInput(String input) {
+	private void givenAScannerWithInput(String input) throws IOException {
 		scanner = ProgramScannerFactory.PROGRAM_SCANNER_FACTORY.scanner(new StringReader(input));
 	}
 

@@ -37,6 +37,6 @@ buildNumber.properties
 .mvn/timing.properties
 
 ### Local research
-research/
+research/downloads
 
 # Created by .ignore support plugin (hsz.mobi)

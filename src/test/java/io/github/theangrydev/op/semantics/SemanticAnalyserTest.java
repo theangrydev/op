@@ -25,6 +25,7 @@ import io.github.theangrydev.opper.parser.tree.ParseTreeNode;
 import io.github.theangrydev.opper.scanner.Location;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import static io.github.theangrydev.op.semantics.BinaryExpressionAnalyser.binaryExpression;
@@ -38,7 +39,7 @@ import static org.mockito.Mockito.mock;
 public class SemanticAnalyserTest {
 
 	@Test
-	public void shouldEvaluateAParseTree() {
+	public void shouldEvaluateAParseTree() throws IOException {
 		Rule add = rule();
 		Rule times = rule();
 		Rule number = rule();

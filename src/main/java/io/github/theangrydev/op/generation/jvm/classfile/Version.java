@@ -31,13 +31,13 @@ public class Version implements ClassFileWriter {
 	private final ShortValue minorVersion;
 	private final ShortValue majorVersion;
 
-	private Version(ShortValue majorVersion, ShortValue minorVersion) {
+	private Version(ShortValue minorVersion, ShortValue majorVersion) {
 		this.minorVersion = minorVersion;
 		this.majorVersion = majorVersion;
 	}
 
 	public static Version java8() {
-		return new Version(shortValue(52), shortValue(0));
+		return new Version(shortValue(0), shortValue(52));
 	}
 
 	@Override

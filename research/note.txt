@@ -1,0 +1,27 @@
+====
+    Copyright 2015 Liam Williams <liam.williams@zoho.com>.
+
+    This file is part of op.
+
+    op is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    op is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with op.  If not, see <http://www.gnu.org/licenses/>.
+====
+
+http://www2.cs.tum.edu/projects/cup/examples.php
+http://jflex.sourceforge.net/jflex-maven-plugin/usage.html
+http://jflex.de/manual.html#ExampleUserCode
+http://byaccj.sourceforge.net/
+http://www2.cs.tum.edu/projects/cup/install.php
+https://github.com/JetBrains/Grammar-Kit
+http://users.csc.calpoly.edu/~gfisher/classes/330/examples/jflex/pascal.jflex
+https://github.com/JetBrains/kotlin/blob/440379dfad83ce455a41bb4b75b3aca60e437496/update_dependencies.xml
