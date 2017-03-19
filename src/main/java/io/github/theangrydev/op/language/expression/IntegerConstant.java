@@ -114,7 +114,7 @@ public class IntegerConstant implements NumericConstant<Integer>, SimplifyingCon
 	}
 
 	@Override
-	public TypeReference typeReference() {
+	public TypeReference<IntegerType> typeReference() {
 		return constantReference;
 	}
 }

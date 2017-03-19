@@ -34,7 +34,7 @@ public class SymbolTable {
 	}
 
 	public void populateDefaultTypes() {
-		for (UnderlyingType defaultType : DEFAULT_TYPES) {
+		for (UnderlyingType<?> defaultType : DEFAULT_TYPES) {
 			defaultUnderlyingTypesByName.put(defaultType.name(), defaultType);
 		}
 	}

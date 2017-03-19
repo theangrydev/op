@@ -20,6 +20,7 @@ package io.github.theangrydev.op.generation.jvm.attribute.instruction;
 
 import io.github.theangrydev.op.generation.jvm.ByteValue;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex;
+import io.github.theangrydev.op.generation.jvm.constant.MethodReferenceInfoConstant;
 
 import java.io.DataOutput;
 import java.io.IOException;
@@ -29,13 +30,13 @@ import static io.github.theangrydev.op.generation.jvm.ByteValue.byteValue;
 public class Invokevirtual implements Instruction {
 
 	private static final ByteValue INVOKEVIRTUAL = byteValue(0xb6);
-	private final ConstantPoolIndex methodReference;
+	private final ConstantPoolIndex<MethodReferenceInfoConstant> methodReference;
 
-	private Invokevirtual(ConstantPoolIndex methodReference) {
+	private Invokevirtual(ConstantPoolIndex<MethodReferenceInfoConstant> methodReference) {
 		this.methodReference = methodReference;
 	}
 
-	public static Invokevirtual invokevirtual(ConstantPoolIndex methodReference) {
+	public static Invokevirtual invokevirtual(ConstantPoolIndex<MethodReferenceInfoConstant> methodReference) {
 		return new Invokevirtual(methodReference);
 	}
 

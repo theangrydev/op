@@ -23,8 +23,7 @@ import io.github.theangrydev.op.generation.jvm.attribute.Attribute;
 import io.github.theangrydev.op.generation.jvm.attribute.AttributeInfo;
 import io.github.theangrydev.op.generation.jvm.attribute.Attributes;
 import io.github.theangrydev.op.generation.jvm.attribute.instruction.Instructions;
-import io.github.theangrydev.op.generation.jvm.constant.ConstantPool;
-import io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex;
+import io.github.theangrydev.op.generation.jvm.constant.*;
 import io.github.theangrydev.op.generation.jvm.field.Fields;
 import io.github.theangrydev.op.generation.jvm.method.MethodInfo;
 import io.github.theangrydev.op.generation.jvm.method.Methods;
@@ -77,8 +76,8 @@ public class ClassFile implements ClassFileWriter {
 	private final Fields classFields = new Fields();
 	private final Methods classMethods;
 	private final Attributes classAttributes = attributes(emptyList());
-	private final ConstantPoolIndex thisIndex;
-	private final ConstantPoolIndex superIndex;
+	private final ConstantPoolIndex<ClassInfoConstant> thisIndex;
+	private final ConstantPoolIndex<ClassInfoConstant> superIndex;
 
 	private ClassFile(ConstantPool constantPool, List<MethodInfo> classMethods) {
 		this.classMethods = methods(classMethods);
@@ -93,9 +92,9 @@ public class ClassFile implements ClassFileWriter {
 	}
 
 	private static MethodInfo constructor(ConstantPool constantPool) {
-		ConstantPoolIndex nameIndex = constantPool.addUtf8Info("<init>");
-		ConstantPoolIndex descriptorIndex = constantPool.addUtf8Info("()V");
-		ConstantPoolIndex objectConstructor = constantPool.addMethodReference("java/lang/Object", "<init>", "()V");
+		ConstantPoolIndex<Utf8InfoConstant> nameIndex = constantPool.addUtf8Info("<init>");
+		ConstantPoolIndex<Utf8InfoConstant> descriptorIndex = constantPool.addUtf8Info("()V");
+		ConstantPoolIndex<MethodReferenceInfoConstant> objectConstructor = constantPool.addMethodReference("java/lang/Object", "<init>", "()V");
 		Instructions instructions = instructions(aload0(), invokespecial(objectConstructor), voidreturn());
 		AttributeInfo attributeInfo = codeAttributeInfo(shortValue(2), shortValue(3), instructions, exceptionTable(), attributes(emptyList()));
 		Attribute code = attribute(constantPool.addUtf8Info("Code"), attributeInfo);
@@ -104,8 +103,8 @@ public class ClassFile implements ClassFileWriter {
 	}
 
 	private static MethodInfo someCalculation(ConstantPool constantPool) {
-		ConstantPoolIndex nameIndex = constantPool.addUtf8Info("someCalculation");
-		ConstantPoolIndex descriptorIndex = constantPool.addUtf8Info("(I)I");
+		ConstantPoolIndex<Utf8InfoConstant> nameIndex = constantPool.addUtf8Info("someCalculation");
+		ConstantPoolIndex<Utf8InfoConstant> descriptorIndex = constantPool.addUtf8Info("(I)I");
 		Instructions instructions = instructions(iconst2(), istore1(), iconst3(), istore2(), iload1(), iload2(), iadd(), iload0(), iadd(), ireturn());
 		AttributeInfo attributeInfo = codeAttributeInfo(shortValue(2), shortValue(3), instructions, exceptionTable(), attributes(emptyList()));
 		Attribute code = attribute(constantPool.addUtf8Info("Code"), attributeInfo);
@@ -114,11 +113,11 @@ public class ClassFile implements ClassFileWriter {
 	}
 
 	private static MethodInfo mainMethod(ConstantPool constantPool) {
-		ConstantPoolIndex nameIndex = constantPool.addUtf8Info("main");
-		ConstantPoolIndex descriptorIndex = constantPool.addUtf8Info("([Ljava/lang/String;)V");
-		ConstantPoolIndex systemOut = constantPool.addFieldReference("java/lang/System", "out", "Ljava/io/PrintStream;");
-		ConstantPoolIndex someCalculation = constantPool.addMethodReference("Test", "someCalculation", "(I)I");
-		ConstantPoolIndex println = constantPool.addMethodReference("java/io/PrintStream", "println", "(I)V");
+		ConstantPoolIndex<Utf8InfoConstant> nameIndex = constantPool.addUtf8Info("main");
+		ConstantPoolIndex<Utf8InfoConstant> descriptorIndex = constantPool.addUtf8Info("([Ljava/lang/String;)V");
+		ConstantPoolIndex<FieldReferenceInfoConstant> systemOut = constantPool.addFieldReference("java/lang/System", "out", "Ljava/io/PrintStream;");
+		ConstantPoolIndex<MethodReferenceInfoConstant> someCalculation = constantPool.addMethodReference("Test", "someCalculation", "(I)I");
+		ConstantPoolIndex<MethodReferenceInfoConstant> println = constantPool.addMethodReference("java/io/PrintStream", "println", "(I)V");
 		Instructions instructions = instructions(getstatic(systemOut), bipush(byteValue(11)), invokestatic(someCalculation), invokevirtual(println), voidreturn());
 		AttributeInfo attributeInfo = codeAttributeInfo(shortValue(2), shortValue(1), instructions, exceptionTable(), attributes(emptyList()));
 		Attribute code = attribute(constantPool.addUtf8Info("Code"), attributeInfo);

@@ -23,7 +23,7 @@ import io.github.theangrydev.op.generation.UnderlyingType;
 import io.github.theangrydev.op.language.ProgramElement;
 
 public interface Expression extends ProgramElement<Expression>, AdditionSimplifier {
-	TypeReference typeReference();
+	TypeReference<?> typeReference();
 	default UnderlyingType<?> underlyingType() {
 		return typeReference().underlyingType();
 	}

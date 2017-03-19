@@ -21,6 +21,7 @@ package io.github.theangrydev.op.generation.jvm.method;
 import io.github.theangrydev.op.generation.jvm.ClassFileWriter;
 import io.github.theangrydev.op.generation.jvm.attribute.Attributes;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex;
+import io.github.theangrydev.op.generation.jvm.constant.Utf8InfoConstant;
 
 import java.io.DataOutput;
 import java.io.IOException;
@@ -28,18 +29,18 @@ import java.io.IOException;
 public class MethodInfo implements ClassFileWriter {
 
 	private final MethodAccessFlags methodAccessFlags;
-	private final ConstantPoolIndex nameIndex;
-	private final ConstantPoolIndex descriptorIndex;
+	private final ConstantPoolIndex<Utf8InfoConstant> nameIndex;
+	private final ConstantPoolIndex<Utf8InfoConstant> descriptorIndex;
 	private final Attributes attributes;
 
-	private MethodInfo(MethodAccessFlags methodAccessFlags, ConstantPoolIndex nameIndex, ConstantPoolIndex descriptorIndex, Attributes attributes) {
+	private MethodInfo(MethodAccessFlags methodAccessFlags, ConstantPoolIndex<Utf8InfoConstant> nameIndex, ConstantPoolIndex<Utf8InfoConstant>descriptorIndex, Attributes attributes) {
 		this.methodAccessFlags = methodAccessFlags;
 		this.nameIndex = nameIndex;
 		this.descriptorIndex = descriptorIndex;
 		this.attributes = attributes;
 	}
 
-	public static MethodInfo methodInfo(ConstantPoolIndex nameIndex, ConstantPoolIndex descriptorIndex, Attributes attributes, MethodAccessFlags methodAccessFlags) {
+	public static MethodInfo methodInfo(ConstantPoolIndex<Utf8InfoConstant> nameIndex, ConstantPoolIndex<Utf8InfoConstant> descriptorIndex, Attributes attributes, MethodAccessFlags methodAccessFlags) {
 		return new MethodInfo(methodAccessFlags, nameIndex, descriptorIndex, attributes);
 	}
 

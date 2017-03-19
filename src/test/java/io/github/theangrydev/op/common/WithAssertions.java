@@ -46,7 +46,7 @@ public interface WithAssertions extends org.assertj.core.api.WithAssertions {
 		return new IntegerConstantAssert(actual);
 	}
 
-	default AssignmentAssert assertThat(Assignment actual) {
+	default AssignmentAssert assertThat(Assignment<?> actual) {
 		return new AssignmentAssert(actual);
 	}
 

@@ -69,14 +69,14 @@ public class Program implements ProgramElement<Program> {
 	@Override
 	public void checkTypes(ProgramCompiler programCompiler) {
 		programCompiler.populateDefaultTypes();
-		for (Statement statement : statements) {
+		for (Statement<?>statement : statements) {
 			statement.checkTypes(programCompiler);
 		}
 	}
 
 	@Override
 	public void compile(ProgramCompiler programCompiler) {
-		for (Statement statement : statements) {
+		for (Statement<?> statement : statements) {
 			statement.compile(programCompiler);
 		}
 	}

@@ -110,7 +110,7 @@
 					<configuration>
 						<source>${java.language.level}</source>
 						<target>${java.language.level}</target>
-						<showWarnings>true</showWarnings>
+						<showWarnings>false</showWarnings><!-- TODO: enable but exclude assertj-assertions generated sources -->
 						<compilerArgs>
 							<arg>-Werror</arg>
 							<arg>-Xlint:all</arg>

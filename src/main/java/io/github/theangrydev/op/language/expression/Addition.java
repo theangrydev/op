@@ -28,7 +28,7 @@ public class Addition implements BinaryOperator {
 	private final Location location;
 	private Expression left;
 	private Expression right;
-	private TypeReference typeReference;
+	private TypeReference<?> typeReference;
 
 	private Addition(Expression left, Expression right) {
 		this.location = locationBetween(left, right);
@@ -52,8 +52,8 @@ public class Addition implements BinaryOperator {
 		left.checkTypes(programCompiler);
 		right.checkTypes(programCompiler);
 
-		TypeReference leftType = left.typeReference();
-		TypeReference rightType = right.typeReference();
+		TypeReference<?> leftType = left.typeReference();
+		TypeReference<?> rightType = right.typeReference();
 		Preconditions.checkState(leftType == rightType, "Left type '%s' should match right type '%s'", leftType, rightType);
 		typeReference = leftType;
 
@@ -88,7 +88,7 @@ public class Addition implements BinaryOperator {
 	}
 
 	@Override
-	public TypeReference typeReference() {
+	public TypeReference<?> typeReference() {
 		return typeReference;
 	}
 }

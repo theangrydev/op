@@ -22,6 +22,7 @@ import io.github.theangrydev.op.generation.jvm.ClassFileWriter;
 import io.github.theangrydev.op.generation.jvm.IntValue;
 import io.github.theangrydev.op.generation.jvm.WithSizeInBytes;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex;
+import io.github.theangrydev.op.generation.jvm.constant.Utf8InfoConstant;
 
 import java.io.DataOutput;
 import java.io.IOException;
@@ -29,17 +30,17 @@ import java.io.IOException;
 import static io.github.theangrydev.op.generation.jvm.IntValue.intValue;
 
 public class Attribute implements ClassFileWriter, WithSizeInBytes {
-	private final ConstantPoolIndex attributeNameIndex;
+	private final ConstantPoolIndex<Utf8InfoConstant> attributeNameIndex;
 	private final AttributeInfo attributeInfo;
 	private final IntValue attributeLengthInBytes;
 
-	private Attribute(ConstantPoolIndex attributeNameIndex, AttributeInfo attributeInfo, IntValue attributeLengthInBytes) {
+	private Attribute(ConstantPoolIndex<Utf8InfoConstant> attributeNameIndex, AttributeInfo attributeInfo, IntValue attributeLengthInBytes) {
 		this.attributeNameIndex = attributeNameIndex;
 		this.attributeInfo = attributeInfo;
 		this.attributeLengthInBytes = attributeLengthInBytes;
 	}
 
-	public static Attribute attribute(ConstantPoolIndex attributeNameIndex, AttributeInfo attributeInfo) {
+	public static Attribute attribute(ConstantPoolIndex<Utf8InfoConstant> attributeNameIndex, AttributeInfo attributeInfo) {
 		IntValue attributeLengthInBytes = intValue(attributeInfo.sizeInBytes());
 		return new Attribute(attributeNameIndex, attributeInfo, attributeLengthInBytes);
 	}

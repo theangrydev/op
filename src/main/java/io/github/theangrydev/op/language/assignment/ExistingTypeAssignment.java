@@ -71,8 +71,8 @@ public class ExistingTypeAssignment implements Assignment<ExistingTypeAssignment
 	public void checkTypes(ProgramCompiler programCompiler) {
 		expression.checkTypes(programCompiler);
 		targetType.checkTypes(programCompiler);
-		TypeReference targetTypeReference = targetType.typeReference();
-		TypeReference expressionTypeReference = expression.typeReference();
+		TypeReference<?> targetTypeReference = targetType.typeReference();
+		TypeReference<?> expressionTypeReference = expression.typeReference();
 		Preconditions.checkState(targetTypeReference == expressionTypeReference, "Target type '%s' should match expression type '%s'", targetTypeReference, expressionTypeReference);
 	}
 

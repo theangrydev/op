@@ -27,7 +27,7 @@ public interface ProgramElement<T extends ProgramElement<T>> {
 	void checkTypes(ProgramCompiler programCompiler);
 	void compile(ProgramCompiler programCompiler);
 
-	default Location locationBetween(ProgramElement start, ProgramElement end) {
+	default Location locationBetween(ProgramElement<?> start, ProgramElement<?> end) {
 		return Location.between(start.getLocation(), end.getLocation());
 	}
 }

@@ -21,6 +21,7 @@ package io.github.theangrydev.op.generation;
 import io.github.theangrydev.op.generation.jvm.classfile.ClassFile;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPool;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex;
+import io.github.theangrydev.op.generation.jvm.constant.IntegerConstantInfo;
 
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class SymbolTableProgramCompiler implements ProgramCompiler {
 
 	@Override
 	public ConstantReference<IntegerType> registerIntegerConstant(int value) {
-		ConstantPoolIndex integerIndex = constantPool.addInteger(value);
+		ConstantPoolIndex<IntegerConstantInfo> integerIndex = constantPool.addInteger(value);
 		return constantReference(integerIndex, INTEGER_TYPE);
 	}
 

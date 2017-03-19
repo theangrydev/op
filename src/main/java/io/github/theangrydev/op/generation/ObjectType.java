@@ -26,7 +26,7 @@ public class ObjectType implements UnderlyingType<ObjectType> {
 		this.name = name;
 	}
 
-	public static UnderlyingType underlyingType(String name) {
+	public static ObjectType underlyingType(String name) {
 		return new ObjectType(name);
 	}
 

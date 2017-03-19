@@ -121,7 +121,7 @@ public class RealConstant implements NumericConstant<Double>, SimplifyingConstan
 	}
 
 	@Override
-	public TypeReference typeReference() {
+	public TypeReference<RealType> typeReference() {
 		return constantReference;
 	}
 }

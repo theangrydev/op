@@ -110,7 +110,7 @@ public class StringConstant implements Constant<String>, SimplifyingConstantAddi
 	}
 
 	@Override
-	public TypeReference typeReference() {
+	public TypeReference<StringType> typeReference() {
 		return constantReference;
 	}
 }

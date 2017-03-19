@@ -57,11 +57,11 @@ public class ProgramParseTreeAnalyserFactory {
 		ParseTreeAnalyser<Type> type = analyser(consumeExpression(ParseTreeLeafAnalyser.analyser(Type::type)));
 		ParseTreeAnalyser<TypeDeclaration> typeDeclaration = analyser(binaryExpression(TypeDeclaration::of, typeExpression, type));
 
-		ParseTreeAnalysers<Statement> statements = new ParseTreeAnalysers<>();
+		ParseTreeAnalysers<Statement<?>> statements = new ParseTreeAnalysers<>();
 		statements.add(grammar.ruleByDefinition("Statement", "TypeDeclaration", "=", "Expression"), analyser(binaryExpression(TypeDeclarationAssignment::of, typeDeclaration, expressions)));
 		statements.add(grammar.ruleByDefinition("Statement", "TypeExpression", "=", "Expression"), analyser(binaryExpression(ExistingTypeAssignment::of, typeExpression, expressions)));
 
-		ParseTreeAnalyser<Statement> statementWithSemicolon = analyser(consumeExpression(statements));
+		ParseTreeAnalyser<Statement<?>> statementWithSemicolon = analyser(consumeExpression(statements));
 
 		ParseTreeAnalysers<List<Statement<?>>> statementListAnalysers = new ParseTreeAnalysers<>();
 		statementListAnalysers.add(grammar.ruleByDefinition("StatementList", "Empty"), emptyExpression(Lists::newArrayList));
@@ -70,7 +70,7 @@ public class ProgramParseTreeAnalyserFactory {
 		return analyser(consumeExpression(statementListAnalysers, Program::of));
 	}
 
-	private static List<Statement<?>> addStatement(List<Statement<?>> statements, Statement statement) {
+	private static List<Statement<?>> addStatement(List<Statement<?>> statements, Statement<?> statement) {
 		statements.add(statement);
 		return statements;
 	}

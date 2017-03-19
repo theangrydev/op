@@ -20,6 +20,7 @@ package io.github.theangrydev.op.generation.jvm.attribute.instruction;
 
 import io.github.theangrydev.op.common.WithAssertions;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex;
+import io.github.theangrydev.op.generation.jvm.constant.FieldReferenceInfoConstant;
 import org.junit.Test;
 
 import static io.github.theangrydev.op.generation.ByteWriter.bytes;
@@ -29,7 +30,7 @@ import static io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex
 
 public class GetstaticTest implements WithAssertions {
 
-	private static final ConstantPoolIndex FIELD_REFERENCE = constantPoolIndex(9999);
+	private static final ConstantPoolIndex<FieldReferenceInfoConstant> FIELD_REFERENCE = constantPoolIndex(9999);
 
 	@Test
 	public void writesOpcodeAndIndexBytes() throws Exception {
