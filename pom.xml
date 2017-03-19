@@ -53,10 +53,6 @@
 
 	<repositories>
 		<repository>
-			<id>project</id>
-			<url>file://${project.basedir}/repo</url>
-		</repository>
-		<repository>
 			<id>repo.bodar.com</id>
 			<url>http://repo.bodar.com</url>
 		</repository>
@@ -99,7 +95,7 @@
 		<yatspec.version>1.11</yatspec.version>
 		<apache.commons.lang.version>3.4</apache.commons.lang.version>
 		<junit.version>4.11</junit.version>
-		<opper.version>0.1.5</opper.version>
+		<opper.version>0.1.6</opper.version>
 	</properties>
 
 	<build>
