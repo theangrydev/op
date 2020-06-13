@@ -16,40 +16,36 @@
  * You should have received a copy of the GNU General Public License
  * along with op.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.theangrydev.op.generation.jvm;
+package io.github.theangrydev.op.generation.jvm.attribute.instruction;
 
-import com.google.common.base.Preconditions;
-import io.github.theangrydev.op.common.WithReflectiveEqualsAndHashCode;
+import io.github.theangrydev.op.generation.jvm.ByteValue;
 
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class ByteValue extends WithReflectiveEqualsAndHashCode implements ClassFileWriter, WithSizeInBytes {
+import static io.github.theangrydev.op.generation.jvm.ByteValue.byteValue;
 
-	public static final int MAX_BYTE_VALUE = 255;
-	private final int value;
+public class Ldc implements Instruction {
 
-	private ByteValue(int value) {
-		this.value = value;
+	private static final ByteValue LDC = byteValue(0x12);
+	private final ByteValue indexByte;
+
+	private Ldc(ByteValue indexByte) {
+		this.indexByte = indexByte;
 	}
 
-	public static ByteValue byteValue(int value) {
-		Preconditions.checkArgument(value >= 0, "%s may not be negative but was %s", name(), value);
-		Preconditions.checkArgument(value <= MAX_BYTE_VALUE, "%s can be at most %s but was %s", name(), MAX_BYTE_VALUE, value);
-		return new ByteValue(value);
-	}
-
-	private static String name() {
-		return ByteValue.class.getSimpleName();
+	public static Ldc ldc(int index) {
+		return new Ldc(byteValue(index));
 	}
 
 	@Override
 	public void writeTo(DataOutput dataOutput) throws IOException {
-		dataOutput.write(value);
+		LDC.writeTo(dataOutput);
+		indexByte.writeTo(dataOutput);
 	}
 
 	@Override
 	public int sizeInBytes() {
-		return 1;
+		return LDC.sizeInBytes() + indexByte.sizeInBytes();
 	}
 }

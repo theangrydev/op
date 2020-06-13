@@ -18,6 +18,7 @@
  */
 package io.github.theangrydev.op.generation;
 
+import io.github.theangrydev.op.generation.jvm.attribute.instruction.Instruction;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex;
 
 public class ConstantReference<T extends UnderlyingType<T>> implements TypeReference<T> {
@@ -46,5 +47,9 @@ public class ConstantReference<T extends UnderlyingType<T>> implements TypeRefer
 	@Override
 	public void load(ProgramCompiler programCompiler) {
 		underlyingType.load(programCompiler, this);
+	}
+
+	public Instruction loadInstruction() {
+		return index.loadInstruction();
 	}
 }

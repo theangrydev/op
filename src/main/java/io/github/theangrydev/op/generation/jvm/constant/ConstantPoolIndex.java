@@ -18,39 +18,34 @@
  */
 package io.github.theangrydev.op.generation.jvm.constant;
 
-import io.github.theangrydev.op.generation.jvm.ClassFileWriter;
-import io.github.theangrydev.op.generation.jvm.ShortValue;
-import io.github.theangrydev.op.generation.jvm.WithSizeInBytes;
+import io.github.theangrydev.op.generation.jvm.attribute.instruction.Instruction;
 
-import java.io.DataOutput;
-import java.io.IOException;
-
-import static io.github.theangrydev.op.generation.jvm.ShortValue.shortValue;
+import static io.github.theangrydev.op.generation.jvm.ByteValue.MAX_BYTE_VALUE;
+import static io.github.theangrydev.op.generation.jvm.attribute.instruction.Ldc.ldc;
+import static io.github.theangrydev.op.generation.jvm.attribute.instruction.Ldc_w.ldc_w;
 
 @SuppressWarnings("unused") // Type is used to ensure type safety
-public class ConstantPoolIndex<T> implements ClassFileWriter, WithSizeInBytes {
+public class ConstantPoolIndex<T> {
 
-	private final ShortValue index;
+	private final int index;
 
-	private ConstantPoolIndex(ShortValue index) {
+	private ConstantPoolIndex(int index) {
 		this.index = index;
 	}
 
 	public static <T> ConstantPoolIndex<T> constantPoolIndex(int index) {
-		return new ConstantPoolIndex<>(shortValue(index));
+		return new ConstantPoolIndex<>(index);
 	}
 
 	public int index() {
-		return index.value();
+		return index;
 	}
 
-	@Override
-	public void writeTo(DataOutput dataOutput) throws IOException {
-		index.writeTo(dataOutput);
-	}
-
-	@Override
-	public int sizeInBytes() {
-		return index.sizeInBytes();
+	public Instruction loadInstruction() {
+		if (index < MAX_BYTE_VALUE) {
+			return ldc(index);
+		} else {
+			return ldc_w(index);
+		}
 	}
 }

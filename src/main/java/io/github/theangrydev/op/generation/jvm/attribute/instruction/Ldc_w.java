@@ -16,40 +16,40 @@
  * You should have received a copy of the GNU General Public License
  * along with op.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.theangrydev.op.generation.jvm;
+package io.github.theangrydev.op.generation.jvm.attribute.instruction;
 
-import com.google.common.base.Preconditions;
-import io.github.theangrydev.op.common.WithReflectiveEqualsAndHashCode;
+import io.github.theangrydev.op.generation.jvm.ByteValue;
 
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class ByteValue extends WithReflectiveEqualsAndHashCode implements ClassFileWriter, WithSizeInBytes {
+import static io.github.theangrydev.op.generation.jvm.ByteValue.MAX_BYTE_VALUE;
+import static io.github.theangrydev.op.generation.jvm.ByteValue.byteValue;
 
-	public static final int MAX_BYTE_VALUE = 255;
-	private final int value;
+public class Ldc_w implements Instruction {
 
-	private ByteValue(int value) {
-		this.value = value;
+	private static final ByteValue LDC_W = byteValue(0x13);
+	private final ByteValue indexByte1;
+	private final ByteValue indexByte2;
+
+	private Ldc_w(ByteValue indexByte1, ByteValue indexByte2) {
+		this.indexByte1 = indexByte1;
+		this.indexByte2 = indexByte2;
 	}
 
-	public static ByteValue byteValue(int value) {
-		Preconditions.checkArgument(value >= 0, "%s may not be negative but was %s", name(), value);
-		Preconditions.checkArgument(value <= MAX_BYTE_VALUE, "%s can be at most %s but was %s", name(), MAX_BYTE_VALUE, value);
-		return new ByteValue(value);
-	}
-
-	private static String name() {
-		return ByteValue.class.getSimpleName();
+	public static Ldc_w ldc_w(int index) {
+		return new Ldc_w(byteValue(index / MAX_BYTE_VALUE), byteValue(index % MAX_BYTE_VALUE));
 	}
 
 	@Override
 	public void writeTo(DataOutput dataOutput) throws IOException {
-		dataOutput.write(value);
+		LDC_W.writeTo(dataOutput);
+		indexByte1.writeTo(dataOutput);
+		indexByte2.writeTo(dataOutput);
 	}
 
 	@Override
 	public int sizeInBytes() {
-		return 1;
+		return LDC_W.sizeInBytes() + indexByte1.sizeInBytes() + indexByte2.sizeInBytes();
 	}
 }

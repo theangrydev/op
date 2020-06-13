@@ -18,11 +18,14 @@
  */
 package io.github.theangrydev.op.generation;
 
+import io.github.theangrydev.op.generation.jvm.attribute.instruction.Instruction;
 import io.github.theangrydev.op.generation.jvm.classfile.ClassFile;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPool;
 import io.github.theangrydev.op.generation.jvm.constant.ConstantPoolIndex;
 import io.github.theangrydev.op.generation.jvm.constant.IntegerConstantInfo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static io.github.theangrydev.op.generation.ConstantReference.constantReference;
@@ -34,6 +37,7 @@ public class SymbolTableProgramCompiler implements ProgramCompiler {
 
 	private final SymbolTable symbolTable;
 	private final ConstantPool constantPool;
+	private final List<Instruction> instructions = new ArrayList<>();
 
 	public SymbolTableProgramCompiler(SymbolTable symbolTable) {
 		this.symbolTable = symbolTable;
@@ -98,7 +102,7 @@ public class SymbolTableProgramCompiler implements ProgramCompiler {
 
 	@Override
 	public void loadIntegerFromConstant(ConstantReference<IntegerType> constantToLoad) {
-
+		instructions.add(constantToLoad.loadInstruction());
 	}
 
 	@Override
