@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 Liam Williams <liam.williams@zoho.com>.
+ * Copyright 2015-2020 Liam Williams <liam.williams@zoho.com>.
  *
  * This file is part of op.
  *
@@ -21,13 +21,13 @@ package io.github.theangrydev.op.common;
 import io.github.theangrydev.op.language.assignment.*;
 import io.github.theangrydev.op.language.expression.*;
 import org.assertj.core.api.AbstractThrowableAssert;
-import org.assertj.core.api.StrictAssertions;
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;
 
 public interface WithAssertions extends org.assertj.core.api.WithAssertions {
 
 	default AbstractThrowableAssert<?, ? extends Throwable> assertThatThrownBy(ThrowableAssert.ThrowingCallable shouldRaiseThrowable) {
-		return StrictAssertions.assertThatThrownBy(shouldRaiseThrowable);
+		return Assertions.assertThatThrownBy(shouldRaiseThrowable);
 	}
 
 	default ExistingTypeAssignmentAssert assertThat(ExistingTypeAssignment actual) {

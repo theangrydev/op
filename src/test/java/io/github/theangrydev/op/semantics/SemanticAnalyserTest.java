@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 Liam Williams <liam.williams@zoho.com>.
+ * Copyright 2015-2020 Liam Williams <liam.williams@zoho.com>.
  *
  * This file is part of op.
  *
@@ -23,6 +23,7 @@ import io.github.theangrydev.opper.parser.Parser;
 import io.github.theangrydev.opper.parser.tree.ParseTree;
 import io.github.theangrydev.opper.parser.tree.ParseTreeNode;
 import io.github.theangrydev.opper.scanner.Location;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ import static io.github.theangrydev.op.semantics.ParseTreeLeafAnalyser.analyser;
 import static io.github.theangrydev.op.semantics.ParseTreeNodeAnalyser.analyser;
 import static io.github.theangrydev.opper.parser.tree.ParseTreeLeaf.leaf;
 import static io.github.theangrydev.opper.parser.tree.ParseTreeNode.node;
-import static org.assertj.core.api.StrictAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class SemanticAnalyserTest {
